@@ -17,7 +17,7 @@
  */-->
 <project name="PM-STRUTS" basedir="../.." >
      <property file="build.properties"/>
-     <property name="module.name" value="pm_struts" />
+     <property name="module.name" value="jpospm_struts" />
      <property name="module.lib.dir" value="${modules.dir}/${module.name}/lib"/>
      <property name="module.cfg.dir" value="${modules.dir}/${module.name}/cfg"/>
     <property name="module.webinf.dir" value="${build.dir}/webapps/pm/WEB-INF"/>
