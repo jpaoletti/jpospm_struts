@@ -20,22 +20,10 @@ package org.jpos.ee.pm.struts.actions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
+import org.apache.struts.action.*;
 import org.jpos.ee.Constants;
-import org.jpos.ee.pm.core.PMException;
-import org.jpos.ee.pm.core.PMMessage;
-import org.jpos.ee.pm.core.PMUnauthorizedException;
-import org.jpos.ee.pm.core.PresentationManager;
-import org.jpos.ee.pm.struts.PMEntitySupport;
-import org.jpos.ee.pm.struts.PMForwardException;
-import org.jpos.ee.pm.struts.PMStrutsContext;
-import org.jpos.ee.pm.struts.PMStrutsService;
+import org.jpos.ee.pm.core.*;
+import org.jpos.ee.pm.struts.*;
 
 /**
  * A super class for all actions with some helpers and generic stuff
