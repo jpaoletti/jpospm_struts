@@ -36,9 +36,6 @@
       <forward name="continue" path="/pages/ae.jsp"/>
       <forward name="failure" path="/pages/ae.jsp"/>
     </action>
-    <action path="/opers" type="org.jpos.ee.pm.struts.actions.OperAction" >
-        <forward name="success" path="/pages/opers.jsp" />
-    </action>
     <action path="/selectItem" type="org.jpos.ee.pm.struts.actions.SelectItemAction" >
         <forward name="success" path="/pages/void.jsp" />
     </action>

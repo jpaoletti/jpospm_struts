@@ -53,17 +53,6 @@
             });
         }
 	
-	function fnRowCallback ( nRow, aData, iDisplayIndex ) {
-		var i = oTable.fnGetPosition( nRow );
-		//var i = iDisplayIndex;
-		$('td:eq(0)', nRow).html( '<div class="operations" id="row_'+i+'"><div class="operationspopup" id="g_'+i+'">error</div><div class="trigger">'+aData[0]+'</div></div>' );
-		var operationdiv = $('#row_'+i, nRow);
-		var grupodiv = $('#g_'+i, nRow);
-		grupodiv.load('opers.do?pmid='+pmid+'&i='+i);
-		configurePopup(operationdiv);
-		return nRow;
-	}
-	
 	$(document).ready(function() {
 			oTable = $('#list').dataTable({
 						"bProcessing": true,
