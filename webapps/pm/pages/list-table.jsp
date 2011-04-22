@@ -20,6 +20,7 @@
 <bean:define id="c" name="pmlist" property="listTotalDigits" type="java.lang.Integer" />
 <bean:define id="has_selected" name="PMLIST" property="hasSelectedScope" type="java.lang.Boolean" />
 <bean:define id="messages" name="org.apache.struts.action.MESSAGE" type="org.apache.struts.util.MessageResources" scope="application"/>
+<bean:define id="pmsession" name="pmsession" type="org.jpos.ee.pm.core.PMSession" scope="session"/>
 <script type="text/javascript">
     function selectItem(i){
         $.ajax({ url: "selectItem.do?pmid="+"${pmid}"+"&idx="+i});
@@ -62,6 +63,9 @@
                     &nbsp;
                     <span style="white-space: nowrap;" class="operationspopup" id="g_${i}">
                         <logic:iterate id="itemOperation" indexId="j" name="ctx" property="map.operations.itemOperations.operations" type="org.jpos.ee.pm.core.Operation">
+                            <%
+                            if(pmsession.getUser().hasPermission(itemOperation.getPerm())) {
+                            %>
                             <logic:present name="itemOperation" property="url">
                                 <bean:define id="furl" value="${itemOperation.url}" />
                             </logic:present>
@@ -69,6 +73,7 @@
                                 <bean:define id="furl" value="${es.context_path}/${itemOperation.id}.do?pmid=${entity.id}&item=${i}" />
                             </logic:notPresent>
                             <a class="confirmable_${itemOperation.confirm}" href="${furl}" id="operation${itemOperation.id}" title="<%=messages.getMessage("operation."+itemOperation.getId())%>" ${onclick}><img src="${es.context_path}/templates/${pm.template}/img/${itemOperation.id}.gif" alt="${itemOperation.id}" /></a>
+                            <% }%>
                         </logic:iterate> &nbsp;
                     </span>
                 </td>
@@ -104,7 +109,7 @@
     </tfoot>
 </table>
 <script>
-$(".confirmable_true").bind('click',function(){
-     return confirm("<pm:message key='pm.operation.confirm.question' />");
-});
+    $(".confirmable_true").bind('click',function(){
+        return confirm("<pm:message key='pm.operation.confirm.question' />");
+    });
 </script>
