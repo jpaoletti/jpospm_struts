@@ -176,7 +176,7 @@ public class PMEntitySupport extends EntitySupport {
             sb.append("/");
             sb.append(container.getOperation().getId());
             sb.append(".do?pmid=");
-            sb.append(container.getEntity().getId()).append(" >");
+            sb.append(container.getEntity().getId()).append("' >");
             sb.append(container.getSelected().getInstance());
             sb.append("</a>");
         }
