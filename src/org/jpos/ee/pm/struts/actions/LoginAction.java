@@ -1,20 +1,20 @@
 /*
- * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+* jPOS Project [http://jpos.org]
+* Copyright (C) 2000-2011 Alejandro P. Revilla
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 package org.jpos.ee.pm.struts.actions;
 
 import org.jpos.ee.pm.core.PMContext;
@@ -68,13 +68,14 @@ public class LoginAction extends EntityActionSupport {
     }
 
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        PMSession session = ctx.getPresentationManager().registerSession(ctx.getSession().getId());
+        final String sid = ctx.getSession().getId();
+        final PMSession session = ctx.getPresentationManager().registerSession(sid);
         ctx.getSession().setAttribute(PMEntitySupport.PMSESSION, session);
         if (ctx.getPresentationManager().isLoginRequired()) {
             try {
                 ctx.getSession().setAttribute(USER, null);
                 ctx.getSession().setAttribute(MENU, null);
-                PMSecurityUser u = authenticate(ctx);
+                final PMSecurityUser u = authenticate(ctx);
                 session.setUser(u);
                 session.setMenu(loadMenu(ctx, u));
                 if (u.isChangePassword()) {
@@ -82,15 +83,18 @@ public class LoginAction extends EntityActionSupport {
                 }
 
             } catch (UserNotFoundException e) {
+                ctx.getPresentationManager().removeSession(sid);
                 throw new PMException("pm_security.user.not.found");
             } catch (InvalidPasswordException e) {
+                ctx.getPresentationManager().removeSession(sid);
                 throw new PMException("pm_security.password.invalid");
             } catch (Exception e) {
+                ctx.getPresentationManager().removeSession(sid);
                 ctx.getPresentationManager().error(e);
                 throw new PMException("pm_core.unespected.error");
             }
         } else {
-            PMSecurityUser u = new PMSecurityUser();
+            final PMSecurityUser u = new PMSecurityUser();
             u.setName(" ");
             session.setUser(u);
             session.setMenu(loadMenu(ctx, u));
@@ -105,10 +109,10 @@ public class LoginAction extends EntityActionSupport {
     }
 
     /**
-     * @param ctx The context with all the parameters
-     * @return The user
-     * @throws BLException
-     */
+* @param ctx The context with all the parameters
+* @return The user
+* @throws BLException
+*/
     private PMSecurityUser authenticate(PMStrutsContext ctx) throws PMSecurityException {
         PMSecurityUser u = null;
         LoginActionForm f = (LoginActionForm) ctx.getForm();
