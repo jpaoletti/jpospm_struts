@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2011 Alejandro P. Revilla
+ * Copyright (C) 2000-2010 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,115 +17,48 @@
  */
 package org.jpos.ee.pm.struts.actions;
 
-import org.jpos.ee.pm.core.PMContext;
-import org.jpos.ee.pm.core.PMException;
-import org.jpos.ee.pm.core.PMSession;
-import org.jpos.ee.pm.menu.Menu;
-import org.jpos.ee.pm.menu.MenuSupport;
-import org.jpos.ee.pm.security.core.InvalidPasswordException;
-import org.jpos.ee.pm.security.core.PMSecurityConnector;
-import org.jpos.ee.pm.security.core.PMSecurityException;
-import org.jpos.ee.pm.security.core.PMSecurityService;
-import org.jpos.ee.pm.security.core.PMSecurityUser;
-import org.jpos.ee.pm.security.core.UserNotFoundException;
-import org.jpos.ee.pm.struts.PMEntitySupport;
-import org.jpos.ee.pm.struts.PMForwardException;
-import org.jpos.ee.pm.struts.PMStrutsContext;
+import javax.servlet.http.HttpServletRequest;
 
-public class LoginAction extends EntityActionSupport {
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.jpos.util.Validator;
 
-    /** Opens an hibernate transaction before doExecute*/
-    @Override
-    protected boolean openTransaction() {
-        return false;
+public class LoginActionForm extends ActionForm {
+    private static final long serialVersionUID = 959334757634953090L;
+    private String username;
+    private String password;
+    private boolean remember;
+    
+    public ActionErrors validate(ActionMapping mapping,HttpServletRequest request) {
+        ActionErrors errors = new ActionErrors();
+        if(username == null || username.compareTo("") == 0)
+            errors.add("username",new ActionMessage("login.username.null"));
+        if(password == null || password.compareTo("") == 0)
+            errors.add("password",new ActionMessage("login.password.null"));
+        
+        if (username!= null && !Validator.isName (username)) 
+            errors.add("username",new ActionMessage("login.username.invalid"));
+
+        return errors;
     }
-
-    /**Makes the operation generate an audithory entry*/
-    @Override
-    protected boolean isAudited() {
-        return false;
+    public String getUsername() {
+        return username;
     }
-
-    /**Forces execute to check if any user is logged in*/
-    @Override
-    protected boolean checkUser() {
-        return false;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
-    /**Forces execute to check if there is an entity defined in parameters*/
-    @Override
-    protected boolean checkEntity() {
-        return false;
-    }
-
-    @Override
-    protected boolean prepare(PMStrutsContext ctx) throws PMException {
-        if (ctx.getPresentationManager().isLoginRequired()) {
-            return super.prepare(ctx);
-        } else {
-            return true;
-        }
-    }
-
-    protected void doExecute(PMStrutsContext ctx) throws PMException {
-        final String sid = ctx.getSession().getId();
-        final PMSession session = ctx.getPresentationManager().registerSession(sid);
-        ctx.getSession().setAttribute(PMEntitySupport.PMSESSION, session);
-        if (ctx.getPresentationManager().isLoginRequired()) {
-            try {
-                ctx.getSession().setAttribute(USER, null);
-                ctx.getSession().setAttribute(MENU, null);
-                final PMSecurityUser u = authenticate(ctx);
-                session.setUser(u);
-                session.setMenu(loadMenu(ctx, u));
-                if (u.isChangePassword()) {
-                    throw new PMForwardException("changepassword");
-                }
-
-            } catch (UserNotFoundException e) {
-                ctx.getPresentationManager().removeSession(sid);
-                throw new PMException("pm_security.user.not.found");
-            } catch (InvalidPasswordException e) {
-                ctx.getPresentationManager().removeSession(sid);
-                throw new PMException("pm_security.password.invalid");
-            } catch (Exception e) {
-                ctx.getPresentationManager().removeSession(sid);
-                ctx.getPresentationManager().error(e);
-                throw new PMException("pm_core.unespected.error");
-            }
-        } else {
-            final PMSecurityUser u = new PMSecurityUser();
-            u.setName(" ");
-            session.setUser(u);
-            session.setMenu(loadMenu(ctx, u));
-        }
-    }
-
-    private Menu loadMenu(PMStrutsContext ctx, PMSecurityUser u) throws PMException {
-        Menu menu = MenuSupport.getMenu(u.getPermissionList());
-        ctx.getSession().setAttribute(USER, u);
-        ctx.getSession().setAttribute(MENU, menu);
-        return menu;
-    }
-
-    /**
-     * @param ctx The context with all the parameters
-     * @return The user
-     * @throws BLException
-     */
-    private PMSecurityUser authenticate(PMStrutsContext ctx) throws PMSecurityException {
-        PMSecurityUser u = null;
-        LoginActionForm f = (LoginActionForm) ctx.getForm();
-        String seed = ctx.getSession().getId();
-        u = getConnector(ctx).authenticate(f.getUsername(), decrypt(f.getPassword(), seed));
-        return u;
-    }
-
-    private PMSecurityConnector getConnector(PMContext ctx) {
-        return PMSecurityService.getService().getConnector(ctx);
-    }
-
-    private String decrypt(String password, String seed) {
+    public String getPassword() {
         return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setRemember(boolean remember) {
+        this.remember = remember;
+    }
+    public boolean getRemember() {
+        return remember;
     }
 }
