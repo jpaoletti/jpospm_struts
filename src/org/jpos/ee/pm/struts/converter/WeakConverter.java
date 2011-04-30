@@ -60,6 +60,10 @@ public class WeakConverter extends StrutsEditConverter {
         final Collection collection = (Collection) ctx.getPresentationManager().get(ctx.getSelected().getInstance(), ctx.getRequest().getParameter("property"));
         final List<Object> result = new ArrayList<Object>();
         final Entity entity = getEntity(ctx);
+        if(entity==null){
+            ctx.getPresentationManager().error("Weak entity not found");
+            throw new ConverterException("pm.struts.entity.not.found");
+        }
         if (collection != null) {
             for (Object object : collection) {
                 result.add(entity.getDataAccess().refresh(ctx, object));
