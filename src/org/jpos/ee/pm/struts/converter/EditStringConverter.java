@@ -42,7 +42,8 @@ public class EditStringConverter extends StrutsEditConverter {
     public String visualize(PMContext ctx) throws ConverterException {
         final EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
         final Field field = (Field) ctx.get(PM_FIELD);
-        final Object p = getValue(einstance, field);
+        Object p = ctx.get(PM_FIELD_VALUE);
+        if(p==null) p = getValue(einstance, field);
         final String value = normalize((p == null) ? "" : p.toString());
         return super.visualize("string_converter.jsp?"
                 + "ml=" + getConfig("max-length")
