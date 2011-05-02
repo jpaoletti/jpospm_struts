@@ -19,7 +19,7 @@ public class EditBigStringConverter extends EditStringConverter {
         if (p == null) {
             p = getValue(einstance, field);
         }
-        final String value = p.toString();
+        final String value = (p!=null)?p.toString():"";
         return super.visualize("bigstring_converter.jsp?"
                 + "&value=" + value
                 + "&isNull=" + (p == null)
