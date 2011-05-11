@@ -22,17 +22,17 @@ legend {
 	display: none;
 }
 
-h1, h2, h3 {
+h1.title , h2.title , h3.title  {
 	margin: 0;
 	color: #11A6D4;
 }
 
-h2 {
+h2.title  {
 	margin-bottom: .5em;
 	font-size: 1.8em;
 }
 
-h3 {
+h3.title {
 	margin-bottom: 1em;
 	font-size: 1em;
 }
@@ -94,7 +94,7 @@ img {
 	text-transform: uppercase;
 	font-size: 1.2em;
 	color: #777777;
-	margin: 0px 0px 5px 5px; 
+	margin: 0px 0px 5px 5px;
 }
 
 .boxed .content {
@@ -376,7 +376,7 @@ img {
 	font-weight: bold;
 	vertical-align: middle;
 	margin: 0px 0px 0px 20px;
-} 
+}
 
 /**CUSTOM STYLES*/
 
@@ -408,13 +408,13 @@ img {
     border: 1px solid #CCC;
 }
 #sort_page{
-	border:1px solid #CCC; 
-	background-color: #EAEAD7; 
+	border:1px solid #CCC;
+	background-color: #EAEAD7;
 	width: 250px;
 }
 .jqmWindow {
     display: none;
-    
+
     position: fixed;
     top: 17%;
     left: 50%;
@@ -437,8 +437,8 @@ img {
 }
 
 .monitor_window{
-    height: 80%; 
-    overflow: auto; 
+    height: 80%;
+    overflow: auto;
     border: 1px solid black;
     background-color: #ECF8E0;
     color:navy;

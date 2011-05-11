@@ -7,8 +7,8 @@
 <div id="header">
     <pm:topmenu />
     <div id="logo">
-        <h1><a href="${es.context_path}"><pm:message key="${pm.title}"/></a></h1>
-        <h2><pm:message key="${pm.subtitle}"/></h2>
+        <h1 class="title"><a href="${es.context_path}"><pm:message key="${pm.title}"/></a></h1>
+        <h2 class="title"><pm:message key="${pm.subtitle}"/></h2>
     </div>
     <c:if test="${not empty pmsession.user}">
     <div id="userbox">
