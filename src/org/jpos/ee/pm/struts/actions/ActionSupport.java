@@ -47,7 +47,7 @@ public abstract class ActionSupport extends Action implements Constants {
     }
 
     protected boolean prepare(PMStrutsContext ctx) throws PMException {
-        if(checkUser() && ctx.getPMSession()==null){
+        if (checkUser() && ctx.getPMSession() == null) {
             //Force logout
             final PMEntitySupport es = PMEntitySupport.getInstance();
             ctx.getSession().invalidate();
@@ -71,7 +71,11 @@ public abstract class ActionSupport extends Action implements Constants {
             }
             return mapping.findForward(SUCCESS);
         } catch (PMForwardException e) {
-            return mapping.findForward(e.getKey());
+            if (e.getActionForward() != null) {
+                return e.getActionForward();
+            } else {
+                return mapping.findForward(e.getKey());
+            }
         } catch (PMUnauthorizedException e) {
             return mapping.findForward(STRUTS_LOGIN);
         } catch (PMException e) {
