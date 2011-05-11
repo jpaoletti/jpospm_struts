@@ -30,13 +30,10 @@ public class DefaultStrutsConverter extends Converter {
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
         Object s = ctx.get(PM_FIELD_VALUE);
-        if (s == null) {
-            return "void.jsp?text=";
-        }
-        if (s instanceof String && s.toString().contains(".jsp?") || s.toString().contains(".do?")) {
+        if (s!=null && s instanceof String && s.toString().contains(".jsp?") || s.toString().contains(".do?")) {
             return s;
         } else {
-            return "void.jsp?text=" + s;
+            return "void.jsp?";
         }
     }
 }

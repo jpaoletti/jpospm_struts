@@ -1,1 +1,1 @@
-${param.text}
+${ctx.map.PM_FIELD_VALUE}

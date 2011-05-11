@@ -17,7 +17,7 @@
 --%>
 <%@include file="../inc/tag-libs.jsp" %>
 <%@page import="org.jpos.ee.pm.core.*" import="org.jpos.ee.Constants" import="org.jpos.ee.pm.struts.PMEntitySupport" %>
-<bean:define id="value" value="${param.value}"/>
+<bean:define id="value" value="${ctx.map.PM_FIELD_VALUE}"/>
 <bean:define id="checked" value="${param.isNull ? 'checked' : ''}"/>
 <bean:define id="disabled" value="${ (param.isNull and param.withNull) ? 'disabled=disabled' : ''}"/>
 <c:if test="${param.withNull}">

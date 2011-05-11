@@ -30,10 +30,14 @@ import org.jpos.ee.pm.core.PMContext;
  */
 public class ShowPreConverter extends ShowStringConverter{
 
+    @Override
     public String visualize(PMContext ctx) throws ConverterException {
         EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
-        Field field = (Field) ctx.get(PM_FIELD);
-        Object o = getValue(einstance.getInstance(), field);
-        return super.visualize("pre.jsp?value="+o,ctx.getString(PM_EXTRA_DATA));
+        final Field field = (Field) ctx.get(PM_FIELD);
+        Object p = ctx.get(PM_FIELD_VALUE);
+        if(p==null) p = getValue(einstance, field);
+        final String value = (p == null) ? "" : p.toString();
+        ctx.put(PM_FIELD_VALUE, value);
+        return super.visualize("pre.jsp?",ctx.getString(PM_EXTRA_DATA));
     }
 }

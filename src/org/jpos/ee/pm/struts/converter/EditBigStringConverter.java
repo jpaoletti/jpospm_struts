@@ -20,9 +20,9 @@ public class EditBigStringConverter extends EditStringConverter {
             p = getValue(einstance, field);
         }
         final String value = (p!=null)?p.toString():"";
+        ctx.put(PM_FIELD_VALUE, value);
         return super.visualize("bigstring_converter.jsp?"
-                + "&value=" + value
-                + "&isNull=" + (p == null)
+                + "isNull=" + (p == null)
                 + "&withNull=" + getConfig("with-null", "false"));
     }
 }

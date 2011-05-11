@@ -45,9 +45,9 @@ public class EditStringConverter extends StrutsEditConverter {
         Object p = ctx.get(PM_FIELD_VALUE);
         if(p==null) p = getValue(einstance, field);
         final String value = normalize((p == null) ? "" : p.toString());
+        ctx.put(PM_FIELD_VALUE, value);
         return super.visualize("string_converter.jsp?"
                 + "ml=" + getConfig("max-length")
-                + "&value=" + value
                 + "&isNull=" + (p == null)
                 + "&withNull=" + getConfig("with-null", "false"));
     }
