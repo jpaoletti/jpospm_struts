@@ -7,14 +7,10 @@
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic" %>
-<script src="${es.context_path}/js/md5.js" type="text/javascript"></script>
-<script src="${es.context_path}/js/cookies.js" type="text/javascript"></script>
-<script src="${es.context_path}/js/encrypt.js" type="text/javascript"></script>
-
 <div id="login" class="boxed">
     <h2 class="title"><bean:message key="login"/> </h2>
     <div class="content">
-        <html:form action="/login" method="POST"  onsubmit="return encrypt(this.username, this.password);">
+        <html:form action="/login" method="POST">
             <fieldset>
                 <logic:equal value="true" name="pm" property="loginRequired">
                     <legend><bean:message key="login.sign.in" /></legend>
