@@ -38,7 +38,7 @@ public class ListAction extends ActionSupport {
             ctx.put("rows_per_page",10);
         }
         ListOperation op = new ListOperation("list");
-        op.excecute(ctx);
+        op.execute(ctx);
 
         /*final ListManager listManager = new ListManager();
         final Operations operations = (Operations) ctx.getSession().getAttribute(OPERATIONS);

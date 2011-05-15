@@ -32,7 +32,7 @@ public class AddAction extends ActionSupport {
         }
 
         AddOperation op = new AddOperation("add");
-        op.excecute(ctx);
+        op.execute(ctx);
 
         if (finish) {
             throw new PMForwardException(CONTINUE);

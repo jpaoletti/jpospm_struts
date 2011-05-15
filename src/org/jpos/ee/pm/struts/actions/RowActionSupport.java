@@ -1,5 +1,4 @@
 /*
-/*
  * jPOS Project [http://jpos.org]
  * Copyright (C) 2000-2010 Alejandro P. Revilla
  *
@@ -26,8 +25,11 @@ import org.jpos.util.DisplacedList;
 
 public abstract class RowActionSupport extends FieldProcessingActionSupport {
 
-    public boolean testSelectedExist() {return true;}
+    public boolean testSelectedExist() {
+        return true;
+    }
 
+    @Override
     protected boolean prepare(PMStrutsContext ctx) throws PMException {
         super.prepare(ctx);
 
@@ -63,8 +65,9 @@ public abstract class RowActionSupport extends FieldProcessingActionSupport {
         refreshSelectedObject(ctx, null);
 
 
-        if(ctx.getOperation() != null && ctx.getOperation().getContext()!=null)
+        if (ctx.getOperation() != null && ctx.getOperation().getContext() != null) {
             ctx.getOperation().getContext().preConversion(ctx);
+        }
 
 
         if (testSelectedExist() && ctx.getEntityContainer().getSelected() == null) {

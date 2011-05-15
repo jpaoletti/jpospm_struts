@@ -30,7 +30,7 @@ public class EditAction extends ActionSupport {
         }
 
         EditOperation op = new EditOperation("edit");
-        op.excecute(ctx);
+        op.execute(ctx);
 
         if (finish) {
             throw new PMForwardException(CONTINUE);

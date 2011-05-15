@@ -29,7 +29,7 @@ public class ClearFilterAction extends ActionSupport{
 
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        (new ClearFilterOperation("clearfilter")).excecute(ctx);
+        (new ClearFilterOperation("clearfilter")).execute(ctx);
     }
 
 }

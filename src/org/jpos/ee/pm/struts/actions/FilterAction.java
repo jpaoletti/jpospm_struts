@@ -32,7 +32,7 @@ public class FilterAction extends ActionSupport {
         ctx.put("validate", false);
 
         PMFilterOperation op = new PMFilterOperation("filter");
-        op.excecute(ctx);
+        op.execute(ctx);
 
         if (finish) {
             throw new PMForwardException(CONTINUE);

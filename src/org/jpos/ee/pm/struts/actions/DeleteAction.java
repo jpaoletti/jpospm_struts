@@ -24,6 +24,6 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
 public class DeleteAction extends ActionSupport {
 
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        (new DeleteOperation("delete")).excecute(ctx);
+        (new DeleteOperation("delete")).execute(ctx);
     }
 }

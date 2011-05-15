@@ -24,7 +24,8 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
 
 public class ShowAction extends ActionSupport {
 
+    @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        (new ShowOperation("show")).excecute(ctx);
+        (new ShowOperation("show")).execute(ctx);
     }
 }
