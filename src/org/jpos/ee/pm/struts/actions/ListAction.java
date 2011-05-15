@@ -17,46 +17,19 @@
  */
 package org.jpos.ee.pm.struts.actions;
 
-
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.operations.ListOperation;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
 public class ListAction extends ActionSupport {
 
+    @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        final ListActionForm f = (ListActionForm) ctx.getForm();
-        if (ctx.getParameter(FINISH) != null) {
-            ctx.put("order",f.getOrder());
-            ctx.put("desc",f.isDesc());
-            ctx.put("page",((f.getPage() != null && f.getPage() > 0) ? f.getPage() : 1));
-            ctx.put("rows_per_page",f.getRowsPerPage());
-        }else{
-            ctx.put("order",null);
-            ctx.put("desc",false);
-            ctx.put("page",1);
-            ctx.put("rows_per_page",10);
-        }
+        ctx.put("order", ctx.getParameter("order"));
+        ctx.put("desc", ctx.getParameter("desc") != null && ctx.getParameter("order").equals("true"));
+        ctx.put("page", (ctx.getParameter("page") == null) ? null : Integer.parseInt((String) ctx.getParameter("page")));
+        ctx.put("rowsPerPage", (ctx.getParameter("rowsPerPage") == null) ? null : Integer.parseInt((String) ctx.getParameter("rowsPerPage")));
         ListOperation op = new ListOperation("list");
         op.execute(ctx);
-
-        /*final ListManager listManager = new ListManager();
-        final Operations operations = (Operations) ctx.getSession().getAttribute(OPERATIONS);
-
-        PaginatedList pmlist = ctx.getList();
-        if (pmlist == null) {
-        pmlist = listManager.initList(ctx, operations);
-        }
-
-        if (ctx.getParameter(FINISH) != null) {
-        pmlist.setOrder(f.getOrder());
-        pmlist.setDesc(f.isDesc());
-        pmlist.setPage((f.getPage() != null && f.getPage() > 0) ? f.getPage() : 1);
-        pmlist.setRowsPerPage(f.getRowsPerPage());
-        }
-
-        ctx.put(PM_LIST_ORDER, pmlist.getOrder());
-        ctx.put(PM_LIST_ASC, !pmlist.isDesc());
-        listManager.configureList(ctx, pmlist, operations);*/
     }
 }

@@ -1,4 +1,4 @@
-    <action path="/list" name="ListActionForm" type="org.jpos.ee.pm.struts.actions.ListAction" validate="false" scope="request">
+    <action path="/list" type="org.jpos.ee.pm.struts.actions.ListAction" scope="request">
       <forward name="success" path="/pages/list.jsp"/>
     </action>
     <action path="/filter" name="AddActionForm" type="org.jpos.ee.pm.struts.actions.FilterAction" validate="false">

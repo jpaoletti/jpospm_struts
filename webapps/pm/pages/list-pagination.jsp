@@ -18,12 +18,11 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <script type="text/javascript">
     function paginate(i){
-        $("#listpage").val(i);
+        $("#page").val(i);
         $("#listform").submit();
     }
 </script>
 <logic:equal value="true" name="PMLIST" property="paginable">
-    <html:hidden property="page" value="${PMLIST.page}" styleId="listpage"/>
     <tr>
         <td colspan="100">
             <pm:message key='pm.struts.list.rpp' />
@@ -48,6 +47,7 @@
                 </logic:greaterThan>
 
                 <logic:lessEqual value="20" name="PMLIST" property="pages">
+                    <input type="hidden" value="${PMLIST.page}" id="page" name="page"/>
                     <logic:iterate id="i" name="PMLIST" property="pageRange" >
                         <pm:list-pagination-link i="${i}" />
                     </logic:iterate>
@@ -57,6 +57,7 @@
             <c:if test="${PMLIST.total == null}">
                 <pm:list-pagination-link i="${1}" />
                 <html:text property="page" value="${PMLIST.page}" styleId="page" size="5" style="width:25px;" /> |
+                <input type="hidden" value="${PMLIST.page}" id="page" name="page"/>
             </c:if>
             <c:if test="${PMLIST.total == null || PMLIST.page < PMLIST.pages}">
                 <a href="javascript:paginate('${PMLIST.page+1}')"><pm:message key="pm.struts.list.next"/> &raquo;</a>
