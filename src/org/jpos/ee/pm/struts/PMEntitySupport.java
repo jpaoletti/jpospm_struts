@@ -25,6 +25,7 @@ import org.jpos.ee.pm.core.EntityFilter;
 import org.jpos.ee.pm.core.EntitySupport;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PaginatedList;
+import org.jpos.ee.pm.core.PresentationManager;
 
 /**
  * Helper class for internal use.
@@ -164,6 +165,10 @@ public class PMEntitySupport extends EntitySupport {
         } catch (PMStrutsException ex) {
             return 0;
         }
+    }
+
+    public String getWelcomePage(){
+        return PresentationManager.getPm().getCfg().get("welcome-page", "pages/welcome.jsp");
     }
 
     public String getNavigationList(final EntityContainer container) {
