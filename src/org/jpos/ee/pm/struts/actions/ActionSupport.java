@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -27,7 +27,7 @@ import org.jpos.ee.pm.struts.*;
 
 /**
  * A super class for all actions with some helpers and generic stuff
- * 
+ *
  * @author jpaoletti
  */
 public abstract class ActionSupport extends Action implements Constants {
@@ -68,6 +68,9 @@ public abstract class ActionSupport extends Action implements Constants {
             boolean step = prepare(ctx);
             if (step) {
                 excecute(ctx);
+                if(ctx.getOperation() != null && ctx.getOperation().getFollows()!=null){
+                    return new ActionForward("/"+ctx.getOperation().getFollows()+".do");
+                }
             }
             return mapping.findForward(SUCCESS);
         } catch (PMForwardException e) {
