@@ -52,6 +52,8 @@ public class WeakConverter extends StrutsEditConverter {
         sb.append(getConfig("show-modify", "true"));
         sb.append("&property=");
         sb.append(field.getProperty());
+        sb.append("&buttontext=");
+        sb.append(getConfig("button-text", "pm.struts.weak.converter.edit"));
 
         return super.visualize(sb.toString());
     }
