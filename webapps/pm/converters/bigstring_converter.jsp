@@ -33,4 +33,4 @@
     </script>
     <input type="checkbox" ${checked} value="true" id="f_${param.f}_null" name="f_${param.f}_null" onclick="disable${param.f}(this.checked);" />
 </c:if>
-<textarea cols="40" rows="10"  ${disabled} id="f_${param.f}" name="f_${param.f}">${value}</textarea>
+<textarea cols="${param.cols}" rows="${param.rows}"  ${disabled} id="f_${param.f}" name="f_${param.f}">${value}</textarea>

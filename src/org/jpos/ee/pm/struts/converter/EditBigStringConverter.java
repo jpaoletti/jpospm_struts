@@ -23,6 +23,8 @@ public class EditBigStringConverter extends EditStringConverter {
         ctx.put(PM_FIELD_VALUE, value);
         return super.visualize("bigstring_converter.jsp?"
                 + "isNull=" + (p == null)
+                + "&cols=" + getConfig("cols", "40")
+                + "&rows=" + getConfig("rows", "10")
                 + "&withNull=" + getConfig("with-null", "false"));
     }
 }
