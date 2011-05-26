@@ -31,7 +31,7 @@
     	<forward name="success" path="/pages/show.jsp" />
 	    <forward name="failure" path="/pages/show.jsp"/>
     </action>
-    <action path="/edit" name="AddActionForm" type="org.jpos.ee.pm.struts.actions.EditAction" validate="false">
+    <action path="/edit" type="org.jpos.ee.pm.struts.actions.EditAction" validate="false">
       <forward name="success" path="/show.do" redirect="true"/>
       <forward name="continue" path="/pages/ae.jsp"/>
       <forward name="failure" path="/pages/ae.jsp"/>
