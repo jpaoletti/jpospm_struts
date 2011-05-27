@@ -1,6 +1,6 @@
 <%--
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -61,21 +61,7 @@
                         <%= String.format("[%0"+c+"d]", i) %>
                     </c:if>
                     &nbsp;
-                    <span style="white-space: nowrap;" class="operationspopup" id="g_${i}">
-                        <logic:iterate id="itemOperation" indexId="j" name="ctx" property="map.operations.itemOperations.operations" type="org.jpos.ee.pm.core.Operation">
-                            <%
-                            if(pmsession.getUser().hasPermission(itemOperation.getPerm())) {
-                            %>
-                            <logic:present name="itemOperation" property="url">
-                                <bean:define id="furl" value="${itemOperation.url}" />
-                            </logic:present>
-                            <logic:notPresent name="itemOperation" property="url">
-                                <bean:define id="furl" value="${es.context_path}/${itemOperation.id}.do?pmid=${entity.id}&item=${i}" />
-                            </logic:notPresent>
-                            <a class="confirmable_${itemOperation.confirm}" href="${furl}" id="operation${itemOperation.id}" title="<%=messages.getMessage("operation."+itemOperation.getId())%>" ${onclick}><img src="${es.context_path}/templates/${pm.template}/img/${itemOperation.id}.gif" alt="${itemOperation.id}" /></a>
-                            <% }%>
-                        </logic:iterate> &nbsp;
-                    </span>
+                    <%= es.getListItemOperations(ctx, messages, item, i) %>
                 </td>
                 <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
                     <c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">

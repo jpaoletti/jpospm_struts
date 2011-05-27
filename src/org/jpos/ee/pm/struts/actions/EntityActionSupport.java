@@ -32,72 +32,84 @@ import org.jpos.ee.pm.validator.Validator;
 public abstract class EntityActionSupport extends ActionSupport {
 
     /** Opens an hibernate transaction before doExecute*/
-    protected boolean openTransaction() { return false;    }
+    protected boolean openTransaction() {
+        return false;
+    }
+
     /**Makes the operation generate an audithory entry*/
-    protected boolean isAudited() {    return true; }
+    protected boolean isAudited() {
+        return true;
+    }
+
     /**Forces execute to check if there is an entity defined in parameters*/
-    protected boolean checkEntity(){ return true; }
+    protected boolean checkEntity() {
+        return true;
+    }
 
     @Override
     protected boolean prepare(PMStrutsContext ctx) throws PMException {
         super.prepare(ctx);
-        
+
         configureEntityContainer(ctx);
 
         String requrl = ctx.getRequest().getRequestURL().toString();
-        String operationId = requrl.substring(requrl.lastIndexOf("/")+1, requrl.lastIndexOf("."));
+        String operationId = requrl.substring(requrl.lastIndexOf("/") + 1, requrl.lastIndexOf("."));
         final Operation operation = (ctx.hasEntity()) ? ctx.getEntity().getOperations().getOperation(operationId) : null;
         ctx.setOperation(operation);
-        if(ctx.hasEntity()){
+        if (ctx.hasEntity()) {
             ctx.getEntityContainer().setOperation(operation);
-            if(ctx.getEntity().isWeak()){
+            if (ctx.getEntity().isWeak()) {
                 ctx.getEntityContainer().setOwner(ctx.getPMSession().getContainer(ctx.getEntity().getOwner().getEntityId()));
-                if(ctx.getEntityContainer().getOwner()== null) {
+                if (ctx.getEntityContainer().getOwner() == null) {
                     throw new PMException("owner.not.exists");
                 }
-            }else{
+            } else {
                 ctx.getEntityContainer().setOwner(null);
             }
         }
         ctx.getRequest().setAttribute(OPERATION, ctx.getOperation());
-        if(ctx.hasEntityContainer())
-            ctx.getSession().setAttribute(OPERATIONS, ctx.getEntity().getOperations().getOperationsFor(ctx.getOperation()));
+        if (ctx.hasEntityContainer()) {
+            final Object item = (ctx.getSelected() == null) ? null : ctx.getSelected().getInstance();
+            ctx.getSession().setAttribute(OPERATIONS, ctx.getEntity().getOperations().getOperationsFor(ctx, item, ctx.getOperation()));
+        }
         //TODO check entity-level permissions
         //Try to refresh selected object, if there is one
         refreshSelectedObject(ctx, null);
 
         return true;
     }
-    
+
     @Override
     protected void excecute(PMStrutsContext ctx) throws PMException {
-        
+
         /* Validate de operation*/
         validate(ctx);
-        
+
         final Operation operation = ctx.getOperation();
         Object tx = null;
-        try{
-            if(openTransaction()) {
-            	tx = ctx.getPresentationManager().getPersistenceManager().startTransaction(ctx);
-            	ctx.getPresentationManager().debug(this, "Started Transaction "+tx);
+        try {
+            if (openTransaction()) {
+                tx = ctx.getPresentationManager().getPersistenceManager().startTransaction(ctx);
+                ctx.getPresentationManager().debug(this, "Started Transaction " + tx);
             }
-        	if(operation!= null && operation.getContext()!= null)
-        		operation.getContext().preExecute(ctx);
-        
+            if (operation != null && operation.getContext() != null) {
+                operation.getContext().preExecute(ctx);
+            }
+
             /** EXCECUTES THE OPERATION **/
             doExecute(ctx);
 
-            if(operation!= null && operation.getContext()!= null)
+            if (operation != null && operation.getContext() != null) {
                 operation.getContext().postExecute(ctx);
-        
-                /*if(isAuditable(ctx)){
-                    logRevision (ctx.getDB(), (ctx.getEntity()!=null)?ctx.getEntity().getId():null, ctx.getOper_id(), ctx.getUser());
-                }*/
+            }
+
+            /*if(isAuditable(ctx)){
+            logRevision (ctx.getDB(), (ctx.getEntity()!=null)?ctx.getEntity().getId():null, ctx.getOper_id(), ctx.getUser());
+            }*/
             try {
-                if(tx != null){
-                    ctx.getPresentationManager().debug(this, "Commiting Transaction "+tx);
-                    ctx.getPresentationManager().getPersistenceManager().commit(ctx,tx);
+                if (tx != null) {
+                    ctx.getPresentationManager().debug(this, "Commiting Transaction " + tx);
+                    ctx.getPresentationManager().getPersistenceManager().commit(ctx, tx);
                 }
             } catch (Exception e) {
                 ctx.getPresentationManager().error(e);
@@ -107,11 +119,11 @@ public abstract class EntityActionSupport extends ActionSupport {
         } catch (PMException e) {
             throw e;
         } catch (Exception e) {
-        	ctx.getPresentationManager().error(e);
+            ctx.getPresentationManager().error(e);
             throw new PMException(e);
-        }finally{
-            if(tx != null){
-                ctx.getPresentationManager().debug(this,"Rolling Back Transaction "+tx);
+        } finally {
+            if (tx != null) {
+                ctx.getPresentationManager().debug(this, "Rolling Back Transaction " + tx);
                 try {
                     ctx.getPresentationManager().getPersistenceManager().rollback(ctx, tx);
                 } catch (Exception e) {
@@ -121,32 +133,34 @@ public abstract class EntityActionSupport extends ActionSupport {
         }
     }
 
-    protected boolean isAuditable(PMContext ctx) throws PMException{
+    protected boolean isAuditable(PMContext ctx) throws PMException {
         return isAudited() && ctx.hasEntity() && ctx.getEntity().isAuditable();
     }
 
     protected boolean configureEntityContainer(PMStrutsContext ctx) throws PMException {
-        String pmid = (String)ctx.getParameter(PMEntitySupport.PM_ID);
-        if(pmid==null) {
-            pmid=(String) ctx.getSession().getAttribute(PMEntitySupport.LAST_PM_ID);
-        }else{
-            ctx.getSession().setAttribute(PMEntitySupport.LAST_PM_ID,pmid);
+        String pmid = (String) ctx.getParameter(PMEntitySupport.PM_ID);
+        if (pmid == null) {
+            pmid = (String) ctx.getSession().getAttribute(PMEntitySupport.LAST_PM_ID);
+        } else {
+            ctx.getSession().setAttribute(PMEntitySupport.LAST_PM_ID, pmid);
         }
         boolean fail = false;
         ctx.getRequest().setAttribute(PMEntitySupport.PM_ID, pmid);
-        if(pmid==null){
-            if(checkEntity()) ctx.getEntityContainer();
-        }else{
+        if (pmid == null) {
+            if (checkEntity()) {
+                ctx.getEntityContainer();
+            }
+        } else {
             try {
                 ctx.setEntityContainer(ctx.getEntityContainer(pmid));
-            } catch (PMException e){
+            } catch (PMException e) {
                 ctx.getErrors().clear();
             }
-            if(!ctx.hasEntityContainer()){
+            if (!ctx.hasEntityContainer()) {
                 ctx.setEntityContainer(ctx.getPresentationManager().newEntityContainer(pmid));
-                if( checkEntity() ) {
+                if (checkEntity()) {
                     ctx.getPMSession().setContainer(pmid, ctx.getEntityContainer());
-                }else{
+                } else {
                     try {
                         ctx.getPMSession().setContainer(pmid, ctx.getEntityContainer());
                     } catch (Exception e) {
@@ -157,48 +171,54 @@ public abstract class EntityActionSupport extends ActionSupport {
         }
         return !fail;
     }
-    
+
     /**
      * 
      */
     private void validate(PMStrutsContext ctx) throws PMException {
-        if(ctx.getOperation()!= null && ctx.getOperation().getValidators()!= null){
+        if (ctx.getOperation() != null && ctx.getOperation().getValidators() != null) {
             for (Validator ev : ctx.getOperation().getValidators()) {
                 ctx.put(PM_ENTITY_INSTANCE, ctx.getSelected().getInstance());
                 ValidationResult vr = ev.validate(ctx);
-                
+
                 ctx.getErrors().addAll(vr.getMessages());
-                    if(!vr.isSuccessful()) throw new PMException();
+                if (!vr.isSuccessful()) {
+                    throw new PMException();
+                }
             }
         }
     }
 
     public Object refreshSelectedObject(PMStrutsContext ctx, EntityContainer container) throws PMException {
-        EntityContainer entityContainer =  container;
+        EntityContainer entityContainer = container;
 
-        if(entityContainer==null)
-                entityContainer = ctx.getEntityContainer(true);
+        if (entityContainer == null) {
+            entityContainer = ctx.getEntityContainer(true);
+        }
 
-        if(entityContainer == null) return null;
+        if (entityContainer == null) {
+            return null;
+        }
         EntityInstanceWrapper origin = entityContainer.getSelected();
 
-        if(origin != null){
-            if(!entityContainer.isSelectedNew()){
+        if (origin != null) {
+            if (!entityContainer.isSelectedNew()) {
                 Object o = ctx.getEntity().getDataAccess().refresh(ctx, origin.getInstance());
                 entityContainer.setSelected(new EntityInstanceWrapper(o));
-                if(o==null) ctx.getPresentationManager().warn("Fresh instance is null while origin was '"+origin.getInstance()+"'");
+                if (o == null) {
+                    ctx.getPresentationManager().warn("Fresh instance is null while origin was '" + origin.getInstance() + "'");
+                }
                 return o;
-            }else{
+            } else {
                 return origin.getInstance();
             }
         }
         return null;
     }
-    
+
     protected Collection<Object> getOwnerCollection(PMStrutsContext ctx) throws PMException {
         final Object object = refreshSelectedObject(ctx, ctx.getEntityContainer().getOwner());
         final Collection<Object> collection = (Collection<Object>) ctx.getPresentationManager().get(object, ctx.getEntity().getOwner().getEntityProperty());
         return collection;
     }
-
 }
