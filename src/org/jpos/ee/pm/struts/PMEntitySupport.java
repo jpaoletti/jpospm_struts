@@ -212,7 +212,7 @@ public class PMEntitySupport extends EntitySupport {
                     sb.append("' id='operation");
                     sb.append(itemOperation.getId());
                     sb.append("' title='");
-                    sb.append(messages.getMessage("operation.'" + itemOperation.getId()));
+                    sb.append(messages.getMessage("operation." + itemOperation.getId()));
                     sb.append("'><img src='");
                     sb.append(getContext_path());
                     sb.append("/templates/");
