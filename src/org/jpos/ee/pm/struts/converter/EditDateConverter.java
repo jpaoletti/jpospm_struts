@@ -45,7 +45,7 @@ public class EditDateConverter extends EditStringConverter {
     public Object build(PMContext ctx) throws ConverterException {
         try {
             String value = ctx.getString(PM_FIELD_VALUE);
-            if (value != null) {
+            if (value != null && !"".equals(value.trim())) {
                 return getDateFormat().parse((String) value);
             }
         } catch (ParseException e) {
