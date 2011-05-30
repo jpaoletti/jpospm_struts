@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <html:errors/>
+            <pm:errors/>
 
             <logic:present name="entity" property="highlights">
                 <style type="text/css">

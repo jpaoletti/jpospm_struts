@@ -27,5 +27,5 @@
             </fieldset>
         </html:form>
     </div>
-    <html:errors/>
+    <pm:errors/>
 </div>

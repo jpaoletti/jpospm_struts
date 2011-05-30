@@ -18,7 +18,7 @@
 <%@include file="../inc/inc-full.jsp" %>
 <bean:define id="e_container" name="ctx" property="entityContainer" />
 <pm:page title="titles.add">
-    <html:errors />
+    <pm:errors />
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
         <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>

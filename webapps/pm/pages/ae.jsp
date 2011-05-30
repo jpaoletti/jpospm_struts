@@ -35,13 +35,13 @@
                                 <c:if test="${fn:contains(field.display,ctx.operation.id) or fn:contains(field.display,'all')}">
                                     <tr>
                                         <th scope="row" width="175px"><div><label for="object.${field.id}"><pm:field-name entity="${entity}" field="${field}" /></label></div></th>
-                                        <td><div id="f_${field.id}_div"><pm:converted-item operation="${ctx.operation}" entity="${entity}" item="${entity_instance}" field="${field}" /></div></td>
+                                        <td><div id="f_${field.id}_div"><pm:converted-item operation="${ctx.operation}" entity="${entity}" item="${selected.instance}" field="${field}" /></div></td>
                                     </tr>
                                 </c:if>
                             </logic:iterate>
                         </tbody>
                         <tfoot>
-                            <tr><td colspan="2"><html:errors/>&nbsp;</td></tr>
+                            <tr><td colspan="2"><pm:errors />&nbsp;</td></tr>
                         </tfoot>
                     </table>
                     <html:submit styleId="${entity.id}_submit"><pm:message key="pm.struts.form.submit"/></html:submit>
