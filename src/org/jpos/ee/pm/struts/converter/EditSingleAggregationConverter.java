@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -35,39 +35,52 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
  *             <property name="filter"         value="org.jpos.ee.pm.core.ListFilterXX" />
  *             <property name="sort-field"     value="xxx" />
  *             <property name="sort-direction" value="asc | desc" />
+ *             <property name="search"         value="true | false" />
  *         </properties>
  * </converter>
  * }
  * </pre>
  * @author jaoletti jeronimo.paoletti@gmail.com
  * */
-
 public class EditSingleAggregationConverter extends AbstractCollectionConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
-        try{
+        try {
             String s = ctx.getString(PM_FIELD_VALUE);
-            if(s==null || s.trim().compareTo("")==0) return null;
+            if (s == null || s.trim().compareTo("") == 0) {
+                return null;
+            }
             Integer x = Integer.parseInt(s);
-            if(x==-1) return null;            
-            List<?> list = recoverList((PMStrutsContext) ctx,getConfig("entity"),true);
+            if (x == -1) {
+                return null;
+            }
+            List<?> list = recoverList((PMStrutsContext) ctx, getConfig("entity"), true);
             return list.get(x);
         } catch (Exception e1) {
             ctx.getPresentationManager().error(e1);
             throw new ConverterException("Cannot convert single aggregation");
         }
     }
-    
+
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
         String wn = getConfig("with-null", "false");
-        boolean withNull= (wn==null || wn.compareTo("true")!=0)?false:true;
+        boolean withNull = (wn == null || wn.compareTo("true") != 0) ? false : true;
         final String filter = getConfig("filter");
         final String entity = getConfig("entity");
-        Field field = (Field) ctx.get(PM_FIELD);
-        saveList((PMStrutsContext) ctx,entity);
-        return super.visualize("single_aggregation_converter.jsp?filter="+filter+"&entity="+entity+"&with_null="+withNull+"&prop="+field.getProperty());
+        final Field field = (Field) ctx.get(PM_FIELD);
+        saveList((PMStrutsContext) ctx, entity);
+        return super.visualize("single_aggregation_converter.jsp"
+                + "?filter=" + filter
+                + "&entity=" + entity
+                + "&with_null=" + withNull
+                + "&show_search=" + hasSearch(ctx)
+                + "&prop=" + field.getProperty());
     }
 
+    private boolean hasSearch(PMContext ctx) {
+        final String s = getConfig("search", "false");
+        return ("true".equals(s));
+    }
 }

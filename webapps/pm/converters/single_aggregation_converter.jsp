@@ -1,6 +1,6 @@
 <%--
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -16,16 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 <%@include file="../inc/tag-libs.jsp" %>
-<%@page import="org.jpos.ee.pm.core.*" import="org.jpos.ee.Constants" import="java.util.Collection"%>
-<%@page import="java.util.List" import="org.jpos.ee.pm.struts.PMEntitySupport" import="org.jpos.ee.pm.struts.converter.*"%>
-<%@page import="org.jpos.ee.pm.struts.converter.*" import="org.jpos.ee.pm.struts.*"%>
 <bean:define id="collection" name="ctx"    property="tmpList" type="java.util.List" />
-<select size="1" id="f_${param.f}" name="f_${param.f}">
-<c:if test="${param.with_null}">
-	<option value="-1" />&nbsp;<br/>
+<c:if test="${param.show_search}">
+    <input type="text" id="search_${param.f}" size="7" /> &nbsp;
+    <script type="text/javascript">
+        $("#search_${param.f}").change(function() {
+            var filter = $(this).val();
+            //alert(filter);
+            $("#f_${param.f} option").each(function() {
+                var match = $(this).text().search(new RegExp(filter, "i"));
+                if (match < 0 && $(this).text() != "")  {
+                    $(this).attr("disabled",true);
+                    $(this).hide();
+                }else{
+                    $(this).show();
+                    $(this).attr("disabled",false);
+                }
+
+            });
+        });
+    </script>
 </c:if>
-<logic:iterate id="o" name="collection" type="java.lang.Object" indexId="i">
-	<bean:define id="checked" value="${ o eq ctx.map.PM_FIELD_VALUE ? 'selected' : ''}" />
-	<option ${checked} value="${i}" />&nbsp;${o}<br/>
-</logic:iterate>
+<select size="1" id="f_${param.f}" name="f_${param.f}">
+    <c:if test="${param.with_null}">
+        <option value="-1" />&nbsp;<br/>
+    </c:if>
+    <logic:iterate id="o" name="collection" type="java.lang.Object" indexId="i">
+        <bean:define id="checked" value="${ o eq ctx.map.PM_FIELD_VALUE ? 'selected' : ''}" />
+        <option ${checked} value="${i}" />&nbsp;${o}<br/>
+    </logic:iterate>
 </select>
