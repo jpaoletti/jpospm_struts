@@ -1,6 +1,6 @@
 <%--
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -18,16 +18,21 @@
 <%@include file="inc/tag-libs.jsp" %>
 <script type="text/javascript" charset="utf-8">
     function loadPage(url){
-        window.frames["mainframe"].location = url;
+        var mf = window.frames["mainframe"];
+        mf.location = url;
+        $(mf).focus();
     }
 </script>
 <logic:present name="pm">
     <pm:page title="titles.index" >
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(window.frames["mainframe"]).focus();
+            });
+        </script>
         <div id="page-container">
             <pm:header />
-            <%-- <pm:menu /> --%>
             <jsp:include page="pages/menu.jsp" />
-
             <div id="content">
                 <logic:notPresent scope="session" name="user">
                     <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/pages/login.jsp" >
@@ -39,7 +44,6 @@
                     </iframe>
                 </logic:present>
             </div>
-
             <pm:footer />
         </div>
     </pm:page>
