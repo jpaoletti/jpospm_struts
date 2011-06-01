@@ -1,7 +1,4 @@
-<%@page import="org.jpos.ee.pm.menu.*" %>
-<%@page import="org.jpos.ee.pm.core.*" %>
-<%@page import="org.jpos.ee.pm.struts.*" %>
-<bean:define id="es" name="es" type="org.jpos.ee.pm.struts.PMEntitySupport" />
+<%@page import="org.jpos.ee.pm.menu.*" import="org.jpos.ee.pm.core.*" import="org.jpos.ee.pm.struts.*" %>
 <%!
 protected void printMenu(final Menu m, final JspWriter out, final HttpSession session){
     try{
