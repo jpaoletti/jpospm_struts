@@ -47,7 +47,7 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
             if(ss.length > 0 ){
                 for (int i = 0; i < ss.length; i++) {
                     Integer x = Integer.parseInt(ss[i]);
-                    if(!result.contains(list.get(x)))
+                    if(includeRepeated(ctx) || !result.contains(list.get(x)))
                         result.add(list.get(x));
                 }
             }
@@ -90,5 +90,9 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
         final Field field = (Field) ctx.get(PM_FIELD);
         saveList((PMStrutsContext) ctx,entity);
         return super.visualize("collection_converter.jsp?filter="+filter+"&entity="+entity+"&prop="+field.getProperty());
+    }
+
+    private boolean includeRepeated(PMContext ctx) {
+        return getConfig("include-repeated", "false").equals("true");
     }
 }
