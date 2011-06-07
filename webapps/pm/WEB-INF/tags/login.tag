@@ -7,6 +7,7 @@
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <div id="login" class="boxed">
     <h2 class="title"><bean:message key="login"/> </h2>
     <div class="content">
