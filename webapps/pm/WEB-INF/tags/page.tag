@@ -1,8 +1,4 @@
-<%-- 
-    Document   : page
-    Created on : 02/04/2009, 22:22:00
-    Author     : jpaoletti
---%>
+<%-- Created on : 02/04/2009, 22:22:00 --%>
 <%@ tag description="This tag encapsulates a standard html page" pageEncoding="UTF-8" import="org.jpos.ee.pm.struts.PMStrutsService" %>
 <%@ tag import="org.jpos.ee.pm.struts.PMEntitySupport"%>
 <%@ tag import="org.jpos.ee.pm.core.*"%>
@@ -27,20 +23,11 @@
         <script type="text/javascript" src="${es.context_path}/js/jquery.hotkeys.js"></script>
         <link rel="shortcut icon" href="${es.context_path}/templates/${pm.template}/img/favicon.ico">
     </head>
-
-    <!--[if lte IE 7]>
-    <style type="text/css">
-    html .jqueryslidemenu{height: 1%;} /*Holly Hack for IE7 and below*/
-    </style>
-    <![endif]-->
     <body>
         <% try{ %>
         <jsp:doBody />
-        <% }catch(Exception e){
-                PresentationManager.pm.error(e);
-        %>
+        <% }catch(Exception e){PresentationManager.pm.error(e); %>
         <pm:message key="pm.page.error"/>
-        <%
-} %>
+        <%} %>
     </body>
 </html>
