@@ -88,7 +88,6 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
         }
         Gson gson = new Gson();
         ctx.put("json_list", gson.toJson(finalist));
-        System.out.println(ctx.get("json_list"));
         return super.visualize("single_aggregation_converter.jsp"
                 + "?filter=" + filter
                 + "&entity=" + entity
