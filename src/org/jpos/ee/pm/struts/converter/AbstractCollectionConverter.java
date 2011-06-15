@@ -3,7 +3,6 @@ package org.jpos.ee.pm.struts.converter;
 import java.util.List;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.Entity;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.ListFilter;
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.struts.PMStrutsContext;

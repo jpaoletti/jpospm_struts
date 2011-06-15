@@ -29,6 +29,7 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
 import org.jpos.ee.pm.validator.ValidationResult;
 import org.jpos.ee.pm.validator.Validator;
 
+@Deprecated
 public abstract class EntityActionSupport extends ActionSupport {
 
     /** Opens an hibernate transaction before doExecute*/

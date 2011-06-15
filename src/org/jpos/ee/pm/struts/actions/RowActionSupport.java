@@ -23,6 +23,7 @@ import org.jpos.ee.pm.core.PMMessage;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 import org.jpos.util.DisplacedList;
 
+@Deprecated
 public abstract class RowActionSupport extends FieldProcessingActionSupport {
 
     public boolean testSelectedExist() {

@@ -31,13 +31,14 @@ import org.jpos.ee.pm.validator.Validator;
 import org.jpos.util.LogEvent;
 import org.jpos.util.Logger;
 
+@Deprecated
 public abstract class FieldProcessingActionSupport extends EntityActionSupport {
 
     protected void proccessField(PMStrutsContext ctx, Field field, EntityInstanceWrapper wrapper) throws PMException {
         LogEvent evt = ctx.getPresentationManager().getLog().createDebug();
         evt.addMessage("Field [" + field.getId() + "] ");
-        final List<String> parameterValues = getParameterValues(ctx,field);
-        int i  = 0;
+        final List<String> parameterValues = getParameterValues(ctx, field);
+        int i = 0;
         for (String value : parameterValues) {
             evt.addMessage("    Object to convert: " + value);
             try {
@@ -114,7 +115,7 @@ public abstract class FieldProcessingActionSupport extends EntityActionSupport {
         if (s == null) {
             s = "";
         }
-        while(s != null){
+        while (s != null) {
             result.add(s);
             i++;
             s = getParamValues(ctx, eid + "_" + i, ";");
