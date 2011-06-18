@@ -176,7 +176,7 @@ public class PMEntitySupport extends EntitySupport {
 
     public String getNavigationList(final EntityContainer container) {
         final StringBuilder sb = new StringBuilder();
-        if (container != null) {
+        if (container != null && container.getSelected() != null) {
             sb.append(getNavigationList(container.getOwner()));
             sb.append("&nbsp; &gt; &nbsp;");
             sb.append("<a href='");
