@@ -27,6 +27,7 @@ import org.jpos.ee.pm.security.core.PMSecurityConnector;
 import org.jpos.ee.pm.security.core.PMSecurityException;
 import org.jpos.ee.pm.security.core.PMSecurityService;
 import org.jpos.ee.pm.security.core.PMSecurityUser;
+import org.jpos.ee.pm.security.core.UserAlreadyLogged;
 import org.jpos.ee.pm.security.core.UserNotFoundException;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 import org.jpos.ee.pm.struts.PMForwardException;
@@ -85,6 +86,9 @@ public class LoginAction extends EntityActionSupport {
             } catch (UserNotFoundException e) {
                 ctx.getPresentationManager().removeSession(sid);
                 throw new PMException("pm_security.user.not.found");
+            } catch (UserAlreadyLogged e) {
+                ctx.getPresentationManager().removeSession(sid);
+                throw new PMException("pm_security.user.already.logged");
             } catch (InvalidPasswordException e) {
                 ctx.getPresentationManager().removeSession(sid);
                 throw new PMException("pm_security.password.invalid");
