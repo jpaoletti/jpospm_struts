@@ -5,8 +5,6 @@
 <bean:define id="operations"    name="PMLIST" property="operations" type="org.jpos.ee.pm.core.Operations" toScope="request"/>
 <bean:define id="contents" 	name="PMLIST" property="contents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="list">
-    <script type="text/javascript" src="${es.context_path}/js/jquery.modal.js"></script>
-    <script type="text/javascript" src="${es.context_path}/js/jquery.center.js"></script>
     <div class="boxed">
         <pm:pmtitle entity="${entity}" operation="${operation}" />
         <pm:operations labels="true" operations="${operations.operations}"/>
@@ -61,7 +59,6 @@
             <script type="text/javascript">
                 $(function(){
                     var myOpen=function(hash){
-                        $('#sort_page').center();
                         hash.w.css('opacity',0.88).show();
                     };
 
