@@ -12,14 +12,12 @@
         if(typeof $("#search_${param.f}").val() != "undefined"){
             filter=$("#search_${param.f}").val();
         }
-        if(filter.length >= ${param.min_search_size}){
-            for(i=0; i < list.length ; i++){
-                pr = list[i];
-                var match = pr.text.search(new RegExp(filter, "i"));
-                if(match >= 0){
-                    $("#f_${param.f}").get(0)[j]= new Option(list[i].text, list[i].id, false, list[i].selected);
-                    j++;
-                }
+        for(i=0; i < list.length ; i++){
+            pr = list[i];
+            var match = pr.text.search(new RegExp(filter, "i"));
+            if((filter.length >= ${param.min_search_size} && match >= 0) || list[i].selected){
+                $("#f_${param.f}").get(0)[j]= new Option(list[i].text, list[i].id, false, list[i].selected);
+                j++;
             }
         }
     };
