@@ -11,7 +11,8 @@
         <div id="navigation_bar">
             <pm:navigation container="${e_container.owner}"  />
         </div>
-        <form action="" method="GET" class="listform" id="listform">
+        <form action="${es.context_path}/list.do" method="GET" class="listform" id="listform">
+            <input type="hidden" name="pmid" value="${entity.id}" />
             <script type="text/javascript" charset="utf-8">
                 var pmid = "${entity.id}";
                 var searchable = "${PMLIST.searchable}" == "true";
