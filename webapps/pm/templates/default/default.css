@@ -1,6 +1,6 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html{
@@ -8,97 +8,134 @@ html{
 }
 
 body {
-	font: normal small Arial, Helvetica, sans-serif;
-	background: #DDDDDD;
-	color: #111;
-	height: 100%;
+    font: normal small Arial, Helvetica, sans-serif;
+    background: #DDDDDD;
+    color: #111;
+    height: 100%;
 }
 
 fieldset {
-	border: none;
+    border: none;
 }
 
 legend {
-	display: none;
+    display: none;
 }
 
 h1.title , h2.title , h3.title  {
-	margin: 0;
-	color: #11A6D4;
+    margin: 0;
+    color: #11A6D4;
 }
 
 h2.title  {
-	margin-bottom: .5em;
-	font-size: 1.8em;
+    margin-bottom: .5em;
+    font-size: 1.8em;
 }
 
 h3.title {
-	margin-bottom: 1em;
-	font-size: 1em;
+    margin-bottom: 1em;
+    font-size: 1em;
 }
 
 p, blockquote, ul, ol {
-	margin-bottom: 1.5em;
-	line-height: 1.8em;
-}
-
-p {
+    margin-bottom: 1.5em;
+    line-height: 1.8em;
 }
 
 blockquote {
 }
 
 ul {
-	margin-left: 2em;
-	list-style: square;
-}
-
-ul li {
+    margin-left: 2em;
+    list-style: square;
 }
 
 ol {
-	margin-left: 2em;
-	list-style: lower-roman;
+    margin-left: 2em;
+    list-style: lower-roman;
 }
 
-ol li {
-}
 
 a {
-	color: #EA672E;
+    color: #EA672E;
 }
 
 a:hover {
-	text-decoration: none;
-	color: #11A6D4;
+    text-decoration: none;
+    color: #11A6D4;
 }
 
 img {
-	border: none;
+    border: none;
+}
+
+/* Index styles */
+
+.show_hide_btn {
+    margin-left: 2px;
+    margin-right: 10px;
+    margin-top: -25px;
+    border-bottom: #EAEAD7 solid thin;
+    border-right: #EAEAD7 solid thin;
+    border-left: #EAEAD7 solid thin;
+    z-index: 10;
+    padding:5px;
+    padding-top: 10px;
+    text-align:center;
+    cursor: pointer;
+    background-color: #CC3300;
+    width: 30px;
+    height: 10px;
+}
+
+.index_layout{
+    position: relative;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+
+.index_layout_header{
+
+}
+
+.index_layout_content{
+    margin: 0 auto;
+    padding: 20px 0;
+    padding-bottom: 15px;
+    height: 82%;
+}
+
+.index_layout_footer{
+    background: #F7F7F7;
+    width: 100%;
+    position: absolute;
+    bottom: 1px !important;
+    bottom: -1px;
 }
 
 .red{
-	color: red;
+    color: red;
 }
 
 /* Boxed Style */
 
 .boxed {
-	margin-bottom: 1em;
-	/*background: #F7F7F7 url(images/img07.gif) repeat-x;
+    margin-bottom: 1em;
+    /*background: #F7F7F7 url(images/img07.gif) repeat-x;
 	border: 1px solid #CCCCCC;*/
 }
 
 .boxed .title {
-	height: 29px;
-	text-transform: uppercase;
-	font-size: 1.2em;
-	color: #777777;
-	margin: 0px 0px 5px 5px;
+    height: 29px;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    color: #777777;
+    margin: 0px 0px 5px 5px;
 }
 
 .boxed .content {
-	padding: 10px;
+    padding: 10px;
 }
 
 #operation_bar {
@@ -110,7 +147,7 @@ img {
 }
 
 .operationspopup{
-/*float:left;*/
+    /*float:left;*/
 }
 
 #page-container{
@@ -127,9 +164,9 @@ img {
 /* Header */
 
 #header {
-	height: 65px;
-	margin: 0 auto;
-	border-bottom:  2px solid black;
+    height: 65px;
+    margin: 0 auto;
+    border-bottom:  2px solid black;
     margin: 0px 0px 1px 0px;
     background: #F7F7F7;
 }
@@ -141,77 +178,77 @@ img {
 }
 
 #logo h1 {
-	font-size: 2em;
+    font-size: 2em;
 }
 
 #logo h2 {
-	margin: 0;
-	font-size: 1.2em;
+    margin: 0;
+    font-size: 1.2em;
 }
 
 #logo a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 /* Header > Top Menu */
 
 #topmenu {
-	float: right;
+    float: right;
 }
 
 #topmenu ul {
-	margin: 0;
-	padding: 80px 0 0 0;
-	list-style: none;
-	line-height: normal;
+    margin: 0;
+    padding: 80px 0 0 0;
+    list-style: none;
+    line-height: normal;
 }
 
 #topmenu li {
-	display: inline
+    display: inline
 }
 
 #topmenu a {
-	display: block;
-	float: left;
-	margin: 0 0 0 20px;
-	padding: 0 0 0 15px;
-	text-transform: uppercase;
-	text-decoration: none;
-	font-size: x-small;
-	font-weight: bold;
-	color: #FFFFFF;
+    display: block;
+    float: left;
+    margin: 0 0 0 20px;
+    padding: 0 0 0 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: x-small;
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
 #topmenu a:hover {
-	text-decoration: underline
+    text-decoration: underline
 }
 
 #topmenu1 {
-	background: url(images/img03.gif) no-repeat left center;
+    background: url(images/img03.gif) no-repeat left center;
 }
 
 #topmenu2 {
-	background: url(images/img04.gif) no-repeat left center;
+    background: url(images/img04.gif) no-repeat left center;
 }
 
 #topmenu3 {
-	background: url(images/img05.gif) no-repeat left center;
+    background: url(images/img05.gif) no-repeat left center;
 }
 
 /* Content */
 
 #content {
-	margin: 0 auto;
-	padding: 20px 0;
-	padding-bottom: 15px;
+    margin: 0 auto;
+    padding: 20px 0;
+    padding-bottom: 15px;
 }
 
 /* Content > Main */
 
 #main {
-	float: left;
-	width: 460px;
+    float: left;
+    width: 460px;
 }
 
 /* Content > Main > Example */
@@ -222,51 +259,51 @@ img {
 /* Content > Main > Welcome */
 
 #welcome {
-	margin: 0 0 3em 0;
-	padding: 10px 0 1.5em 0;
-	border-bottom: 1px solid #CCCCCC;
+    margin: 0 0 3em 0;
+    padding: 10px 0 1.5em 0;
+    border-bottom: 1px solid #CCCCCC;
 }
 
 /* Content > Sidebar */
 
 #sidebar {
-	float: right;
-	width: 220px;
+    float: right;
+    width: 220px;
 }
 
 /* Content > Sidebar > Login */
 
 #login {
-	width: 220px;
+    width: 220px;
 }
 
 #login label {
-	display: block;
+    display: block;
 }
 
 #login #username, #login #password {
-	width: 180px;
-	margin-bottom: .5em;
-	padding: 2px 5px;
-	border: 1px solid #CCCCCC;
-	font: normal small Arial, Helvetica, sans-serif;
-	color: #999999;
+    width: 180px;
+    margin-bottom: .5em;
+    padding: 2px 5px;
+    border: 1px solid #CCCCCC;
+    font: normal small Arial, Helvetica, sans-serif;
+    color: #999999;
 }
 
 #login #submit {
-	float: right;
-	width: 60px;
-	margin-right: 7px;
-	border: 1px solid #CCCCCC;
-	border-top-color: #FFFFFF;
-	border-left-color: #FFFFFF;
-	font: normal small Arial, Helvetica, sans-serif;
+    float: right;
+    width: 60px;
+    margin-right: 7px;
+    border: 1px solid #CCCCCC;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    font: normal small Arial, Helvetica, sans-serif;
 }
 
 #login p {
-	margin: 0;
-	padding-top: .2em;
-	font-size: x-small;
+    margin: 0;
+    padding-top: .2em;
+    font-size: x-small;
 }
 
 /* Content > Sidebar > Updates*/
@@ -275,30 +312,30 @@ img {
 }
 
 #updates ul {
-	margin: 0;
-	list-style: none;
+    margin: 0;
+    list-style: none;
 }
 
 #updates li {
-	margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 #updates h3 {
-	margin: 0;
-	padding: 0 0 0 10px;
-	background: url(images/img09.gif) no-repeat left center;
-	font-size: x-small;
+    margin: 0;
+    padding: 0 0 0 10px;
+    background: url(images/img09.gif) no-repeat left center;
+    font-size: x-small;
 }
 
 #updates p {
-	margin: 0;
-	padding: 0 0 0 10px;
-	line-height: normal;
-	font-size: .85em;
+    margin: 0;
+    padding: 0 0 0 10px;
+    line-height: normal;
+    font-size: .85em;
 }
 
 #updates a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 /* Content > Sidebar > Partners*/
@@ -306,96 +343,86 @@ img {
 #partners {
 }
 
-/* Footer */
-
-#footer {
-	background: #F7F7F7;
-	width: 100%;
-    position: absolute;
-    bottom: 1px !important;
-    bottom: -1px;
-    /*height: 60px;*/
-}
 
 /* Footer > Legal */
 
 #legal {
-	margin: 0;
-	padding: 3px;
-	text-align: center;
+    margin: 0;
+    padding: 3px;
+    text-align: center;
 }
 
 #legal a {
-	font-weight: bold;
-	color: #FFFFFF;
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
 /* Footer > Links */
 
 #links {
-	text-align: center;
+    text-align: center;
 }
 
 /* Menu */
 
 #menu {
-	height: 40px;
+    height: 40px;
 }
 
 #userbox{
-	padding-right:5px;
-	padding-top:5px;
-	position:absolute;
-	right:5px;
-	text-align:right;
-	top:25px;
+    padding-right:5px;
+    padding-top:5px;
+    position:absolute;
+    right:5px;
+    text-align:right;
+    top:25px;
 }
 
 #appversion{
-	float: left;
-	font-size: 80%;
-	color: graytext;
-	padding: 5px;
+    float: left;
+    font-size: 80%;
+    color: graytext;
+    padding: 5px;
 }
 
 .red{
-	background-color: red;
-	color: white;
+    background-color: red;
+    color: white;
 }
 
 .green{
-	background-color: lime;
-	color: black;
+    background-color: lime;
+    color: black;
 }
 
 #status{
-	width: 300px;
-	line-height:200px;
-	text-align: center;
-	font-size: x-large;
-	font-weight: bold;
-	vertical-align: middle;
-	margin: 0px 0px 0px 20px;
+    width: 300px;
+    line-height:200px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    vertical-align: middle;
+    margin: 0px 0px 0px 20px;
 }
 
 /**CUSTOM STYLES*/
 
 .jqHandle {
-   background: black;
-   height:10px;
+    background: black;
+    height:10px;
 }
 
 .jqDrag {
-  width: 100%;
-  cursor: move;
+    width: 100%;
+    cursor: move;
 }
 
 .jqResize {
-   width: 15px;
-   position: absolute;
-   bottom: 0;
-   right: 0;
-   cursor: se-resize;
+    width: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
 }
 
 .jqDnR {
@@ -408,9 +435,9 @@ img {
     border: 1px solid #CCC;
 }
 #sort_page{
-	border:1px solid #CCC;
-	background-color: #EAEAD7;
-	width: 250px;
+    border:1px solid #CCC;
+    background-color: #EAEAD7;
+    width: 250px;
 }
 .jqmWindow {
     display: none;
@@ -432,8 +459,8 @@ img {
      Star selector used to hide definition from browsers other than IE6
      For valid CSS, use a conditional include instead */
 * html .jqmWindow {
-     position: absolute;
-     top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+    position: absolute;
+    top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
 }
 
 .monitor_window{
