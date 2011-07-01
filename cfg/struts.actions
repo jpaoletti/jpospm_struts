@@ -1,3 +1,4 @@
+    <action path="/get_list" type="org.jpos.ee.pm.struts.actions.GetListAction" />
     <action path="/list" type="org.jpos.ee.pm.struts.actions.ListAction" scope="request">
       <forward name="success" path="/pages/list.jsp"/>
     </action>
