@@ -39,11 +39,14 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
 
 public class GeneralFilter implements Filter, Constants {
 
+    @Override
     public void destroy() {
     }
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest req = (HttpServletRequest) request;
+        req.setCharacterEncoding("UTF-8");
         req.setAttribute("pm", PresentationManager.pm);
         if (PresentationManager.pm == null) {
             chain.doFilter(request, response);
@@ -67,7 +70,7 @@ public class GeneralFilter implements Filter, Constants {
             Map.Entry entry = (Map.Entry) object;
             ctx.put("param_" + entry.getKey(), entry.getValue());
         }
-        
+
         final Object pmid = ctx.getParameter("pmid");
         ctx.put(OperationCommandSupport.PM_ID, pmid);
         ctx.getRequest().setAttribute("pmid", pmid);
@@ -101,6 +104,7 @@ public class GeneralFilter implements Filter, Constants {
         }
     }
 
+    @Override
     public void init(FilterConfig arg0) throws ServletException {
     }
 }

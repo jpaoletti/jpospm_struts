@@ -4,7 +4,7 @@
 <pm:page title="titles.add">
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}" />
-        <form action="${es.context_path}/${ctx.operation.id}.do?pmid=${pmid}" >
+        <form action="${es.context_path}/${ctx.operation.id}.do?pmid=${pmid}"  accept-charset="UTF-8" >
             <html:hidden property="finish" value="yes"/>
             <fieldset>
                 <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>
