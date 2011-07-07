@@ -4,7 +4,7 @@
 <pm:page title="titles.filter">
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
-        <html:form action="/${ctx.operation.id}.do?pmid=${pmid}">
+        <form action="${es.context_path}/${ctx.operation.id}.do?pmid=${pmid}"  accept-charset="UTF-8" >
             <html:hidden property="finish" value="yes"/>
             <fieldset>
                 <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>
@@ -31,6 +31,6 @@
                     <html:submit styleId="${entity.id}_submit"><pm:message key="pm.struts.form.submit"/></html:submit>
                     <html:reset styleId="${entity.id}_submit"><pm:message key="pm.struts.form.reset" /></html:reset>		</div>
             </fieldset>
-        </html:form>
+        </form>
     </div>
 </pm:page>
