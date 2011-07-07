@@ -2,12 +2,12 @@
     <action path="/list" type="org.jpos.ee.pm.struts.actions.ListAction" scope="request">
       <forward name="success" path="/pages/list.jsp"/>
     </action>
-    <action path="/filter" name="AddActionForm" type="org.jpos.ee.pm.struts.actions.FilterAction" validate="false">
+    <action path="/filter" type="org.jpos.ee.pm.struts.actions.FilterAction" validate="false">
       <forward name="success" path="/list.do" redirect="true"/>
       <forward name="continue" path="/pages/filter.jsp"/>
       <forward name="failure" path="/pages/filter.jsp"/>
     </action>
-    <action path="/add" name="AddActionForm" type="org.jpos.ee.pm.struts.actions.AddAction" validate="false">
+    <action path="/add" type="org.jpos.ee.pm.struts.actions.AddAction" validate="false">
       <forward name="success" path="/list.do" redirect="true"/>
       <forward name="continue" path="/pages/ae.jsp"/>
       <forward name="failure" path="/pages/ae.jsp"/>
