@@ -20,11 +20,14 @@ package org.jpos.ee.pm.struts;
 import org.jpos.ee.pm.core.EntityContainer;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.util.MessageResources;
+import org.jpos.ee.K;
 
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.EntityFilter;
 import org.jpos.ee.pm.core.EntitySupport;
+import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.Operation;
+import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PaginatedList;
@@ -226,5 +229,19 @@ public class PMEntitySupport extends EntitySupport {
         }
         sb.append("&nbsp;</span>");
         return sb.toString();
+    }
+
+    public PMContext prepareForConversion(Field field, Object item, Object field_value) {
+        final PMContext ctx = (PMContext) request.getAttribute(K.PM_CONTEXT);
+        ctx.put(K.PM_FIELD, field);
+        if (field_value != null) {
+            ctx.put(K.PM_FIELD_VALUE, field_value);
+        } else {
+            ctx.put(K.PM_FIELD_VALUE, ctx.getPresentationManager().get(item, field.getProperty()));
+        }
+        ctx.put(K.PM_ENTITY_INSTANCE, item);
+        ctx.put(K.PM_EXTRA_DATA, "");
+        request.setAttribute("ctx", ctx);
+        return ctx;
     }
 }

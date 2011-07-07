@@ -15,7 +15,7 @@
                         <c:if test="${fn:contains(field.display,'show') or fn:contains(field.display,'all')}">
                             <tr>
                                 <th scope="row" width="175px"><pm:field-name entity="${entity}" field="${field}" /></th>
-                                <td><pm:converted-item operation="${ctx.operation}" entity="${entity}" item="${ctx.selected.instance}" field="${field}" /></td>
+                                <td><pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" item="${ctx.selected.instance}" field="${field}" /></td>
                             </tr>
                         </c:if>
                     </logic:iterate>

@@ -53,7 +53,7 @@
                            if(h2!=null) request.setAttribute("pm_hl_class2","pm_hl_"+entity.getHighlights().indexOf(h2));
                         %>
                         <td class=" ${pm_hl_class2}" align="${field.align}">
-                            <pm:converted-item operation="${operation}" entity="${entity}" item="${item}" field="${field}" />
+                            <pm:converted-item es="${es}" operation="${operation}" entity="${entity}" item="${item}" field="${field}" />
                         </td>
                         <%
                            h2 = null;

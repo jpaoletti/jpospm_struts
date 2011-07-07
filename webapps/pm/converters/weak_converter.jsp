@@ -28,7 +28,7 @@
                         <logic:iterate id="field" name="fields" type="org.jpos.ee.pm.core.Field" indexId="j">
                             <c:if test="${fn:contains(field.display,'list') or fn:contains(field.display,'all')}">
                                 <td align="text-align:${field.align};">
-                                    <pm:converted-item operation="${woperation}" entity="${weak}" item="${item}" field="${field}" />
+                                    <pm:converted-item es="${es}" operation="${woperation}" entity="${weak}" item="${item}" field="${field}" />
                                 </td>
                             </c:if>
                         </logic:iterate>
