@@ -26,6 +26,7 @@ import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.EntityFilter;
 import org.jpos.ee.pm.core.EntitySupport;
 import org.jpos.ee.pm.core.Field;
+import org.jpos.ee.pm.core.Highlight;
 import org.jpos.ee.pm.core.Operation;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMException;
@@ -243,5 +244,14 @@ public class PMEntitySupport extends EntitySupport {
         ctx.put(K.PM_EXTRA_DATA, "");
         request.setAttribute("ctx", ctx);
         return ctx;
+    }
+
+    public String getHighlight(Entity entity, Field field, Object item, Object field_value) {
+        final Highlight highlight = entity.getHighlight(field, item);
+        if (highlight != null) {
+            return highlight.getStyle();
+        } else {
+            return "";
+        }
     }
 }
