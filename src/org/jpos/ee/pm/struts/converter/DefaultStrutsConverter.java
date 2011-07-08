@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,9 +17,11 @@
  */
 package org.jpos.ee.pm.struts.converter;
 
+import org.jpos.ee.K;
 import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 
 /**
  *
@@ -33,6 +35,10 @@ public class DefaultStrutsConverter extends Converter {
         if (s != null && s instanceof String && (s.toString().contains(".jsp?") || s.toString().contains(".do?"))) {
             return s;
         } else {
+            if (s == null) {
+                s = "";
+            }
+            ctx.put(K.PM_VOID_TEXT, PMEntitySupport.toHtml(s.toString()));
             return "void.jsp?";
         }
     }

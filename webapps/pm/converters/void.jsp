@@ -1,1 +1,1 @@
-${ctx.map.PM_FIELD_VALUE}
+${ctx.map.void_text}

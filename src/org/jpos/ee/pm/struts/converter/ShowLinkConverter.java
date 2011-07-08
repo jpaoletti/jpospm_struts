@@ -21,6 +21,7 @@ import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.ShowStringConverter;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 
 /**
  * Link converter shows a link with the property set in "display" as the text
@@ -53,7 +54,7 @@ public class ShowLinkConverter extends ShowStringConverter {
         final String property = getConfig("property");
         final String display = getConfig("display");
         final Object otherObject = ctx.getPresentationManager().get(einstance, field.getProperty());
-        ctx.put("display", ctx.getPresentationManager().getAsString(otherObject, display));
+        ctx.put("display", PMEntitySupport.toHtml(ctx.getPresentationManager().getAsString(otherObject, display)));
         ctx.put("identified", property + ":" + ctx.getPresentationManager().getAsString(otherObject, property));
         ctx.put("other_entity", getConfig("entity"));
         ctx.put("other_operation", getConfig("operation", "show"));

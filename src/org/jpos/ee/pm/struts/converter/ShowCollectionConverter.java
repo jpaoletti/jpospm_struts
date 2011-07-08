@@ -18,6 +18,7 @@
 package org.jpos.ee.pm.struts.converter;
 
 import java.util.Collection;
+import org.jpos.ee.K;
 import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.IgnoreConvertionException;
@@ -25,6 +26,7 @@ import org.jpos.ee.pm.converter.IgnoreConvertionException;
 import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 
 /**Converter for a collection (1..* aggregation).<br>
  * <pre>
@@ -46,8 +48,8 @@ public class ShowCollectionConverter extends Converter {
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
         try {
-            final EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
-            final Field field = (Field) ctx.get(PM_FIELD);
+            final EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(K.PM_ENTITY_INSTANCE_WRAPPER);
+            final Field field = (Field) ctx.get(K.PM_FIELD);
             final Collection<?> list = (Collection<?>) getValue(einstance, field);
             final StringBuilder sb = new StringBuilder();
             sb.append("<ul>");
@@ -57,8 +59,8 @@ public class ShowCollectionConverter extends Converter {
                 sb.append("</li>");
             }
             sb.append("</ul>");
-            ctx.put(PM_FIELD_VALUE,sb.toString());
-            return super.visualize("void.jsp?",null);
+            ctx.put(K.PM_VOID_TEXT, PMEntitySupport.toHtml(sb.toString()));
+            return super.visualize("void.jsp?", null);
         } catch (Exception e1) {
             getPresentationManager().error(e1);
             throw new ConverterException("pm_core.converter.not.collection");

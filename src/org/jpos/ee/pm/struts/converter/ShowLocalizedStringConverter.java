@@ -22,14 +22,15 @@ import org.jpos.ee.pm.converter.ShowStringConverter;
 import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 
-public class ShowLocalizedStringConverter extends ShowStringConverter{
+public class ShowLocalizedStringConverter extends ShowStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
-        Field field = (Field) ctx.get(PM_FIELD);
-        String s = (String) getValue(einstance, field);
-        return super.visualize("localized_string_converter.jsp?value="+s,"");
+        final EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
+        final Field field = (Field) ctx.get(PM_FIELD);
+        final String s = (String) getValue(einstance, field);
+        return super.visualize("localized_string_converter.jsp?value=" + PMEntitySupport.toHtml(s), "");
     }
 }

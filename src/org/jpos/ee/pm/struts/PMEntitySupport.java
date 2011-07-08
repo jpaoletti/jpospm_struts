@@ -17,6 +17,8 @@
  */
 package org.jpos.ee.pm.struts;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.jpos.ee.pm.core.EntityContainer;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.util.MessageResources;
@@ -48,6 +50,29 @@ public class PMEntitySupport extends EntitySupport {
     private String context_path;
     private static PMEntitySupport instance;
     private HttpServletRequest request;
+    public static final Map<String, String> htmlConversions = new HashMap<String, String>();
+
+    /* TODO Externalize this values into a resource */
+    static {
+        htmlConversions.put("á", "&aacute;");
+        htmlConversions.put("é", "&eacute;");
+        htmlConversions.put("í", "&iacute;");
+        htmlConversions.put("ó", "&oacute;");
+        htmlConversions.put("ú", "&uacute;");
+        htmlConversions.put("Á", "&Aacute;");
+        htmlConversions.put("É", "&Eacute;");
+        htmlConversions.put("Í", "&Iacute;");
+        htmlConversions.put("Ó", "&Oacute;");
+        htmlConversions.put("Ú", "&Uacute;");
+        htmlConversions.put("ñ", "&ntilde;");
+        htmlConversions.put("Ñ", "&Ntilde;");
+        htmlConversions.put("º", "&ordm;");
+        htmlConversions.put("ª", "&ordf;");
+        htmlConversions.put("ü", "&uuml;");
+        htmlConversions.put("Ü", "&Uuml;");
+        htmlConversions.put("ç", "&ccedil;");
+        htmlConversions.put("Ç", "&Ccedil;");
+    }
 
     /**
      * Singleton getter
@@ -252,6 +277,21 @@ public class PMEntitySupport extends EntitySupport {
             return highlight.getStyle();
         } else {
             return "";
+        }
+    }
+
+    public static String toHtml(final String s) {
+        if (s == null) {
+            return null;
+        }
+        if (PresentationManager.getPm().getCfg().getBoolean("html-convert", true)) {
+            String tmp = s;
+            for (Map.Entry<String, String> entry : htmlConversions.entrySet()) {
+                tmp = tmp.replace(entry.getKey(), entry.getValue());
+            }
+            return tmp;
+        } else {
+            return s;
         }
     }
 }

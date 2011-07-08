@@ -22,6 +22,7 @@ import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 
 /**Converter for showing a boolean value.<br>
  * <pre>
@@ -42,16 +43,21 @@ public class ShowBooleanConverter extends Converter {
     public Object build(PMContext ctx) throws ConverterException {
         return Boolean.valueOf(ctx.getString(PM_FIELD_VALUE));
     }
-    
+
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-    	EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
-        Object value = getValue(einstance.getInstance(),(Field) ctx.get(PM_FIELD) );
-        if(! (value instanceof Boolean)) throw new ConverterException("invalid.conversion");
-		boolean b = ((Boolean) value).booleanValue();
-        if(b)
-        	return super.visualize("localized_string_converter.jsp?value="+getConfig("true-text", "pm.converter.boolean_converter.yes"),"");
-        else
-        	return super.visualize("localized_string_converter.jsp?value="+getConfig("false-text", "pm.converter.boolean_converter.no"),"");
+        EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
+        Object value = getValue(einstance.getInstance(), (Field) ctx.get(PM_FIELD));
+        if (!(value instanceof Boolean)) {
+            throw new ConverterException("invalid.conversion");
+        }
+        boolean b = ((Boolean) value).booleanValue();
+        String s;
+        if (b) {
+            s = getConfig("true-text", "pm.converter.boolean_converter.yes");
+        } else {
+            s = getConfig("false-text", "pm.converter.boolean_converter.no");
+        }
+        return super.visualize("localized_string_converter.jsp?value=" +PMEntitySupport.toHtml(s), "");
     }
 }
