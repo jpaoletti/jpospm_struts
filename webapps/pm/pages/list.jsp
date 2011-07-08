@@ -41,22 +41,7 @@
                     <jsp:include page="list-sort.jsp" />
                 </div>
             </div>
-
             <pm:errors/>
-
-            <logic:present name="entity" property="highlights">
-                <style type="text/css">
-                    <logic:iterate id="highlight" name="entity" property="highlights.highlights" indexId="i">
-                        <logic:equal value="instance" name="highlight" property="scope">
-                            tr.pm_hl_${i} { background-color: ${highlight.color}; }
-                        </logic:equal>
-                        <logic:notEqual value="instance" name="highlight" property="scope">
-                            td.pm_hl_${i} { background-color: ${highlight.color}; }
-                        </logic:notEqual>
-                    </logic:iterate>
-                </style>
-            </logic:present>
-
             <script type="text/javascript">
                 $(function(){
                     var myOpen=function(hash){

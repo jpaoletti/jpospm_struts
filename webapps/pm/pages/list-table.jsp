@@ -13,54 +13,27 @@
     <thead>
         <tr>
             <th scope="col" style="width:${pmlist.operationColWidth}">&nbsp;</th>
-            <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
-                <c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">
-                    <bean:define id="w" value="<%=(field.getWidth().compareTo("")!=0)?"style='width:"+field.getWidth()+"px;'":"" %>"></bean:define>
-                    <th scope="col" ${w} ><pm:field-name entity="${entity}" field="${field}" /></th>
-                </c:if>
-            </logic:iterate>
+            <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field"><c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}"><bean:define id="w" value="<%=(field.getWidth().compareTo("")!=0)?"style='width:"+field.getWidth()+"px;'":"" %>"></bean:define>
+            <th scope="col" ${w} ><pm:field-name entity="${entity}" field="${field}" />
+            </th></c:if></logic:iterate>
         </tr>
     </thead>
     <tbody id="list_body" >
         <bean:define id="contents" name="contents" type="org.jpos.util.DisplacedList" />
         <logic:iterate id="item" name="contents" >
-            <%
-            Entity entity = (Entity) request.getAttribute("entity");
-            Integer i = contents.indexOf(item);
-            request.setAttribute("i",i);
-            Highlight h = entity.getHighlight(null,item);
-            if(h!=null) request.setAttribute("pm_hl_class","pm_hl_"+entity.getHighlights().indexOf(h));
-            %>
-            <tr class="${pm_hl_class}">
-                <%
-                    request.removeAttribute("pm_hl_class");
-                %>
+            <% Integer i = contents.indexOf(item); request.setAttribute("i",i); %>
+            <tr class="<%= es.getHighlight(ctx.getEntity(), null, item, null) %>">
                 <td style="color:gray; white-space: nowrap;">
                     <logic:equal name="has_selected" value="true">
                         <bean:define id="checked" value="<%=(ctx.getEntityContainer().getSelectedIndexes().contains(i))?"checked":"" %>" />
                         <input type="checkbox" id="selected_item" value="${i}" onchange="selectItem(this.value);" ${checked} />
                     </logic:equal>
-                    <c:if test="${pmlist.showRowNumber}">
-                        <%= String.format("[%0"+c+"d]", i) %>
-                    </c:if>
-                    &nbsp;
+                    <c:if test="${pmlist.showRowNumber}"><%= String.format("[%0"+c+"d]", i) %></c:if>&nbsp;
                     <%= es.getListItemOperations(ctx, messages, item, i) %>
                 </td>
-                <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
-                    <c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">
-                        <%
-                           Highlight h2 = entity.getHighlight(field, item);
-                           if(h2!=null) request.setAttribute("pm_hl_class2","pm_hl_"+entity.getHighlights().indexOf(h2));
-                        %>
-                        <td class=" ${pm_hl_class2}" align="${field.align}">
-                            <pm:converted-item es="${es}" operation="${operation}" entity="${entity}" item="${item}" field="${field}" />
-                        </td>
-                        <%
-                           h2 = null;
-                           request.removeAttribute("pm_hl_class2");
-                        %>
-                    </c:if>
-                </logic:iterate>
+                <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field"><c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">
+                        <td align="${field.align}"><pm:converted-item es="${es}" operation="${operation}" entity="${entity}" item="${item}" field="${field}" />
+                        </td></c:if></logic:iterate>
             </tr>
         </logic:iterate>
     </tbody>
@@ -77,7 +50,7 @@
         </logic:equal>
     </tfoot>
 </table>
-<script>
+<script type="text/javascript" >
     $(".confirmable_true").bind('click',function(){
         return confirm("<pm:message key='pm.operation.confirm.question' />");
     });
