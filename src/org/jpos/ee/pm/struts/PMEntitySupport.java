@@ -214,7 +214,12 @@ public class PMEntitySupport extends EntitySupport {
             sb.append(container.getOperation().getId());
             sb.append(".do?pmid=");
             sb.append(container.getEntity().getId()).append("' >");
-            sb.append(container.getSelected().getInstance());
+            final Object inst = container.getSelected().getInstance();
+            if (inst == null) {
+                sb.append("");
+            } else {
+                sb.append(toHtml(inst.toString()));
+            }
             sb.append("</a>");
         }
         return sb.toString();
