@@ -17,6 +17,7 @@
  */
 package org.jpos.ee.pm.struts.converter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.jpos.core.ConfigurationException;
@@ -89,6 +90,9 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
         final String entity = getConfig("entity");
         final Field field = (Field) ctx.get(PM_FIELD);
         saveList((PMStrutsContext) ctx,entity);
+        if(ctx.get(PM_FIELD_VALUE)==null){
+            ctx.put(PM_FIELD_VALUE, new ArrayList<Object>());
+        }
         return super.visualize("collection_converter.jsp?filter="+filter+"&entity="+entity+"&prop="+field.getProperty());
     }
 
