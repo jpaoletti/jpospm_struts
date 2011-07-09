@@ -25,7 +25,7 @@
                             </logic:iterate>
                         </tbody>
                         <tfoot>
-                            <tr><td colspan="2"><pm:errors/>&nbsp;</td></tr>
+                            <tr><td colspan="3"><pm:errors/>&nbsp;</td></tr>
                         </tfoot>
                     </table>
                     <html:submit styleId="${entity.id}_submit"><pm:message key="pm.struts.form.submit"/></html:submit>
