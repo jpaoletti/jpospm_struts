@@ -32,10 +32,10 @@
         }
     };
 </script>
-<input type="text" id="search_${param.f}" size="7" style="float: left;" />
+<input type="text" id="search_${param.f}" size="7" />
 <div id="loading_${param.f}"><img alt="..." src="${es.context_path}/templates/${pm.template}/images/loading.gif"/></div>
-<div id="done_${param.f}" style="display: none;">
+<span id="done_${param.f}" style="display: none;">
     <script type="text/javascript">$("#search_${param.f}").change(sacupds["${param.f}"]);</script>
     <select size="1" id="f_${param.f}" name="f_${param.f}"></select>
-</div>
+</span>
 <script type="text/javascript">sacupds["${param.f}"]();</script>
