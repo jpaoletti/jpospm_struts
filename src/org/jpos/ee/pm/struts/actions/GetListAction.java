@@ -7,6 +7,7 @@ import java.util.List;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.EntityFilter;
+import org.jpos.ee.pm.core.FilterBehavior;
 import org.jpos.ee.pm.core.FilterOperation;
 import org.jpos.ee.pm.core.ListFilter;
 import org.jpos.ee.pm.core.PMException;
@@ -18,7 +19,7 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
  * <ul>
  *  <li>entity: Entity id of the wanted list</li>
  *  <li>id: identifier of the wanted list</li>
- *  <li>display: property for displaying</li>
+ *  <li>display: list of properties separated by blanks for displaying</li>
  *  <li>filter: asuming that display is a string, the filter looks for the item list with display "like" the value</li>
  *  <li>filter_class: filter class implementing org.jpos.ee.pm.core.ListFilter</li>
  *  <li></li>
@@ -41,6 +42,12 @@ public class GetListAction extends ActionSupport {
             }
             final String _id = ctx.getRequest().getParameter("id");
             final String _display = ctx.getRequest().getParameter("display");
+            if (_id == null) {
+                throw new PMException("getlist.id.cannot.be.null");
+            }
+            if (_display == null) {
+                throw new PMException("getlist.display.cannot.be.null");
+            }
             final Integer _from = getInt(ctx, "from");
             final Integer _count = getInt(ctx, "count");
             final String _filter = ctx.getRequest().getParameter("filter");
@@ -55,7 +62,11 @@ public class GetListAction extends ActionSupport {
                 entity.setListfilter(lfilter);
                 if (_filter != null) {
                     final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
-                    filter.addFilter(_display, _filter, FilterOperation.LIKE);
+                    filter.setBehavior(FilterBehavior.OR);
+                    String[] _display_fields = _display.split("[ ]");
+                    for (String _display_field : _display_fields) {
+                        filter.addFilter(_display_field, _filter, FilterOperation.LIKE);
+                    }
                     filter.process(entity);
                     list = entity.getList(ctx, filter, _from, _count);
                 } else {
@@ -65,9 +76,14 @@ public class GetListAction extends ActionSupport {
             }
             for (Object object : list) {
                 if (object != null) {
+                    String[] _display_fields = _display.split("[ ]");
+                    String _selected_value = "";
+                    for (String _display_field : _display_fields) {
+                        _selected_value += " "+ctx.getPresentationManager().getAsString(object, _display_field);
+                    }
                     finalist.add(new ACListItem(
                             ctx.getPresentationManager().getAsString(object, _id),
-                            ctx.getPresentationManager().getAsString(object, _display),
+                            _selected_value,
                             false));
                 }
             }

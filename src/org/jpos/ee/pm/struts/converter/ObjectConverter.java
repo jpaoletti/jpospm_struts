@@ -50,14 +50,25 @@ public class ObjectConverter extends StrutsEditConverter {
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
         final String _id = getConfig("id");
+        if (_id == null) {
+            throw new ConverterException("object.converter.id.cannot.be.null");
+        }
         final String _display = getConfig("display");
+        if (_display == null) {
+            throw new ConverterException("object.converter.display.cannot.be.null");
+        }
         final Object fieldValue = ctx.get(PM_FIELD_VALUE);
         if (fieldValue == null) {
             ctx.put("_selected_value", "");
             ctx.put("_selected_id", "-1");
             ctx.put("_with_null", false); //false because selected is already null
         } else {
-            ctx.put("_selected_value", ctx.getPresentationManager().getAsString(fieldValue, _display));
+            String[] _display_fields = _display.split("[ ]");
+            String _selected_value = "" ;
+            for (String _display_field : _display_fields) {
+                _selected_value += " "+ctx.getPresentationManager().getAsString(fieldValue, _display_field);
+            }
+            ctx.put("_selected_value", _selected_value);
             ctx.put("_selected_id", ctx.getPresentationManager().getAsString(fieldValue, _id));
             ctx.put("_with_null", getConfig("with-null", "false"));
         }
