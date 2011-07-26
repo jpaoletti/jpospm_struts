@@ -43,7 +43,7 @@
                 <th><input type="hidden" name="search" class="search_init" /></th>
                     <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
                         <c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">
-                        <th><input type="text" name="search_<pm:field-name entity="${entity}" field="${field}" />" value="<bean:message key="list.input.search"/><pm:field-name entity="${entity}" field="${field}" />" class="search_init" /></th>
+                        <th><input type="text" name="search_<pm:field-name entity="${entity}" field="${field}" />" value="<bean:message key="list.input.search"/>" class="search_init" /></th>
                         </c:if>
                     </logic:iterate>
             </tr>
