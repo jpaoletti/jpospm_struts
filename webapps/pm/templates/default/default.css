@@ -375,7 +375,11 @@ img {
     position:absolute;
     right:5px;
     text-align:right;
-    top:25px;
+    top:5px;
+}
+
+#userbox img{
+    vertical-align:middle;
 }
 
 #appversion{

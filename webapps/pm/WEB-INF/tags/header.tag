@@ -12,7 +12,7 @@
     </div>
     <c:if test="${not empty pmsession.user}">
     <div id="userbox">
-        ${pmsession.user.name} &nbsp; |
+        <img src='${pmsession.user.gravatar}?s=50&d=mm' alt="gravatar"/> &nbsp;${pmsession.user.name} &nbsp; |
         <logic:equal value="true" name="pm" property="loginRequired">
         &nbsp; <a href="javascript:loadPage('${es.context_path}/show.do?pmid=secuserprofile&identified=username:${pmsession.user.username}');"><pm:message key="user.profile"/></a> &nbsp; |
         </logic:equal>
