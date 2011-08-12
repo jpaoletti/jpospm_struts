@@ -33,5 +33,4 @@
             </logic:iterate>
         </style>
     </logic:present>
-    <script type="text/javascript" src="${es.context_path}/js/highlight.js"></script>
 </pm:page>
