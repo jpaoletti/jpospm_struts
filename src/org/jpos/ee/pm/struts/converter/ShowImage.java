@@ -29,6 +29,7 @@ public class ShowImage extends DefaultStrutsConverter {
         try {
             final PMSecurityUser user = ctx.getUser();
             byte[] value = (byte[]) ctx.get(PM_FIELD_VALUE);
+            if(value==null) return null;
             final String filename = user.getUsername() + "." + getConfig("type", "png");
             final String dir = "webapps/pm/cache/";
             final File directory = new File(dir);
