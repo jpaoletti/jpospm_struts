@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -25,6 +25,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jpos.ee.Constants;
+import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 
@@ -35,7 +36,10 @@ public class LogoutAction extends Action implements Constants {
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         final PMEntitySupport es = PMEntitySupport.getInstance();
-        PresentationManager.getPm().removeSession(request.getSession().getId());
+        final PMSession pmsession = PMEntitySupport.getPMSession(request);
+        if (pmsession != null) {
+            PresentationManager.getPm().removeSession(pmsession.getId());
+        }
         request.getSession().invalidate();
         es.setContext_path(request.getContextPath());
         request.getSession().setAttribute(ENTITY_SUPPORT, es);

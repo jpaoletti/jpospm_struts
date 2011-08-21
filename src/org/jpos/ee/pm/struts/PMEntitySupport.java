@@ -305,13 +305,20 @@ public class PMEntitySupport extends EntitySupport {
      * @param key Key
      */
     public static String getTooltip(final String key) {
-            if (key == null) {
+        if (key == null) {
             return "";
         }
         final String message = PresentationManager.getMessage(key);
         if (key.equals(message)) {
             return "";
         }
-        return "<img class='tooltip' title='"+message+"' alt='?' src='"+getInstance().getContext_path()+"/templates/"+getInstance().getPM().getTemplate()+"/img/tooltip.gif' />";
+        return "<img class='tooltip' title='" + message + "' alt='?' src='" + getInstance().getContext_path() + "/templates/" + getInstance().getPM().getTemplate() + "/img/tooltip.gif' />";
+    }
+
+    /**
+     * Getter for PMSession from http session
+     */
+    public static PMSession getPMSession(final HttpServletRequest request) {
+        return (PMSession) request.getSession().getAttribute(PMSESSION);
     }
 }

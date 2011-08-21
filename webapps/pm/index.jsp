@@ -64,12 +64,12 @@
                             <img alt="v" src="${es.context_path}/templates/${pm.template}/img/arrow-down.gif" />
                         </div>
                     </c:if>
-                    <logic:notPresent scope="session" name="user">
+                    <logic:notPresent name="pmsession">
                         <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/pages/login.jsp" >
                         </iframe>
                     </logic:notPresent>
 
-                    <logic:present scope="session" name="user">
+                    <logic:present name="pmsession">
                         <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/${es.welcomePage}">
                         </iframe>
                     </logic:present>

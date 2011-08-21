@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jpos.ee.Constants;
 import org.jpos.ee.pm.core.PMMessage;
+import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.core.operations.OperationCommandSupport;
 import org.jpos.ee.pm.struts.PMEntitySupport;
@@ -47,18 +48,20 @@ public class GeneralFilter implements Filter, Constants {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest req = (HttpServletRequest) request;
         req.setCharacterEncoding("UTF-8");
-        req.setAttribute("pm", PresentationManager.pm);
-        if (PresentationManager.pm == null) {
+        req.setAttribute("pm", PresentationManager.getPm());
+        if (PresentationManager.getPm() == null) {
             chain.doFilter(request, response);
             return;
         }
-        PMEntitySupport o = (PMEntitySupport) req.getSession().getAttribute(ENTITY_SUPPORT);
+        final PMEntitySupport o = (PMEntitySupport) req.getSession().getAttribute(ENTITY_SUPPORT);
         if (o == null) {
             PMEntitySupport es = PMEntitySupport.getInstance();
             es.setContext_path(req.getContextPath());
             req.getSession().setAttribute(ENTITY_SUPPORT, es);
         }
-        PMStrutsContext ctx = new PMStrutsContext(req.getSession().getId());
+        final PMSession pmsession = PMEntitySupport.getPMSession(req);
+        final String sessionId = (pmsession != null) ? pmsession.getId() : "";
+        final PMStrutsContext ctx = new PMStrutsContext(sessionId);
         req.setAttribute("ctx", ctx);
         ctx.setRequest(req);
         ctx.setResponse((HttpServletResponse) response);
@@ -79,10 +82,8 @@ public class GeneralFilter implements Filter, Constants {
         ctx.put(OperationCommandSupport.PM_ITEM, item);
         ctx.getRequest().setAttribute("item", item);
 
-
         try {
             ctx.getPresentationManager().getPersistenceManager().init(ctx);
-
             chain.doFilter(request, response);
         } catch (ServletException e) {
             error(ctx, e);
