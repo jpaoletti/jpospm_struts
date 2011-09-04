@@ -90,7 +90,7 @@ public abstract class EntityActionSupport extends ActionSupport {
         Object tx = null;
         try {
             if (openTransaction()) {
-                tx = ctx.getPresentationManager().getPersistenceManager().startTransaction(ctx);
+                tx = ctx.getPersistenceManager().startTransaction(ctx);
                 ctx.getPresentationManager().debug(this, "Started Transaction " + tx);
             }
             if (operation != null && operation.getContext() != null) {
@@ -110,7 +110,7 @@ public abstract class EntityActionSupport extends ActionSupport {
             try {
                 if (tx != null) {
                     ctx.getPresentationManager().debug(this, "Commiting Transaction " + tx);
-                    ctx.getPresentationManager().getPersistenceManager().commit(ctx, tx);
+                    ctx.getPersistenceManager().commit(ctx, tx);
                 }
             } catch (Exception e) {
                 ctx.getPresentationManager().error(e);
@@ -126,7 +126,7 @@ public abstract class EntityActionSupport extends ActionSupport {
             if (tx != null) {
                 ctx.getPresentationManager().debug(this, "Rolling Back Transaction " + tx);
                 try {
-                    ctx.getPresentationManager().getPersistenceManager().rollback(ctx, tx);
+                    ctx.getPersistenceManager().rollback(ctx, tx);
                 } catch (Exception e) {
                     ctx.getPresentationManager().error(e);
                 }
