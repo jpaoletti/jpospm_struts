@@ -48,53 +48,61 @@ public class GeneralFilter implements Filter, Constants {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest req = (HttpServletRequest) request;
         req.setCharacterEncoding("UTF-8");
-        req.setAttribute("pm", PresentationManager.getPm());
-        if (PresentationManager.getPm() == null) {
+        /**
+         * Optimization to avoid unused connections to data source.
+         */
+        if (isIgnored(req.getRequestURI())) {
             chain.doFilter(request, response);
-            return;
-        }
-        final PMEntitySupport o = (PMEntitySupport) req.getSession().getAttribute(ENTITY_SUPPORT);
-        if (o == null) {
-            PMEntitySupport es = PMEntitySupport.getInstance();
-            es.setContext_path(req.getContextPath());
-            req.getSession().setAttribute(ENTITY_SUPPORT, es);
-        }
-        final PMSession pmsession = PMEntitySupport.getPMSession(req);
-        final String sessionId = (pmsession != null) ? pmsession.getId() : "";
-        final PMStrutsContext ctx = new PMStrutsContext(sessionId);
-        req.setAttribute("ctx", ctx);
-        ctx.setRequest(req);
-        ctx.setResponse((HttpServletResponse) response);
-        ctx.setErrors(new ArrayList<PMMessage>());
-        ctx.getRequest().setAttribute(PM_CONTEXT, ctx);
-        ctx.put(ActionSupport.USER, ctx.getSession().getAttribute(ActionSupport.USER));
+        } else {
+            final PresentationManager pm = PresentationManager.getPm();
+            req.setAttribute("pm", pm);
+            if (pm == null) {
+                chain.doFilter(request, response);
+                return;
+            }
+            final PMEntitySupport o = (PMEntitySupport) req.getSession().getAttribute(ENTITY_SUPPORT);
+            if (o == null) {
+                PMEntitySupport es = PMEntitySupport.getInstance();
+                es.setContext_path(req.getContextPath());
+                req.getSession().setAttribute(ENTITY_SUPPORT, es);
+            }
+            final PMSession pmsession = PMEntitySupport.getPMSession(req);
+            final String sessionId = (pmsession != null) ? pmsession.getId() : "";
+            final PMStrutsContext ctx = new PMStrutsContext(sessionId);
+            req.setAttribute("ctx", ctx);
+            ctx.setRequest(req);
+            ctx.setResponse((HttpServletResponse) response);
+            ctx.setErrors(new ArrayList<PMMessage>());
+            ctx.getRequest().setAttribute(PM_CONTEXT, ctx);
+            ctx.put(ActionSupport.USER, ctx.getSession().getAttribute(ActionSupport.USER));
 
-        for (Object object : req.getParameterMap().entrySet()) {
-            Map.Entry entry = (Map.Entry) object;
-            ctx.put("param_" + entry.getKey(), entry.getValue());
-        }
+            for (Object object : req.getParameterMap().entrySet()) {
+                Map.Entry entry = (Map.Entry) object;
+                ctx.put("param_" + entry.getKey(), entry.getValue());
+            }
 
-        final Object pmid = ctx.getParameter("pmid");
-        ctx.put(OperationCommandSupport.PM_ID, pmid);
-        ctx.getRequest().setAttribute("pmid", pmid);
+            final Object pmid = ctx.getParameter("pmid");
+            ctx.put(OperationCommandSupport.PM_ID, pmid);
+            ctx.getRequest().setAttribute("pmid", pmid);
 
-        final Object item = ctx.getParameter("item");
-        ctx.put(OperationCommandSupport.PM_ITEM, item);
-        ctx.getRequest().setAttribute("item", item);
+            final Object item = ctx.getParameter("item");
+            ctx.put(OperationCommandSupport.PM_ITEM, item);
+            ctx.getRequest().setAttribute("item", item);
 
-        try {
-            ctx.getPresentationManager().getPersistenceManager().init(ctx);
-            chain.doFilter(request, response);
-        } catch (ServletException e) {
-            error(ctx, e);
-            throw e;
-        } catch (Exception e) {
-            error(ctx, e);
-        } finally {
             try {
-                ctx.getPresentationManager().getPersistenceManager().finish(ctx);
+                ctx.getPersistenceManager(); // deprecated. Used to back compat
+                chain.doFilter(request, response);
+            } catch (ServletException e) {
+                error(ctx, e);
+                throw e;
             } catch (Exception e) {
                 error(ctx, e);
+            } finally {
+                try {
+                    ctx.getPersistenceManager().finish(ctx);
+                } catch (Exception e) {
+                    error(ctx, e);
+                }
             }
         }
     }
@@ -107,5 +115,15 @@ public class GeneralFilter implements Filter, Constants {
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
+    }
+
+    private boolean isIgnored(String s) {
+        final String[] ignoredExtensions = PresentationManager.getPm().getCfg().get("struts-ignored-extensions", "css,gif,png,jpg,js").split(",");
+        for (String ext : ignoredExtensions) {
+            if (s.endsWith("." + ext.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
