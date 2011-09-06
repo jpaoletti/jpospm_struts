@@ -1,5 +1,6 @@
 <%@tag description="This tag encapsulates a title" pageEncoding="UTF-8"%>
 <%@taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
+<%@taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <%@attribute name = "key" required="true" type="java.lang.String" %>
 <%@attribute name = "key_operation" required="false" type="java.lang.String" %>
@@ -9,7 +10,7 @@
              src="${es.context_path}/templates/${pm.template}/img/arrow_back.gif"
              style="vertical-align:middle;"/></a>
     &nbsp;<pm:message key="${key}" />&nbsp;
-    <login:present name="key_operation">(<pm:message key="${key_operation}" />)</logic:present>
+    <logic:present name="key_operation">(<pm:message key="${key_operation}" />)</logic:present>
     <a href="javascript:location.reload(true)" title="<bean:message key="pm.title.refresh"/>">
             <img alt="<bean:message key="pm.title.refresh"/>"
              src="${es.context_path}/templates/${pm.template}/img/reload.gif"
