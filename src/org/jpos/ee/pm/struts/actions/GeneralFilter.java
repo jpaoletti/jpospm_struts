@@ -118,12 +118,16 @@ public class GeneralFilter implements Filter, Constants {
     }
 
     private boolean isIgnored(String s) {
-        final String[] ignoredExtensions = PresentationManager.getPm().getCfg().get("struts-ignored-extensions", "css,gif,png,jpg,js").split(",");
-        for (String ext : ignoredExtensions) {
-            if (s.endsWith("." + ext.trim())) {
-                return true;
+        if (PresentationManager.getPm() != null) {
+            final String[] ignoredExtensions = PresentationManager.getPm().getCfg().get("struts-ignored-extensions", "css,gif,png,jpg,js").split(",");
+            for (String ext : ignoredExtensions) {
+                if (s.endsWith("." + ext.trim())) {
+                    return true;
+                }
             }
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 }
