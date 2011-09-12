@@ -18,7 +18,6 @@
 package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
@@ -27,14 +26,18 @@ import org.jpos.ee.pm.core.PMContext;
  * 
  * @author jpaoletti
  */
-public class EditClassConverter  extends StrutsEditConverter{
+public class EditClassConverter extends StrutsEditConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         Object value = ctx.get(PM_FIELD_VALUE);
-        if(value ==null) return null;
+        if (value == null) {
+            return null;
+        }
         String s = (String) value;
-        if(s.compareTo("")==0)return null;
+        if (s.compareTo("") == 0) {
+            return null;
+        }
         try {
             return ctx.getPresentationManager().newInstance(s);
         } catch (Exception e) {
@@ -44,13 +47,12 @@ public class EditClassConverter  extends StrutsEditConverter{
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
         Field field = (Field) ctx.get(PM_FIELD);
         String s = "";
         try {
-            s = getValue(einstance, field).getClass().getName();
+            s = getValue(ctx.getEntityInstance(), field).getClass().getName();
         } catch (Exception e) {
         }
-        return super.visualize("string_converter.jsp?value="+s);
+        return super.visualize("string_converter.jsp?value=" + s);
     }
 }

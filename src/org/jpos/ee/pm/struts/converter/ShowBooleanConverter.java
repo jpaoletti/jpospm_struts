@@ -19,7 +19,6 @@ package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMEntitySupport;
@@ -46,8 +45,7 @@ public class ShowBooleanConverter extends Converter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
-        Object value = getValue(einstance.getInstance(), (Field) ctx.get(PM_FIELD));
+        Object value = getValue(ctx.getEntityInstance(), (Field) ctx.get(PM_FIELD));
         if (!(value instanceof Boolean)) {
             throw new ConverterException("invalid.conversion");
         }
@@ -58,6 +56,6 @@ public class ShowBooleanConverter extends Converter {
         } else {
             s = getConfig("false-text", "pm.converter.boolean_converter.no");
         }
-        return super.visualize("localized_string_converter.jsp?value=" +PMEntitySupport.toHtml(s), "");
+        return super.visualize("localized_string_converter.jsp?value=" + PMEntitySupport.toHtml(s), "");
     }
 }

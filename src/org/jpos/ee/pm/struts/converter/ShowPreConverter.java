@@ -17,10 +17,8 @@
  */
 package org.jpos.ee.pm.struts.converter;
 
-
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.ShowStringConverter;
-import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
@@ -28,16 +26,17 @@ import org.jpos.ee.pm.core.PMContext;
  *
  * @author jpaoletti
  */
-public class ShowPreConverter extends ShowStringConverter{
+public class ShowPreConverter extends ShowStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
         final Field field = (Field) ctx.get(PM_FIELD);
         Object p = ctx.get(PM_FIELD_VALUE);
-        if(p==null) p = getValue(einstance, field);
+        if (p == null) {
+            p = getValue(ctx.getEntityInstance(), field);
+        }
         final String value = (p == null) ? "" : p.toString();
         ctx.put(PM_FIELD_VALUE, value);
-        return super.visualize("pre.jsp?",ctx.getString(PM_EXTRA_DATA));
+        return super.visualize("pre.jsp?", ctx.getString(PM_EXTRA_DATA));
     }
 }

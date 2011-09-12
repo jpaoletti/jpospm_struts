@@ -22,7 +22,6 @@ import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.IgnoreConvertionException;
 
-import org.jpos.ee.pm.core.EntityInstanceWrapper;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMEntitySupport;
@@ -47,9 +46,8 @@ public class ShowCollectionConverter extends Converter {
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
         try {
-            final EntityInstanceWrapper einstance = (EntityInstanceWrapper) ctx.get(PM_ENTITY_INSTANCE_WRAPPER);
             final Field field = (Field) ctx.get(PM_FIELD);
-            final Collection<?> list = (Collection<?>) getValue(einstance, field);
+            final Collection<?> list = (Collection<?>) getValue(ctx.getEntityInstance(), field);
             final StringBuilder sb = new StringBuilder();
             sb.append("<ul>");
             for (Object o : list) {
