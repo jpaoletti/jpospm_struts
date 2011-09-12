@@ -49,11 +49,10 @@ public class ShowLinkConverter extends ShowStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        final Object einstance = (Object) ctx.get(PM_ENTITY_INSTANCE);
         final Field field = (Field) ctx.get(PM_FIELD);
         final String property = getConfig("property");
         final String display = getConfig("display");
-        final Object otherObject = ctx.getPresentationManager().get(einstance, field.getProperty());
+        final Object otherObject = ctx.getPresentationManager().get(ctx.getEntityInstance(), field.getProperty());
         ctx.put("display", PMEntitySupport.toHtml(ctx.getPresentationManager().getAsString(otherObject, display)));
         ctx.put("identified", property + ":" + ctx.getPresentationManager().getAsString(otherObject, property));
         ctx.put("other_entity", getConfig("entity"));

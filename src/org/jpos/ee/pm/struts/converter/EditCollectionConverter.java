@@ -70,13 +70,13 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
      * @throws ConfigurationException
      */
     protected Collection<Object> getCollection(PMContext ctx) throws ConverterException, ConfigurationException {
-        String collection_class = getConfig("collection-class");
+        final String collection_class = getConfig("collection-class");
         if (collection_class == null) {
             throw new ConverterException("pm.struts.converter.class.mustbedefined");
         }
-        final Object instance = ctx.get(PM_ENTITY_INSTANCE);
+        final Object instance = ctx.getEntityInstance();
         Collection<Object> result = null;
-        Field field = (Field) ctx.get(PM_FIELD);
+        final Field field = (Field) ctx.get(PM_FIELD);
         result = (Collection<Object>) getValue(instance, field);
         if (result == null) {
             result = (Collection<Object>) ctx.getPresentationManager().newInstance(collection_class);
