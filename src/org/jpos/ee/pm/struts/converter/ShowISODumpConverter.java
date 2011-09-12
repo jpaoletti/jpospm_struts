@@ -21,7 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.IgnoreConvertionException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.iso.ISOUtil;
 
@@ -34,8 +33,7 @@ public class ShowISODumpConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Field field = (Field) ctx.get(PM_FIELD);
-        byte[] p = (byte[]) getValue(ctx.getEntityInstance(), field);
+        byte[] p = (byte[]) getValue(ctx.getEntityInstance(), ctx.getField());
         if (p != null) {
             try {
                 String string = ISOUtil.hexdump(p); //new String(p);

@@ -23,7 +23,6 @@ import java.util.List;
 import org.jpos.core.ConfigurationException;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
@@ -36,20 +35,23 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
-        try{
+        try {
             final PMStrutsContext c = (PMStrutsContext) ctx;
             Collection<Object> result = getCollection(ctx);
             List<?> list = recoverList(c, getConfig("entity"), true);
 
             result.clear();
             String s = ctx.getString(PM_FIELD_VALUE);
-            if(s.trim().compareTo("")==0) return result;
+            if (s.trim().compareTo("") == 0) {
+                return result;
+            }
             String[] ss = s.split(";");
-            if(ss.length > 0 ){
+            if (ss.length > 0) {
                 for (int i = 0; i < ss.length; i++) {
                     Integer x = Integer.parseInt(ss[i]);
-                    if(includeRepeated(ctx) || !result.contains(list.get(x)))
+                    if (includeRepeated(ctx) || !result.contains(list.get(x))) {
                         result.add(list.get(x));
+                    }
                 }
             }
             return result;
@@ -76,8 +78,7 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
         }
         final Object instance = ctx.getEntityInstance();
         Collection<Object> result = null;
-        final Field field = (Field) ctx.get(PM_FIELD);
-        result = (Collection<Object>) getValue(instance, field);
+        result = (Collection<Object>) getValue(instance, ctx.getField());
         if (result == null) {
             result = (Collection<Object>) ctx.getPresentationManager().newInstance(collection_class);
         }
@@ -88,12 +89,11 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
     public String visualize(PMContext ctx) throws ConverterException {
         final String filter = getConfig("filter");
         final String entity = getConfig("entity");
-        final Field field = (Field) ctx.get(PM_FIELD);
-        saveList((PMStrutsContext) ctx,entity);
-        if(ctx.get(PM_FIELD_VALUE)==null){
+        saveList((PMStrutsContext) ctx, entity);
+        if (ctx.get(PM_FIELD_VALUE) == null) {
             ctx.put(PM_FIELD_VALUE, new ArrayList<Object>());
         }
-        return super.visualize("collection_converter.jsp?filter="+filter+"&entity="+entity+"&prop="+field.getProperty());
+        return super.visualize("collection_converter.jsp?filter=" + filter + "&entity=" + entity + "&prop=" + ctx.getField().getProperty());
     }
 
     private boolean includeRepeated(PMContext ctx) {

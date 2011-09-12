@@ -19,7 +19,6 @@ package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.ShowStringConverter;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 
@@ -49,10 +48,9 @@ public class ShowLinkConverter extends ShowStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        final Field field = (Field) ctx.get(PM_FIELD);
         final String property = getConfig("property");
         final String display = getConfig("display");
-        final Object otherObject = ctx.getPresentationManager().get(ctx.getEntityInstance(), field.getProperty());
+        final Object otherObject = ctx.getPresentationManager().get(ctx.getEntityInstance(), ctx.getField().getProperty());
         ctx.put("display", PMEntitySupport.toHtml(ctx.getPresentationManager().getAsString(otherObject, display)));
         ctx.put("identified", property + ":" + ctx.getPresentationManager().getAsString(otherObject, property));
         ctx.put("other_entity", getConfig("entity"));

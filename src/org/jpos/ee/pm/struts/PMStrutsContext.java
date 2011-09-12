@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMException;
@@ -124,8 +123,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
     }
 
     public String getTmpName() throws PMException {
-        Field field = (Field) get(PM_FIELD);
-        return "tmp_" + getEntity().getId() + "_" + field.getId();
+        return "tmp_" + getEntity().getId() + "_" + getField().getId();
     }
 
     public List<?> getTmpList() {

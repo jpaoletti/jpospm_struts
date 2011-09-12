@@ -18,7 +18,6 @@
 package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
 /**
@@ -47,10 +46,9 @@ public class EditClassConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Field field = (Field) ctx.get(PM_FIELD);
         String s = "";
         try {
-            s = getValue(ctx.getEntityInstance(), field).getClass().getName();
+            s = getValue(ctx.getEntityInstance(), ctx.getField()).getClass().getName();
         } catch (Exception e) {
         }
         return super.visualize("string_converter.jsp?value=" + s);

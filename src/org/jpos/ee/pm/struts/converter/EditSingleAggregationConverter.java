@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
@@ -73,12 +72,11 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
         boolean withNull = (wn == null || wn.compareTo("true") != 0) ? false : true;
         final String filter = getConfig("filter");
         final String entity = getConfig("entity");
-        final Field field = (Field) ctx.get(PM_FIELD);
         saveList((PMStrutsContext) ctx, entity);
 
         final List<?> list = recoverList((PMStrutsContext) ctx, entity, false);
         final List<ACListItem> finalist = new ArrayList<ACListItem>();
-        if(withNull){
+        if (withNull) {
             finalist.add(new ACListItem(-1, "", false));
         }
         for (Object object : list) {
@@ -94,7 +92,7 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
                 + "&with_null=" + withNull
                 + "&show_search=" + hasSearch(ctx)
                 + "&min_search_size=" + getConfig("min-search-size", "0")
-                + "&prop=" + field.getProperty());
+                + "&prop=" + ctx.getField().getProperty());
     }
 
     private boolean hasSearch(PMContext ctx) {

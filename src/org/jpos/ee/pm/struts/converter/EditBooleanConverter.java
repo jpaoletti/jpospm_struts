@@ -18,7 +18,6 @@
 package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
 /**
@@ -43,8 +42,7 @@ public class EditBooleanConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Field field = (Field) ctx.get(PM_FIELD);
-        Boolean p = (Boolean) getValue(ctx.getEntityInstance(), field);
+        Boolean p = (Boolean) getValue(ctx.getEntityInstance(), ctx.getField());
         boolean withnull = Boolean.parseBoolean(getConfig("with-null", "false"));
         if (!withnull) {
             return super.visualize("boolean_converter.jsp?checked=" + ((p != null && p.booleanValue()) ? "checked" : ""));

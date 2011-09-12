@@ -18,7 +18,6 @@
 package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
@@ -28,7 +27,7 @@ public class EditStringConverter extends StrutsEditConverter {
     public Object build(PMContext ctx) throws ConverterException {
         final PMStrutsContext c = (PMStrutsContext) ctx;
         final Object value = ctx.get(PM_FIELD_VALUE);
-        final String fid = ((Field) ctx.get(PM_FIELD)).getId();
+        final String fid = ctx.getField().getId();
         final boolean isNull = Boolean.valueOf((String) c.getParameter("f_" + fid + "_null"));
         if (isNull) {
             return null;
@@ -39,10 +38,9 @@ public class EditStringConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        final Field field = (Field) ctx.get(PM_FIELD);
         Object p = ctx.get(PM_FIELD_VALUE);
         if (p == null) {
-            p = getValue(ctx.getEntityInstance(), field);
+            p = getValue(ctx.getEntityInstance(), ctx.getField());
         }
         final String value = normalize((p == null) ? "" : p.toString());
         ctx.put(PM_FIELD_VALUE, value);

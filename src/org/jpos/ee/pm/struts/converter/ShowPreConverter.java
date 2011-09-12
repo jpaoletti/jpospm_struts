@@ -19,7 +19,6 @@ package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.converter.ShowStringConverter;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
 /**
@@ -30,10 +29,9 @@ public class ShowPreConverter extends ShowStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        final Field field = (Field) ctx.get(PM_FIELD);
         Object p = ctx.get(PM_FIELD_VALUE);
         if (p == null) {
-            p = getValue(ctx.getEntityInstance(), field);
+            p = getValue(ctx.getEntityInstance(), ctx.getField());
         }
         final String value = (p == null) ? "" : p.toString();
         ctx.put(PM_FIELD_VALUE, value);

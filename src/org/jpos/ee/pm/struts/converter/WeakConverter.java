@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.List;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.Entity;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.struts.PMStrutsContext;
@@ -42,8 +41,7 @@ public class WeakConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Field field = (Field) ctx.get(PM_FIELD);
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("weak_converter.jsp?weakid=");
         sb.append(getConfig("weak-entity"));
         sb.append("&showlist=");
@@ -51,7 +49,7 @@ public class WeakConverter extends StrutsEditConverter {
         sb.append("&showbutton=");
         sb.append(getConfig("show-modify", "true"));
         sb.append("&property=");
-        sb.append(field.getProperty());
+        sb.append(ctx.getField().getProperty());
         sb.append("&buttontext=");
         sb.append(getConfig("button-text", "pm.struts.weak.converter.edit"));
 
@@ -62,7 +60,7 @@ public class WeakConverter extends StrutsEditConverter {
         final Collection collection = (Collection) ctx.getPresentationManager().get(ctx.getSelected().getInstance(), ctx.getRequest().getParameter("property"));
         final List<Object> result = new ArrayList<Object>();
         final Entity entity = getEntity(ctx);
-        if(entity==null){
+        if (entity == null) {
             ctx.getPresentationManager().error("Weak entity not found");
             throw new ConverterException("pm.struts.entity.not.found");
         }

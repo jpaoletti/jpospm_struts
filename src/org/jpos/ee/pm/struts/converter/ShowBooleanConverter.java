@@ -19,7 +19,6 @@ package org.jpos.ee.pm.struts.converter;
 
 import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 
@@ -45,7 +44,7 @@ public class ShowBooleanConverter extends Converter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Object value = getValue(ctx.getEntityInstance(), (Field) ctx.get(PM_FIELD));
+        Object value = getValue(ctx.getEntityInstance(), ctx.getField());
         if (!(value instanceof Boolean)) {
             throw new ConverterException("invalid.conversion");
         }

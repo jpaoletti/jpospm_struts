@@ -23,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.jpos.ee.pm.converter.ConverterException;
-import org.jpos.ee.pm.core.EntityInstanceWrapper;
-import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 
 /**Converter for date.<br>
@@ -57,7 +55,6 @@ public class EditDateConverter extends EditStringConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        final Field field = (Field) ctx.get(PM_FIELD);
         try {
             final Date o = (Date) ctx.get(PM_FIELD_VALUE);
             return super.visualize("date_converter.jsp?format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=" + getDateFormat().format(o));
