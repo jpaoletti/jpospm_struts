@@ -3,7 +3,6 @@ package org.jpos.ee.pm.struts.converter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.jpos.ee.K;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.security.core.PMSecurityUser;
@@ -19,7 +18,7 @@ public class ShowImage extends DefaultStrutsConverter {
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
         final String filename = createTmpFile(ctx);
-        ctx.put(K.PM_VOID_TEXT, "<img src='/pm/cache/" + filename + "' alt='x' />");
+        ctx.put(PM_VOID_TEXT, "<img src='/pm/cache/" + filename + "' alt='x' />");
         return "void.jsp?";
 
     }

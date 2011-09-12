@@ -24,12 +24,12 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.jpos.ee.Constants;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.struts.PMEntitySupport;
+import org.jpos.ee.pm.struts.PMStrutsConstants;
 
-public class LogoutAction extends Action implements Constants {
+public class LogoutAction extends Action implements PMStrutsConstants {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,

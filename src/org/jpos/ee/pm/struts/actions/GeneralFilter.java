@@ -30,15 +30,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jpos.ee.Constants;
+import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMMessage;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.core.operations.OperationCommandSupport;
 import org.jpos.ee.pm.struts.PMEntitySupport;
+import org.jpos.ee.pm.struts.PMStrutsConstants;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
-public class GeneralFilter implements Filter, Constants {
+public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants {
 
     @Override
     public void destroy() {

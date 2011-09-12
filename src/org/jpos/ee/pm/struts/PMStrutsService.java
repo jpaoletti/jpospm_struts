@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,8 +17,6 @@
  */
 package org.jpos.ee.pm.struts;
 
-/**This is an implementation of the PMService for struts.*/
-import org.jpos.ee.Constants;
 import org.jpos.ee.pm.core.PMService;
 import org.jpos.ee.pm.struts.converter.DefaultStrutsConverter;
 
@@ -27,7 +25,7 @@ import org.jpos.ee.pm.struts.converter.DefaultStrutsConverter;
  * 
  * @author jpaoletti
  */
-public class PMStrutsService extends PMService implements Constants {
+public class PMStrutsService extends PMService {
 
     @Override
     protected void initService() throws Exception {

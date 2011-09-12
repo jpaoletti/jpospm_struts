@@ -6,7 +6,7 @@
     request.setAttribute("woperation", weak.getOperations().getOperation("list"));
     request.setAttribute("contents", listv);
 %>
-<bean:define id="fields" 	  name="weak" property="orderedFields" type="java.util.List" toScope="request"/><br/>
+<bean:define id="fields" name="weak" property="orderedFields" type="java.util.List" toScope="request"/><br/>
 <c:if test="${param.showbutton}">
     <a href="${es.context_path}/list.do?pmid=${param.weakid}" class='button edit' > &nbsp;&nbsp; <pm:message key="${param.buttontext}" /></a>
 </c:if>

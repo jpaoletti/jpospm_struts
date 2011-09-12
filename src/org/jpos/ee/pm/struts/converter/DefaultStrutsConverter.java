@@ -17,7 +17,6 @@
  */
 package org.jpos.ee.pm.struts.converter;
 
-import org.jpos.ee.K;
 import org.jpos.ee.pm.converter.Converter;
 import org.jpos.ee.pm.converter.ConverterException;
 import org.jpos.ee.pm.core.PMContext;
@@ -38,7 +37,7 @@ public class DefaultStrutsConverter extends Converter {
             if (s == null) {
                 s = "";
             }
-            ctx.put(K.PM_VOID_TEXT, PMEntitySupport.toHtml(s.toString()));
+            ctx.put(PM_VOID_TEXT, PMEntitySupport.toHtml(s.toString()));
             return "void.jsp?";
         }
     }

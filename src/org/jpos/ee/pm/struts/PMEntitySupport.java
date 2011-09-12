@@ -22,7 +22,6 @@ import java.util.Map;
 import org.jpos.ee.pm.core.EntityContainer;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.util.MessageResources;
-import org.jpos.ee.K;
 
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.EntityFilter;
@@ -31,6 +30,7 @@ import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.Highlight;
 import org.jpos.ee.pm.core.Operation;
 import org.jpos.ee.pm.core.PMContext;
+import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PaginatedList;
@@ -42,11 +42,8 @@ import org.jpos.ee.pm.core.PresentationManager;
  * @author jpaoletti
  * @see EntitySupport
  */
-public class PMEntitySupport extends EntitySupport {
+public class PMEntitySupport extends EntitySupport implements PMCoreConstants, PMStrutsConstants {
 
-    public static final String PMSESSION = "pmsession";
-    public static String PM_ID = "pmid";
-    public static final String LAST_PM_ID = "last_pmid";
     private String context_path;
     private static PMEntitySupport instance;
     private HttpServletRequest request;
@@ -263,15 +260,15 @@ public class PMEntitySupport extends EntitySupport {
     }
 
     public PMContext prepareForConversion(Field field, Object item, Object field_value) {
-        final PMContext ctx = (PMContext) request.getAttribute(K.PM_CONTEXT);
-        ctx.put(K.PM_FIELD, field);
+        final PMContext ctx = (PMContext) request.getAttribute(PM_CONTEXT);
+        ctx.put(PM_FIELD, field);
         if (field_value != null) {
-            ctx.put(K.PM_FIELD_VALUE, field_value);
+            ctx.put(PM_FIELD_VALUE, field_value);
         } else {
-            ctx.put(K.PM_FIELD_VALUE, ctx.getPresentationManager().get(item, field.getProperty()));
+            ctx.put(PM_FIELD_VALUE, ctx.getPresentationManager().get(item, field.getProperty()));
         }
-        ctx.put(K.PM_ENTITY_INSTANCE, item);
-        ctx.put(K.PM_EXTRA_DATA, "");
+        ctx.put(PM_ENTITY_INSTANCE, item);
+        ctx.put(PM_EXTRA_DATA, "");
         request.setAttribute("ctx", ctx);
         return ctx;
     }
