@@ -9,4 +9,4 @@
     </script>
     <input type="checkbox" ${param.isNull ? 'checked' : ''} value="true" id="f_${param.f}_null" name="f_${param.f}_null" onclick="disable${param.f}(this.checked);" />
 </c:if>
-<input type="text" maxlength="${param.ml}" ${ (param.isNull and param.withNull) ? 'disabled=disabled' : ''} value="${ctx.map.PM_FIELD_VALUE}" id="f_${param.f}" name="f_${param.f}" />
+<input type="text" maxlength="${param.ml}" ${ (param.isNull and param.withNull) ? 'disabled=disabled' : ''} value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" />

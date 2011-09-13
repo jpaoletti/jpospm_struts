@@ -1,1 +1,1 @@
-<span style="white-space:pre;">${ctx.map.PM_FIELD_VALUE}</span>
+<span style="white-space:pre;">${ctx.fieldValue}</span>

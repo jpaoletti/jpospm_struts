@@ -41,7 +41,7 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
             List<?> list = recoverList(c, getConfig("entity"), true);
 
             result.clear();
-            String s = ctx.getString(PM_FIELD_VALUE);
+            String s = (String) ctx.getFieldValue();
             if (s.trim().compareTo("") == 0) {
                 return result;
             }
@@ -90,8 +90,8 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
         final String filter = getConfig("filter");
         final String entity = getConfig("entity");
         saveList((PMStrutsContext) ctx, entity);
-        if (ctx.get(PM_FIELD_VALUE) == null) {
-            ctx.put(PM_FIELD_VALUE, new ArrayList<Object>());
+        if (ctx.getFieldValue() == null) {
+            ctx.setFieldValue(new ArrayList<Object>());
         }
         return super.visualize("collection_converter.jsp?filter=" + filter + "&entity=" + entity + "&prop=" + ctx.getField().getProperty());
     }

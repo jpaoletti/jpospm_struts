@@ -1,7 +1,7 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <%@page import="org.jpos.ee.pm.core.*" import="java.util.Collection"%>
 <%@page import="java.util.List" import="org.jpos.ee.pm.struts.PMEntitySupport" import="org.jpos.ee.pmee.PMList" %>
-<bean:define id="listv"      name="ctx"    property="map.PM_FIELD_VALUE" type="java.util.Collection" />
+<bean:define id="listv"      name="ctx"    property="fieldValue" type="java.util.Collection" />
 <bean:define id="collection" name="ctx"    property="tmpList" type="java.util.List" />
 <div id="">
 </div>

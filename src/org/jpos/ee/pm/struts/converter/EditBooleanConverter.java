@@ -30,7 +30,7 @@ public class EditBooleanConverter extends StrutsEditConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
-        String res = ctx.getString(PM_FIELD_VALUE);
+        final String res = (String) ctx.getFieldValue();
         if (res.compareTo("true") == 0) {
             return true;
         }
@@ -42,8 +42,8 @@ public class EditBooleanConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Boolean p = (Boolean) getValue(ctx.getEntityInstance(), ctx.getField());
-        boolean withnull = Boolean.parseBoolean(getConfig("with-null", "false"));
+        final Boolean p = (Boolean) getValue(ctx.getEntityInstance(), ctx.getField());
+        final boolean withnull = Boolean.parseBoolean(getConfig("with-null", "false"));
         if (!withnull) {
             return super.visualize("boolean_converter.jsp?checked=" + ((p != null && p.booleanValue()) ? "checked" : ""));
         } else {

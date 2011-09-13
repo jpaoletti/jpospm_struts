@@ -32,10 +32,11 @@ import org.jpos.ee.pm.core.PMContext;
  * @author J.Paoletti jeronimo.paoletti@gmail.com
  * */
 public class EditLongConverter extends EditStringConverter {
-    
-    public Object build(PMContext ctx) throws ConverterException{
+
+    @Override
+    public Object build(PMContext ctx) throws ConverterException {
         try {
-            return Long.parseLong(ctx.getString(PM_FIELD_VALUE));
+            return Long.parseLong((String) ctx.getFieldValue());
         } catch (NumberFormatException e) {
             return null;
         }

@@ -34,10 +34,11 @@ import org.jpos.ee.pm.core.PMContext;
  * @author J.Paoletti jeronimo.paoletti@gmail.com
  * */
 public class EditDecimalConverter extends EditStringConverter {
-    
-    public Object build(PMContext ctx) throws ConverterException{
+
+    @Override
+    public Object build(PMContext ctx) throws ConverterException {
         try {
-            return new BigDecimal(ctx.getString(PM_FIELD_VALUE));
+            return new BigDecimal((String) ctx.getFieldValue());
         } catch (NumberFormatException e) {
             return null;
         }

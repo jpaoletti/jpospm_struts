@@ -26,7 +26,7 @@ public class EditStringConverter extends StrutsEditConverter {
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         final PMStrutsContext c = (PMStrutsContext) ctx;
-        final Object value = ctx.get(PM_FIELD_VALUE);
+        final Object value = ctx.getFieldValue();
         final String fid = ctx.getField().getId();
         final boolean isNull = Boolean.valueOf((String) c.getParameter("f_" + fid + "_null"));
         if (isNull) {
@@ -38,12 +38,12 @@ public class EditStringConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Object p = ctx.get(PM_FIELD_VALUE);
+        Object p = ctx.getFieldValue();
         if (p == null) {
             p = getValue(ctx.getEntityInstance(), ctx.getField());
         }
         final String value = normalize((p == null) ? "" : p.toString());
-        ctx.put(PM_FIELD_VALUE, value);
+        ctx.setFieldValue( value);
         return super.visualize("string_converter.jsp?"
                 + "ml=" + getConfig("max-length")
                 + "&isNull=" + (p == null)

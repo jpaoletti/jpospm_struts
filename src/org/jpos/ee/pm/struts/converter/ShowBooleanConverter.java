@@ -39,7 +39,7 @@ public class ShowBooleanConverter extends Converter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
-        return Boolean.valueOf(ctx.getString(PM_FIELD_VALUE));
+        return Boolean.valueOf((String) ctx.getFieldValue());
     }
 
     @Override

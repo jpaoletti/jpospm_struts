@@ -29,7 +29,7 @@ public class EditClassConverter extends StrutsEditConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
-        Object value = ctx.get(PM_FIELD_VALUE);
+        Object value = ctx.getFieldValue();
         if (value == null) {
             return null;
         }

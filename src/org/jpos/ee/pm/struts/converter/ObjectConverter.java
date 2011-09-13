@@ -33,7 +33,7 @@ public class ObjectConverter extends StrutsEditConverter {
             final String _id = getConfig("id");
             final String _entity = getConfig("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
-            final String newFieldValue = ctx.getString(PM_FIELD_VALUE);
+            final String newFieldValue = (String) ctx.getFieldValue();
             if (newFieldValue == null || newFieldValue.trim().compareTo("-1") == 0) {
                 return null;
             }
@@ -57,7 +57,7 @@ public class ObjectConverter extends StrutsEditConverter {
         if (_display == null) {
             throw new ConverterException("object.converter.display.cannot.be.null");
         }
-        final Object fieldValue = ctx.get(PM_FIELD_VALUE);
+        final Object fieldValue = ctx.getFieldValue();
         if (fieldValue == null) {
             ctx.put("_selected_value", "");
             ctx.put("_selected_id", "-1");

@@ -263,9 +263,9 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
         final PMContext ctx = (PMContext) request.getAttribute(PM_CONTEXT);
         ctx.setField(field);
         if (field_value != null) {
-            ctx.put(PM_FIELD_VALUE, field_value);
+            ctx.setFieldValue(field_value);
         } else {
-            ctx.put(PM_FIELD_VALUE, ctx.getPresentationManager().get(item, field.getProperty()));
+            ctx.setFieldValue(ctx.getPresentationManager().get(item, field.getProperty()));
         }
         ctx.setEntityInstance(item);
         ctx.put(PM_EXTRA_DATA, "");

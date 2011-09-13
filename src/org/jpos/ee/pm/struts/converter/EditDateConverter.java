@@ -43,7 +43,7 @@ public class EditDateConverter extends EditStringConverter {
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
-            String value = ctx.getString(PM_FIELD_VALUE);
+            String value = (String) ctx.getFieldValue();
             if (value != null && !"".equals(value.trim())) {
                 return getDateFormat().parse((String) value);
             }
@@ -56,7 +56,7 @@ public class EditDateConverter extends EditStringConverter {
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
         try {
-            final Date o = (Date) ctx.get(PM_FIELD_VALUE);
+            final Date o = (Date) ctx.getFieldValue();
             return super.visualize("date_converter.jsp?format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=" + getDateFormat().format(o));
         } catch (Exception e) {
             return super.visualize("date_converter.jsp?format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=");

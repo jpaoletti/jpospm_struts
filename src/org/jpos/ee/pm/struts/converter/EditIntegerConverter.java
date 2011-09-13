@@ -31,10 +31,11 @@ import org.jpos.ee.pm.core.PMContext;
  * @author J.Paoletti jeronimo.paoletti@gmail.com
  * */
 public class EditIntegerConverter extends EditStringConverter {
-    
-    public Object build(PMContext ctx) throws ConverterException{
+
+    @Override
+    public Object build(PMContext ctx) throws ConverterException {
         try {
-            return Integer.parseInt(ctx.getString(PM_FIELD_VALUE));
+            return Integer.parseInt((String) ctx.getFieldValue());
         } catch (NumberFormatException e) {
             return null;
         }

@@ -50,7 +50,7 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
-            String s = ctx.getString(PM_FIELD_VALUE);
+            String s = (String) ctx.getFieldValue();
             if (s == null || s.trim().compareTo("") == 0) {
                 return null;
             }
@@ -81,7 +81,7 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
         }
         for (Object object : list) {
             if (object != null) {
-                finalist.add(new ACListItem(list.indexOf(object), object.toString(), object.equals(ctx.get(PM_FIELD_VALUE))));
+                finalist.add(new ACListItem(list.indexOf(object), object.toString(), object.equals(ctx.getFieldValue())));
             }
         }
         Gson gson = new Gson();
