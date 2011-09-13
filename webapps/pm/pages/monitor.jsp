@@ -10,18 +10,18 @@
     <pm:errors />
     <script src="../js/jquery-plugin-arte.js" type="text/javascript"></script>
     <script type="text/javascript">
-            $(document).ready(function(){
-                $.arte({'ajax_url':'${es.context_path}/monitor.do?pmid=${monitor.id}&continue=true', 'on_success':update_field, 'time':'${monitor.delay}' }).start();
-            });
-            function update_field(data){
-                var cleanup = ${monitor.cleanup};
-                if(data.trim().length > 0){
-                    var res =  "<pre style='WHITE-SPACE: pre'>";
-                    if(!cleanup) res = res+$("#line_container").html();
-                    res=res+data+"</pre>";
-                    $("#line_container").html(res);
-                    $("#con").animate({ scrollTop: $("#con").attr("scrollHeight") - $('#con').height() }, 1000);
-                }
+        PM_register(function(){
+            $.arte({'ajax_url':'${es.context_path}/monitor.do?pmid=${monitor.id}&continue=true', 'on_success':update_field, 'time':'${monitor.delay}' }).start();
+        });
+        function update_field(data){
+            var cleanup = ${monitor.cleanup};
+            if(data.trim().length > 0){
+                var res =  "<pre style='WHITE-SPACE: pre'>";
+                if(!cleanup) res = res+$("#line_container").html();
+                res=res+data+"</pre>";
+                $("#line_container").html(res);
+                $("#con").animate({ scrollTop: $("#con").attr("scrollHeight") - $('#con').height() }, 1000);
             }
+        }
     </script>
 </pm:page>

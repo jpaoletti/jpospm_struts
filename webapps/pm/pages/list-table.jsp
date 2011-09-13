@@ -51,7 +51,9 @@
     </tfoot>
 </table>
 <script type="text/javascript" >
-    $(".confirmable_true").bind('click',function(){
-        return confirm("<pm:message key='pm.operation.confirm.question' />");
+    PM_register(function(){
+        $(".confirmable_true").bind('click',function(){
+            return confirm("<pm:message key='pm.operation.confirm.question' />");
+        });
     });
 </script>

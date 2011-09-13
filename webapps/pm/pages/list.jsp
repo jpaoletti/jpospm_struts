@@ -41,19 +41,18 @@
                     <jsp:include page="list-sort.jsp" />
                 </div>
             </div>
+            <div class="entity_message_container_${entity.id}"></div>
             <pm:errors/>
             <script type="text/javascript">
-                $(function(){
-                    var myOpen=function(hash){
-                        hash.w.css('opacity',0.88).show();
-                    };
-
+                PM_register(function(){
                     $("#page").keydown(function(event){
                         if(event.keyCode == 13)
                             this.form.submit();
                     });
                     $('#operationsort').addClass('jqModal');
-                    $('#sort_page').jqm({onShow:myOpen});
+                    $('#sort_page').jqm({onShow:function(hash){
+                            hash.w.css('opacity',0.88).show();
+                        }});
                 });
             </script>
         </form>

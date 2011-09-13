@@ -26,8 +26,15 @@
     <body>
         <% try{ %>
         <jsp:doBody />
-        <% }catch(Exception e){PresentationManager.pm.error(e); %>
+        <% }catch(Exception e){PresentationManager.getPm().error(e); %>
         <pm:message key="pm.page.error"/>
         <%} %>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery.each(PM_onLoadFunctions, function(){
+                    this();
+                });
+            });
+        </script>
     </body>
 </html>

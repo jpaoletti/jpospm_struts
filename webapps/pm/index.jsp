@@ -37,7 +37,7 @@
                     hideHeader();
                 }
             }
-            $(document).ready(function(){
+            PM_register(function(){
                 $(window.frames["mainframe"]).focus();
             <c:if test="${pm.hideableHeader}">
                     initBtn();

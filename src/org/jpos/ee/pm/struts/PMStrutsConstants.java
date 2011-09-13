@@ -40,7 +40,6 @@ public interface PMStrutsConstants {
     public static final String PM_RID = "pmrid";
     public static final String PM_MONITOR_CONTINUE = "PM_MONITOR_CONTINUE";
     public static final String PM_MONITOR = "PM_MONITOR";
-    public static final String ENTITY_FILTER = "entity_filter";
     public static final String CONTINUE = "continue";
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
