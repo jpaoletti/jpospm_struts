@@ -28,10 +28,6 @@ public interface PMStrutsConstants {
     public static String PM_ID = "pmid";
     public static final String LAST_PM_ID = "last_pmid";
     public static final String PM_VOID_TEXT = "void_text";
-    public static final String PM_MAPPINGS = "PM_MAPPINGS";
-    public static final String PM_ACTION_FORM = "PM_ACTION_FORM";
-    public static final String PM_HTTP_REQUEST = "PM_HTTP_REQUEST";
-    public static final String PM_HTTP_RESPONSE = "PM_HTTP_RESPONSE";
     public static final String PM_LIST = "PMLIST";
     public static final String REPORT = "report";
     public static final String ENTITY_SUPPORT = "es";
