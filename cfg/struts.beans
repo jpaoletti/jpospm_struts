@@ -1,2 +1,0 @@
-
-    <form-bean name="LoginActionForm" type="org.jpos.ee.pm.struts.actions.LoginActionForm"/>
