@@ -35,6 +35,7 @@ import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PaginatedList;
 import org.jpos.ee.pm.core.PresentationManager;
+import org.jpos.ee.pm.core.operations.OperationScope;
 
 /**
  * Helper class for internal use.
@@ -229,7 +230,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
             //If we have permission
             if (ctx.getPMSession().getUser().hasPermission(itemOperation.getPerm())) {
                 //if operation is at item scope
-                if (Operation.SCOPE_ITEM.equals(itemOperation.getScope())) {
+                if (OperationScope.ITEM.is(itemOperation.getScope())) {
                     String furl = "";
                     if (itemOperation.getUrl() != null) {
                         furl = itemOperation.getUrl();
