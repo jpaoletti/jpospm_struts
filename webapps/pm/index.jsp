@@ -39,12 +39,12 @@
             }
             PM_register(function(){
                 $(window.frames["mainframe"]).focus();
-            <c:if test="${pm.hideableHeader}">
+                <c:if test="${pm.hideableHeader}">
                     initBtn();
                     $(".show_hide_btn").offset({left: $("#topmenu").offset().left });
                     $("#hide_context").click( hideHeader );
                     $("#show_context").click( showHeader );
-            </c:if>
+                </c:if>
                 });
         </script>
         <div class="index_layout" id="page-container">
