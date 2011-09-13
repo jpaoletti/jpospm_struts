@@ -37,11 +37,7 @@ public class ObjectConverter extends StrutsEditConverter {
             if (newFieldValue == null || newFieldValue.trim().compareTo("-1") == 0) {
                 return null;
             }
-            //I don't like this, it need a review
-            ctx.put(PM_ENTITY, entity);
-            final Object res = entity.getDataAccess().getItem(ctx, _id, newFieldValue);
-            ctx.put(PM_ENTITY, null);
-            return res;
+            return entity.getDataAccess().getItem(ctx, _id, newFieldValue);
         } catch (PMException ex) {
             throw new ConverterException(ex);
         }
