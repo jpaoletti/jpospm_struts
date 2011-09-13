@@ -1,6 +1,4 @@
 <%@include file="../inc/inc-full.jsp" %>
-<bean:define id="e_container" name="ctx" property="entityContainer" />
-<bean:define id="entity_instance" name="ctx" property="selected.instance" toScope="request"/>
 <pm:page title="titles.add">
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}" />
@@ -9,7 +7,7 @@
             <fieldset>
                 <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>
                 <div id="navigation_bar">
-                    <pm:navigation container="${e_container.owner}"  />
+                    <pm:navigation container="${ctx.entityContainer.owner}"  />
                 </div>
                 <div class="content">
                     <table id="box-table-a">
@@ -18,7 +16,7 @@
                                 <c:if test="${fn:contains(field.display,ctx.operation.id) or fn:contains(field.display,'all')}">
                                     <tr>
                                         <th scope="row" width="175px"><div><label for="object.${field.id}"><pm:field-name entity="${entity}" field="${field}" /></label></div></th>
-                                        <td><div id="f_${field.id}_div"><pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" item="${entity_instance}" field="${field}" /></div></td>
+                                        <td><div id="f_${field.id}_div"><pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" item="${ctx.selected.instance}" field="${field}" /></div></td>
                                     </tr>
                                 </c:if>
                             </logic:iterate>
