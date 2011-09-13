@@ -75,11 +75,19 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
     }
 
     /**
-     * Helper for deny action forward
-     * @return deny action forward
+     * Helper for fwdDeny action forward
+     * @return fwdDeny action forward
      */
-    public ActionForward deny() {
-        return getMapping().findForward(DENIED);
+    public ActionForward fwdDeny() {
+        return getMapping().findForward("denied");
+    }
+
+    /**
+     * Helper for login action forward
+     * @return fwdDeny action forward
+     */
+    public ActionForward fwdLogin() {
+        return getMapping().findForward("login");
     }
 
     /**

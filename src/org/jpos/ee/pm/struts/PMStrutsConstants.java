@@ -44,6 +44,4 @@ public interface PMStrutsConstants {
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
     public static final String USER = "user";
-    public static final String DENIED = "denied";
-    public static final String STRUTS_LOGIN = "login";
 }

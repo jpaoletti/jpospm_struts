@@ -29,8 +29,9 @@ import org.apache.struts.action.ActionMessages;
 import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PMMessage;
-import org.jpos.ee.pm.core.PMUnauthorizedException;
+import org.jpos.ee.pm.core.exception.NotAuthorizedException;
 import org.jpos.ee.pm.core.PresentationManager;
+import org.jpos.ee.pm.core.exception.NotAuthenticatedException;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 import org.jpos.ee.pm.struts.PMForwardException;
 import org.jpos.ee.pm.struts.PMStrutsConstants;
@@ -59,7 +60,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             es.setContext_path(ctx.getRequest().getContextPath());
             ctx.getSession().setAttribute(ENTITY_SUPPORT, es);
             ctx.getRequest().setAttribute("reload", 1);
-            throw new PMUnauthorizedException();
+            throw new NotAuthorizedException();
         }
         return true;
     }
@@ -84,8 +85,10 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             } else {
                 return mapping.findForward(e.getKey());
             }
-        } catch (PMUnauthorizedException e) {
-            return mapping.findForward(STRUTS_LOGIN);
+        } catch (NotAuthenticatedException e) {
+            return ctx.fwdLogin();
+        } catch (NotAuthorizedException e) {
+            return ctx.fwdDeny();
         } catch (PMException e) {
             ctx.getPresentationManager().debug(this, e);
             if (e.getKey() != null) {
