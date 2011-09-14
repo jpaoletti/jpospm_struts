@@ -60,7 +60,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             es.setContext_path(ctx.getRequest().getContextPath());
             ctx.getSession().setAttribute(ENTITY_SUPPORT, es);
             ctx.getRequest().setAttribute("reload", 1);
-            throw new NotAuthorizedException();
+            throw new NotAuthenticatedException();
         }
         return true;
     }
