@@ -27,7 +27,7 @@
                     </fieldset>
                 </form>
             </div>
-            <pm:errors/>
+            <div class="entity_message_container_${entity.id}">&nbsp;</div>
         </div>
     </logic:notPresent>
 </pm:page>

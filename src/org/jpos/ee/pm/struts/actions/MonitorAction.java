@@ -3,9 +3,8 @@ package org.jpos.ee.pm.struts.actions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.struts.action.ActionMessages;
 import org.jpos.ee.pm.core.PMException;
-import org.jpos.ee.pm.core.PMMessage;
+import org.jpos.ee.pm.core.message.MessageFactory;
 import org.jpos.ee.pm.core.monitor.Monitor;
 import org.jpos.ee.pm.core.monitor.MonitorObserver;
 import org.jpos.ee.pm.struts.PMEntitySupport;
@@ -38,7 +37,7 @@ public class MonitorAction extends ActionSupport {
             }
             Monitor monitor = ctx.getPresentationManager().getMonitor(pmid);
             if (monitor == null) {
-                ctx.getErrors().add(new PMMessage(ActionMessages.GLOBAL_MESSAGE, "pm.struts.error.monitor.not.found", pmid));
+                ctx.addMessage(MessageFactory.error("pm.struts.error.monitor.not.found", pmid));
                 throw new PMException();
             }
             ctx.put(PM_MONITOR, monitor);
@@ -46,6 +45,7 @@ public class MonitorAction extends ActionSupport {
         }
     }
 
+    @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         synchronized (ctx.getSession()) {
             boolean kontinue = (Boolean) ctx.get(PM_MONITOR_CONTINUE);

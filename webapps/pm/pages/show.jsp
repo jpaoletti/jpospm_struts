@@ -1,7 +1,6 @@
 <%@include file="../inc/inc-full.jsp" %>
 <bean:define id="e_container" name="ctx" property="entityContainer" />
 <pm:page title="titles.add">
-    <pm:errors />
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
         <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>
@@ -15,13 +14,16 @@
                         <c:if test="${fn:contains(field.display,'show') or fn:contains(field.display,'all')}">
                             <tr>
                                 <th scope="row" width="175px"><pm:field-name entity="${entity}" field="${field}" /></th>
-                                <td><pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" item="${ctx.selected.instance}" field="${field}" /></td>
+                                <td>
+                                    <pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" item="${ctx.selected.instance}" field="${field}" />
+                                    <div class="field_message_container_${entity.id}_${field.id}"></div>
+                                </td>
                             </tr>
                         </c:if>
                     </logic:iterate>
                 </tbody>
                 <tfoot>
-                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr><td colspan="2"><div class="entity_message_container_${entity.id}">&nbsp;</div></td></tr>
                 </tfoot>
             </table>
         </div>

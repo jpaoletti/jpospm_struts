@@ -7,7 +7,6 @@
     <div id="con" class="boxed monitor_window monitor_${monitor.id}">
         <div id='line_container' ></div>
     </div>
-    <pm:errors />
     <script src="../js/jquery-plugin-arte.js" type="text/javascript"></script>
     <script type="text/javascript">
         PM_register(function(){

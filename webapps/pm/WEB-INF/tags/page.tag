@@ -1,10 +1,9 @@
 <%-- Created on : 02/04/2009, 22:22:00 --%>
-<%@ tag description="This tag encapsulates a standard html page" pageEncoding="UTF-8" import="org.jpos.ee.pm.struts.PMStrutsService" %>
+<%@ tag description="This tag encapsulates a standard html page"
+        pageEncoding="UTF-8" import="org.jpos.ee.pm.struts.PMStrutsService" %>
 <%@ tag import="org.jpos.ee.pm.struts.PMEntitySupport"%>
 <%@ tag import="org.jpos.ee.pm.core.*"%>
-<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic" %>
-<%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html" %>
+
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <%@ attribute name="title" required="true"%>
@@ -26,13 +25,40 @@
     <body>
         <% try{ %>
         <jsp:doBody />
-        <% }catch(Exception e){PresentationManager.getPm().error(e); %>
+        <% }catch(Exception e){
+            PresentationManager.getPm().error(e);
+        %>
         <pm:message key="pm.page.error"/>
         <%} %>
         <script type="text/javascript">
+            var msg_system = new Array();
+            var msg_entity = new Array();
+            var msg_field  = new Array();
+            <c:forEach var="message" items="${ctx.messages}">
+                <c:if test="${message.systemScoped}"> msg_system.push(<pm:pm-message message="${message}"/>);</c:if>
+                <c:if test="${message.entityScoped}"> msg_entity.push(<pm:pm-message message="${message}"/>);</c:if>
+                <c:if test="${message.fieldScoped}">  msg_field.push (<pm:pm-message message="${message}"/>);</c:if>
+            </c:forEach>
             jQuery(document).ready(function() {
                 jQuery.each(PM_onLoadFunctions, function(){
                     this();
+                });
+
+                //System scoped messages
+                jQuery.each(msg_system, function(){
+                    alert(this.text);
+                });
+
+                jQuery.each(msg_entity, function(){
+                    var cl = ".entity_message_container_"+this.entity;
+                    jQuery(cl).addClass("pm_message_"+this.type);
+                    jQuery(cl).html(this.text);
+                });
+
+                jQuery.each(msg_field, function(){
+                    var cl = ".field_message_container_"+this.entity+"_"+this.field;
+                    jQuery(cl).addClass("pm_message_"+this.type);
+                    jQuery(cl).html(this.text);
                 });
             });
         </script>

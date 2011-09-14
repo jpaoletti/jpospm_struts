@@ -484,3 +484,23 @@ img {
     height:12px;
     cursor: help;
 }
+
+
+#box-table-a td.pm_message_ERROR{
+    background-color: pink;
+    border-right: red solid thick;
+    border-bottom: red solid thin;
+    color: red;
+}
+#box-table-a td.pm_message_WARN{
+    background-color: yellow;
+    border-right: orange solid thick;
+    border-bottom: orange solid thin;
+}
+
+#box-table-a td.pm_message_INFO{
+    background-color: lightcyan;
+    border-right: blue solid thick;
+    border-bottom: blue solid thin;
+    color: blue;
+}

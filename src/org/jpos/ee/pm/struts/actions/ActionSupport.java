@@ -20,18 +20,15 @@ package org.jpos.ee.pm.struts.actions;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMException;
-import org.jpos.ee.pm.core.PMMessage;
 import org.jpos.ee.pm.core.exception.NotAuthorizedException;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.core.exception.NotAuthenticatedException;
+import org.jpos.ee.pm.core.message.MessageFactory;
 import org.jpos.ee.pm.struts.PMEntitySupport;
 import org.jpos.ee.pm.struts.PMForwardException;
 import org.jpos.ee.pm.struts.PMStrutsConstants;
@@ -92,13 +89,8 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         } catch (PMException e) {
             ctx.getPresentationManager().debug(this, e);
             if (e.getKey() != null) {
-                ctx.getErrors().add(new PMMessage(ActionMessages.GLOBAL_MESSAGE, e.getKey()));
+                ctx.addMessage(MessageFactory.error(e.getKey()));
             }
-            ActionErrors errors = new ActionErrors();
-            for (PMMessage msg : ctx.getErrors()) {
-                errors.add(msg.getKey(), new ActionMessage(msg.getMessage(), msg.getArg0(), msg.getArg1(), msg.getArg2(), msg.getArg3()));
-            }
-            saveErrors(request, errors);
             return mapping.findForward(FAILURE);
         }
     }
@@ -109,7 +101,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
 
     protected PMStrutsService getPMService() throws PMException {
         try {
-            return (PMStrutsService) PresentationManager.pm.getService();
+            return (PMStrutsService) PresentationManager.getPm().getService();
         } catch (Exception e) {
             throw new PMException();
         }

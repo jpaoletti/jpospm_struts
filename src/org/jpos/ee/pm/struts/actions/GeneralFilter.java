@@ -18,7 +18,6 @@
 package org.jpos.ee.pm.struts.actions;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -31,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jpos.ee.pm.core.PMCoreConstants;
-import org.jpos.ee.pm.core.PMMessage;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.core.operations.OperationCommandSupport;
@@ -73,7 +71,6 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
             req.setAttribute("ctx", ctx);
             ctx.setRequest(req);
             ctx.setResponse((HttpServletResponse) response);
-            ctx.setErrors(new ArrayList<PMMessage>());
             ctx.getRequest().setAttribute(PM_CONTEXT, ctx);
             
             for (Object object : req.getParameterMap().entrySet()) {

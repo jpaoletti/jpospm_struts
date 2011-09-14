@@ -1,0 +1,1 @@
+<%@attribute name = "message" required="true" type="org.jpos.ee.pm.core.message.Message" %> { "type": "${message.type}", "entity": "${message.entity.id}", "field": "${message.field.id}", "text": "<%= org.jpos.ee.pm.core.PresentationManager.getMessage(message.getKey(), message.getArgs()) %>"}

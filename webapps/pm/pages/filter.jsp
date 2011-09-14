@@ -19,13 +19,16 @@
                                     <tr>
                                         <th scope="row" width="175px"><div><label for="object.${field.id}"><pm:field-name entity="${entity}" field="${field}" /></label></div></th>
                                         <td><pm:filter-operations field_id="${field.id}" filter="${entity_filter}" /></td>
-                                        <td><pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" field="${field}" field_value="${entity_filter.filterValues[field.id][0]}" /></td>
+                                        <td>
+                                            <pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" field="${field}" field_value="${entity_filter.filterValues[field.id][0]}" />
+                                            <div class="field_message_container_${entity.id}_${field.id}"></div>
+                                        </td>
                                     </tr>
                                 </c:if>
                             </logic:iterate>
                         </tbody>
                         <tfoot>
-                            <tr><td colspan="3"><pm:errors/>&nbsp;</td></tr>
+                            <tr><td colspan="2"><div class="entity_message_container_${entity.id}">&nbsp;</div></td></tr>
                         </tfoot>
                     </table>
                     <html:submit styleId="${entity.id}_submit"><pm:message key="pm.struts.form.submit"/></html:submit>
