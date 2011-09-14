@@ -31,7 +31,6 @@ public interface PMStrutsConstants {
     public static final String PM_LIST = "PMLIST";
     public static final String REPORT = "report";
     public static final String ENTITY_SUPPORT = "es";
-    public static final String CONTEXT_PATH = "context_path";
     public static final String MENU = "menu";
     public static final String FINISH = "finish";
     public static final String OPERATION = "operation";
