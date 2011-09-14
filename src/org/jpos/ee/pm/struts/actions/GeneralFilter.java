@@ -75,8 +75,7 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
             ctx.setResponse((HttpServletResponse) response);
             ctx.setErrors(new ArrayList<PMMessage>());
             ctx.getRequest().setAttribute(PM_CONTEXT, ctx);
-            ctx.put(ActionSupport.USER, ctx.getSession().getAttribute(ActionSupport.USER));
-
+            
             for (Object object : req.getParameterMap().entrySet()) {
                 Map.Entry entry = (Map.Entry) object;
                 ctx.put("param_" + entry.getKey(), entry.getValue());

@@ -42,5 +42,4 @@ public interface PMStrutsConstants {
     public static final String CONTINUE = "continue";
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
-    public static final String USER = "user";
 }
