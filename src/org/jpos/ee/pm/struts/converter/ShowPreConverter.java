@@ -35,6 +35,6 @@ public class ShowPreConverter extends ShowStringConverter {
         }
         final String value = (p == null) ? "" : p.toString();
         ctx.setFieldValue(value);
-        return super.visualize("pre.jsp?", ctx.getString(PM_EXTRA_DATA));
+        return super.visualize("pre.jsp?");
     }
 }
