@@ -55,7 +55,7 @@ public class ShowCollectionConverter extends Converter {
             }
             sb.append("</ul>");
             ctx.put(PM_VOID_TEXT, PMEntitySupport.toHtml(sb.toString()));
-            return super.visualize("void.jsp?", null);
+            return super.visualize("void.jsp?");
         } catch (Exception e1) {
             getPresentationManager().error(e1);
             throw new ConverterException("pm_core.converter.not.collection");

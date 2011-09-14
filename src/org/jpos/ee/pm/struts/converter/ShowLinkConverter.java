@@ -55,6 +55,6 @@ public class ShowLinkConverter extends ShowStringConverter {
         ctx.put("identified", property + ":" + ctx.getPresentationManager().getAsString(otherObject, property));
         ctx.put("other_entity", getConfig("entity"));
         ctx.put("other_operation", getConfig("operation", "show"));
-        return super.visualize("link_converter.jsp?", "");
+        return super.visualize("link_converter.jsp?");
     }
 }

@@ -55,6 +55,6 @@ public class ShowBooleanConverter extends Converter {
         } else {
             s = getConfig("false-text", "pm.converter.boolean_converter.no");
         }
-        return super.visualize("localized_string_converter.jsp?value=" + PMEntitySupport.toHtml(s), "");
+        return super.visualize("localized_string_converter.jsp?value=" + PMEntitySupport.toHtml(s));
     }
 }
