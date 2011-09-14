@@ -68,9 +68,9 @@ public class GetListAction extends ActionSupport {
                         filter.addFilter(_display_field, _filter, FilterOperation.LIKE);
                     }
                     filter.process(entity);
-                    list = entity.getList(ctx, filter, _from, _count);
+                    list = entity.getList(ctx, filter, null, _from, _count);
                 } else {
-                    list = entity.getList(ctx, null, _from, _count);
+                    list = entity.getList(ctx, null, null, _from, _count);
                 }
                 entity.setListfilter(tmp);
             }
@@ -79,7 +79,7 @@ public class GetListAction extends ActionSupport {
                     String[] _display_fields = _display.split("[ ]");
                     String _selected_value = "";
                     for (String _display_field : _display_fields) {
-                        _selected_value += " "+ctx.getPresentationManager().getAsString(object, _display_field);
+                        _selected_value += " " + ctx.getPresentationManager().getAsString(object, _display_field);
                     }
                     finalist.add(new ACListItem(
                             ctx.getPresentationManager().getAsString(object, _id),
