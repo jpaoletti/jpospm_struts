@@ -1,2 +1,0 @@
-<%@tag description="Navigation bar" pageEncoding="UTF-8"%><%@attribute name="container" required="false" type="org.jpos.ee.pm.core.EntityContainer" %>
-<%=((org.jpos.ee.pm.struts.PMEntitySupport) session.getAttribute("es")).getNavigationList(container)%>
