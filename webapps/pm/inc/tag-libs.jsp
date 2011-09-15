@@ -7,4 +7,5 @@
 <%@ taglib uri="/WEB-INF/tld/x.tld" prefix="x" %>
 <%@ taglib uri="/WEB-INF/tld/fn.tld" prefix="fn" %>
 <%@ taglib uri="/WEB-INF/tld/fmt.tld" prefix="fmt" %>
+<%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>

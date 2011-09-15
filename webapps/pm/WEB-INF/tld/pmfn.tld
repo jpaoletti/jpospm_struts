@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+    <description>PM 1.0 functions library</description>
+    <display-name>Presentation Manager functions</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>pmfn</short-name>
+
+    <function>
+        <description>
+          Builds an icon set with the operations of an item inside a list
+        </description>
+        <name>listItemOperations</name>
+        <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String listItemOperations(org.jpos.ee.pm.struts.PMStrutsContext, java.lang.String, org.jpos.util.DisplacedList, java.lang.Object)
+        </function-signature>
+        <example>
+            ${pmfn:listItemOperations(ctx, es.context_path, contents, item)}
+        </example>
+    </function>
+
+    <function>
+        <description>
+          Return a css class name for a highlight
+        </description>
+        <name>highlight</name>
+        <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String highlight(org.jpos.ee.pm.core.Entity, org.jpos.ee.pm.core.Field, java.lang.Object, java.lang.Object)
+        </function-signature>
+        <example>
+            class="${pmfn:highlight(entity,field,item,fieldValue)}"
+        </example>
+    </function>
+
+    <function>
+        <description>
+          Return the row number as HTML
+        </description>
+        <name>rowNumber</name>
+        <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String rowNumber(org.jpos.ee.pm.core.PaginatedList, java.lang.Object)
+        </function-signature>
+        <example>
+            class="${pmfn:highlight(entity,field,item,fieldValue)}"
+        </example>
+    </function>
+</taglib>
