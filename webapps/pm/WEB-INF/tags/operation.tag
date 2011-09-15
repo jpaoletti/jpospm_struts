@@ -1,8 +1,7 @@
 <%@ tag description="This tag builds an Operation view" pageEncoding="UTF-8"%>
 <%@ tag import="org.jpos.ee.pm.core.*" %>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %><%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ attribute name="operation" required="true" type="org.jpos.ee.pm.core.Operation" %>
 <bean:define id="style" value="background-image:url(${es.context_path}/templates/${pm.template}/img/${operation.id}.gif);" />
 <%@attribute name="labels" required="false" type="java.lang.Boolean" description="If this value is set to true, then buttons will have label." %>
@@ -15,5 +14,5 @@
 </c:if>
 <a href='${hreff}' class='button' style="${style}" id="operation${operation.id}" ${onclick}>&nbsp;
 <c:if test="${labels == null or labels}">
-	<pm:message key="operation.${operation.id}" arg0="pm.entity.${entity.id}"/>&nbsp;
+	<pmfn:message key="operation.${operation.id}" arg0="pm.entity.${entity.id}"/>&nbsp;
 </c:if></a><% request.removeAttribute("onclick"); %>

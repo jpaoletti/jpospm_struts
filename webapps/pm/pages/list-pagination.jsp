@@ -6,7 +6,7 @@
     }
 </script>
 <c:if test="${PMLIST.paginable}">
-    <pm:message key='pm.struts.list.rpp' />
+    <pmfn:message key='pm.struts.list.rpp' />
     <select name="rowsPerPage" onchange="this.form.submit();">
         <option ${(PMLIST.rowsPerPage == 5)?'selected':''} value="5">5</option>
         <option ${(PMLIST.rowsPerPage == 10)?'selected':''} value="10">10</option>
@@ -14,11 +14,11 @@
         <option ${(PMLIST.rowsPerPage == 50)?'selected':''} value="50">50</option>
         <option ${(PMLIST.rowsPerPage == 100)?'selected':''} value="100">100</option>
     </select>
-    <pm:message key="pm.struts.list.of" />
+    <pmfn:message key="pm.struts.list.of" />
     <c:if test="${PMLIST.total != null}">${PMLIST.total}</c:if>
     <c:if test="${PMLIST.total == null}">? &nbsp;</c:if>| &nbsp;&nbsp;&nbsp;&nbsp;
     <c:if test="${PMLIST.page > 1}">
-        <a href="javascript:paginate('${PMLIST.page-1}')">&laquo; <pm:message key="pm.struts.list.prev"/></a> |
+        <a href="javascript:paginate('${PMLIST.page-1}')">&laquo; <pmfn:message key="pm.struts.list.prev"/></a> |
     </c:if>
     <c:if test="${PMLIST.total != null}">
         <c:if test="${PMLIST.pages > 20}">
@@ -39,6 +39,6 @@
         <input type="hidden" value="${PMLIST.page}" id="page" name="page"/>
     </c:if>
     <c:if test="${empty PMLIST.total || PMLIST.page < PMLIST.pages}">
-        <a href="javascript:paginate('${PMLIST.page+1}')"><pm:message key="pm.struts.list.next"/> &raquo;</a>
+        <a href="javascript:paginate('${PMLIST.page+1}')"><pmfn:message key="pm.struts.list.next"/> &raquo;</a>
     </c:if>
 </c:if>

@@ -28,8 +28,8 @@
                             <tr><td colspan="2"><div class="entity_message_container_${entity.id}">&nbsp;</div></td></tr>
                         </tfoot>
                     </table>
-                    <html:submit styleId="${entity.id}_submit"><pm:message key="pm.struts.form.submit"/></html:submit>
-                    <html:reset styleId="${entity.id}_submit"><pm:message key="pm.struts.form.reset" /></html:reset>
+                    <html:submit styleId="${entity.id}_submit"><pmfn:message key="pm.struts.form.submit"/></html:submit>
+                    <html:reset styleId="${entity.id}_submit"><pmfn:message key="pm.struts.form.reset" /></html:reset>
                 </div>
             </fieldset>
         </form>

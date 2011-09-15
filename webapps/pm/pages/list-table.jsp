@@ -26,7 +26,7 @@
                 <th><input type="hidden" name="search" class="search_init" /></th>
                     <c:forEach var="field" items="${entity.orderedFields}">
                         <c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}">
-                        <th><input type="text" name="search_<pm:field-name entity="${entity}" field="${field}" />" value="<pm:message key="list.input.search"/>" class="search_init" /></th>
+                        <th><input type="text" name="search_<pm:field-name entity="${entity}" field="${field}" />" value="<pmfn:message key="list.input.search"/>" class="search_init" /></th>
                         </c:if>
                     </c:forEach>
             </tr>
@@ -39,7 +39,7 @@
     }
     PM_register(function(){
         $(".confirmable_true").bind('click',function(){
-            return confirm("<pm:message key='pm.operation.confirm.question' />");
+            return confirm("<pmfn:message key='pm.operation.confirm.question' />");
         });
     });
 </script>

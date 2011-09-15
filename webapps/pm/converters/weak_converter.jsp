@@ -8,7 +8,7 @@
 %>
 <bean:define id="fields" name="weak" property="orderedFields" type="java.util.List" toScope="request"/><br/>
 <c:if test="${param.showbutton}">
-    <a href="${es.context_path}/list.do?pmid=${param.weakid}" class='button edit' > &nbsp;&nbsp; <pm:message key="${param.buttontext}" /></a>
+    <a href="${es.context_path}/list.do?pmid=${param.weakid}" class='button edit' > &nbsp;&nbsp; <pmfn:message key="${param.buttontext}" /></a>
 </c:if>
 <c:if test="${param.showlist}">
     <div class="boxed">

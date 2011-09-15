@@ -1,1 +1,1 @@
-<%@include file="../inc/tag-libs.jsp" %><pm:message key="${param.value}"/>
+<%@include file="../inc/tag-libs.jsp" %><pmfn:message key="${param.value}"/>
