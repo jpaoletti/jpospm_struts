@@ -96,4 +96,20 @@ public class PMTags {
             return "";
         }
     }
+
+    /**
+     * This method show a tooltip if the key is defined
+     * @param key Key
+     */
+    public static String tooltip(String contextPath, Entity entity, Field field) {
+        final String key = "pm.field." + entity.getId() + "." + field.getId() + ".tooltip";
+        if (key == null) {
+            return "";
+        }
+        final String message = PresentationManager.getMessage(key);
+        if (key.equals(message)) {
+            return "";
+        }
+        return "<img class='tooltip' title='" + message + "' alt='?' src='" + contextPath + "/templates/" + PresentationManager.getPm().getTemplate() + "/img/tooltip.gif' />";
+    }
 }

@@ -247,21 +247,6 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
     }
 
     /**
-     * This method show a tooltip if the key is defined
-     * @param key Key
-     */
-    public static String getTooltip(final String key) {
-        if (key == null) {
-            return "";
-        }
-        final String message = PresentationManager.getMessage(key);
-        if (key.equals(message)) {
-            return "";
-        }
-        return "<img class='tooltip' title='" + message + "' alt='?' src='" + getInstance().getContext_path() + "/templates/" + getInstance().getPM().getTemplate() + "/img/tooltip.gif' />";
-    }
-
-    /**
      * Getter for PMSession from http session
      */
     public static PMSession getPMSession(final HttpServletRequest request) {

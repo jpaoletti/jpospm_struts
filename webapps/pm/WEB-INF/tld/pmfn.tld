@@ -40,6 +40,20 @@
 
     <function>
         <description>
+          Return an img html with a tooltip for a field
+        </description>
+        <name>tooltip</name>
+        <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String tooltip(java.lang.String, org.jpos.ee.pm.core.Entity, org.jpos.ee.pm.core.Field)
+        </function-signature>
+        <example>
+            ${pmfn:tooltip(es.context_path, entity, field)}
+        </example>
+    </function>
+
+    <function>
+        <description>
           Return the row number as HTML
         </description>
         <name>rowNumber</name>
