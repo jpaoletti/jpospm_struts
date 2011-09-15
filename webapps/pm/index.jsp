@@ -49,10 +49,7 @@
         </script>
         <div class="index_layout" id="page-container">
             <div class="index_layout_header">
-                <div id="full_header">
-                    <pm:header />
-                    <jsp:include page="pages/menu.jsp" />
-                </div>
+                <div id="full_header"><pm:header /><pmfn:menu pmsession="${pmsession}" /></div>
             </div>
             <div class="index_layout_content">
                 <div id="content">

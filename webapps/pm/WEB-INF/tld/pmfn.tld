@@ -145,4 +145,16 @@
             <description>The entity container</description>
         </attribute>
     </tag>
+    <tag>
+        <description>Display the system menu</description>
+        <name>menu</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.MenuTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pmsession</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The session</description>
+        </attribute>
+    </tag>
 </taglib>
