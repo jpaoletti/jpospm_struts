@@ -6,7 +6,7 @@
         $(mf).focus();
     }
 </script>
-<logic:present name="pm">
+<c:if test="${not empty pm}">
     <pm:page title="titles.index" >
         <script type="text/javascript" src="js/expand.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
@@ -64,15 +64,15 @@
                             <img alt="v" src="${es.context_path}/templates/${pm.template}/img/arrow-down.gif" />
                         </div>
                     </c:if>
-                    <logic:notPresent name="pmsession">
+                    <c:if test="${empty pmsession}">
                         <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/pages/login.jsp" >
                         </iframe>
-                    </logic:notPresent>
+                    </c:if>
 
-                    <logic:present name="pmsession">
+                    <c:if test="${not empty pmsession}">
                         <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/${es.welcomePage}">
                         </iframe>
-                    </logic:present>
+                    </c:if>
                 </div>
             </div>
             <div class="index_layout_footer">
@@ -80,9 +80,9 @@
             </div>
         </div>
     </pm:page>
-</logic:present>
+</c:if>
 
-<logic:notPresent name="pm">
+<c:if test="${empty pm}">
     <style type="text/css" >
         #pm_error_div{
             margin: 70px;
@@ -106,4 +106,4 @@
         <img alt="error" src="error.png" id="error_img">
         <bean:message key="pm.not.present"/>
     </div>
-</logic:notPresent>
+</c:if>

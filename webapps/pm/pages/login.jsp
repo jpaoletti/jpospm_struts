@@ -1,16 +1,16 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <pm:page title="login">
-    <logic:present name="pmsession">
+    <c:if test="${not empty pmsession}">
         <script type="text/javascript" charset="utf-8">
             parent.location = "/";
         </script>
-    </logic:present>
-    <logic:present name="reload" scope="request">
+    </c:if>
+    <c:if test="${not empty reload}">
         <script type="text/javascript" charset="utf-8">
             parent.location = "/";
         </script>
-    </logic:present>
-    <logic:notPresent name="pmsession">
+    </c:if>
+    <c:if test="${empty pmsession}">
         <div id="login" class="boxed">
             <h2 class="title"><bean:message key="login"/> </h2>
             <div class="content">
@@ -29,5 +29,5 @@
             </div>
             <div class="entity_message_container_${entity.id}">&nbsp;</div>
         </div>
-    </logic:notPresent>
+    </c:if>
 </pm:page>

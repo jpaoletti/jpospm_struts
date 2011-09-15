@@ -10,7 +10,7 @@
              src="${es.context_path}/templates/${pm.template}/img/arrow_back.gif"
              style="vertical-align:middle;"/></a>
     &nbsp;<pm:message key="${key}" />&nbsp;
-    <logic:present name="key_operation">(<pm:message key="${key_operation}" />)</logic:present>
+    <c:if test="${not empty key_operation}">(<pm:message key="${key_operation}" />)</c:if>
     <a href="javascript:location.reload(true)" title="<bean:message key="pm.title.refresh"/>">
             <img alt="<bean:message key="pm.title.refresh"/>"
              src="${es.context_path}/templates/${pm.template}/img/reload.gif"

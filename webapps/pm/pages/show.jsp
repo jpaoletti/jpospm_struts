@@ -28,11 +28,11 @@
             </table>
         </div>
     </div>
-    <logic:present name="entity" property="highlights">
+    <c:if test="${not empty entity.highlights}">
         <style type="text/css" >
             <logic:iterate id="highlight" name="entity" property="highlights.highlights">
                 .${highlight.field}_${highlight.value} { background-color: ${highlight.color}; }
             </logic:iterate>
         </style>
-    </logic:present>
+    </c:if>
 </pm:page>
