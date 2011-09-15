@@ -17,6 +17,7 @@
  */
 package org.jpos.ee.pm.struts.tags;
 
+import javax.servlet.jsp.tagext.TagSupport;
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.Highlight;
@@ -25,6 +26,7 @@ import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PaginatedList;
 import org.jpos.ee.pm.core.PresentationManager;
 import org.jpos.ee.pm.core.operations.OperationScope;
+import org.jpos.ee.pm.struts.PMEntitySupport;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 import org.jpos.util.DisplacedList;
 
@@ -36,9 +38,9 @@ import org.jpos.util.DisplacedList;
  * @version 1.2
  *
  */
-public class PMTags {
+public class PMTags extends TagSupport {
 
-    public static String listItemOperations(PMStrutsContext ctx, String contexPath, DisplacedList list, Object item) {
+    public static String listItemOperations(PMStrutsContext ctx, DisplacedList list, Object item) {
         try {
             final StringBuilder sb = new StringBuilder();
             sb.append("<span style='white-space: nowrap;' class='operationspopup'>");
@@ -51,7 +53,7 @@ public class PMTags {
                         if (itemOperation.getUrl() != null) {
                             furl = itemOperation.getUrl();
                         } else {
-                            furl = contexPath + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + list.indexOf(item);
+                            furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + list.indexOf(item);
                         }
                         sb.append("<a class='confirmable_");
                         sb.append(itemOperation.getConfirm());
@@ -62,7 +64,7 @@ public class PMTags {
                         sb.append("' title='");
                         sb.append(PresentationManager.getMessage("operation." + itemOperation.getId()));
                         sb.append("'><img src='");
-                        sb.append(contexPath);
+                        sb.append(getContextPath());
                         sb.append("/templates/");
                         sb.append(ctx.getPresentationManager().getTemplate());
                         sb.append("/img/").append(itemOperation.getId());
@@ -101,7 +103,7 @@ public class PMTags {
      * This method show a tooltip if the key is defined
      * @param key Key
      */
-    public static String tooltip(String contextPath, Entity entity, Field field) {
+    public static String tooltip(Entity entity, Field field) {
         final String key = "pm.field." + entity.getId() + "." + field.getId() + ".tooltip";
         if (key == null) {
             return "";
@@ -110,6 +112,14 @@ public class PMTags {
         if (key.equals(message)) {
             return "";
         }
-        return "<img class='tooltip' title='" + message + "' alt='?' src='" + contextPath + "/templates/" + PresentationManager.getPm().getTemplate() + "/img/tooltip.gif' />";
+        return "<img class='tooltip' title='" + message + "' alt='?' src='" + getContextPath() + "/templates/" + getTemplate() + "/img/tooltip.gif' />";
+    }
+
+    protected static String getTemplate() {
+        return PresentationManager.getPm().getTemplate();
+    }
+
+    protected static String getContextPath() {
+        return PMEntitySupport.getInstance().getContext_path();
     }
 }

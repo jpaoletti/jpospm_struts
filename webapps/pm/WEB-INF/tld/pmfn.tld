@@ -17,10 +17,10 @@
         <name>listItemOperations</name>
         <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
         <function-signature>
-            String listItemOperations(org.jpos.ee.pm.struts.PMStrutsContext, java.lang.String, org.jpos.util.DisplacedList, java.lang.Object)
+            String listItemOperations(org.jpos.ee.pm.struts.PMStrutsContext, org.jpos.util.DisplacedList, java.lang.Object)
         </function-signature>
         <example>
-            ${pmfn:listItemOperations(ctx, es.context_path, contents, item)}
+            ${pmfn:listItemOperations(ctx, contents, item)}
         </example>
     </function>
 
@@ -45,10 +45,10 @@
         <name>tooltip</name>
         <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
         <function-signature>
-            String tooltip(java.lang.String, org.jpos.ee.pm.core.Entity, org.jpos.ee.pm.core.Field)
+            String tooltip(org.jpos.ee.pm.core.Entity, org.jpos.ee.pm.core.Field)
         </function-signature>
         <example>
-            ${pmfn:tooltip(es.context_path, entity, field)}
+            ${pmfn:tooltip(entity, field)}
         </example>
     </function>
 

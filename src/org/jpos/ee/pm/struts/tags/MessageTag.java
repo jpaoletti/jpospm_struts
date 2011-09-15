@@ -19,7 +19,6 @@ package org.jpos.ee.pm.struts.tags;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.TagSupport;
 import org.jpos.ee.pm.core.PresentationManager;
 
 /**
@@ -30,7 +29,7 @@ import org.jpos.ee.pm.core.PresentationManager;
  * @version v1.2
  *
  */
-public class MessageTag extends TagSupport {
+public class MessageTag extends PMTags {
 
     private String key;
     private String arg0;

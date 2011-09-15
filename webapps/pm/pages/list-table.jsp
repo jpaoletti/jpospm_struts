@@ -13,7 +13,7 @@
                     <c:if test="${ctx.entityContainer.list.hasSelectedScope}">
                         <input type="checkbox" id="selected_item" value="${fn:indexOf(contents,item)}" onchange="selectItem(this.value);" ${(fn:contains(ctx.entityContainer.selectedIndexes,fn:indexOf(contents,item)))?'checked':''} />
                     </c:if>
-                    ${pmfn:rowNumber(ctx.entityContainer.list,item)}&nbsp;${pmfn:listItemOperations(ctx, es.context_path, contents, item)}
+                    ${pmfn:rowNumber(ctx.entityContainer.list,item)}&nbsp;${pmfn:listItemOperations(ctx, contents, item)}
                 </td>
                 <c:forEach var="field" items="${entity.orderedFields}" ><c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}"><td align="${field.align}"><pm:converted-item es="${es}" operation="${operation}" entity="${entity}" item="${item}" field="${field}" /></td></c:if>
                 </c:forEach>
