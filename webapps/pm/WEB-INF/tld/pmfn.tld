@@ -108,4 +108,35 @@
             <description>Fifth parametric replacement value, if any.</description>
         </attribute>
     </tag>
+
+    <tag>
+        <description>Display an operation bar</description>
+        <name>operations</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.OperationsTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pmsession</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The pm session</description>
+        </attribute>
+        <attribute>
+            <name>entity</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The entity</description>
+        </attribute>
+        <attribute>
+            <name>labels</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>If true, labels are shown</description>
+        </attribute>
+        <attribute>
+            <name>operations</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operations object</description>
+        </attribute>
+    </tag>
 </taglib>

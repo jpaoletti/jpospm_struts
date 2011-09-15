@@ -1,16 +1,15 @@
 <%@include file="../inc/inc-full.jsp" %>
-<bean:define id="e_container" name="ctx" property="entityContainer" />
 <pm:page title="titles.add">
     <div id="add" class="boxed">
         <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
-        <pm:operations labels="true" operations="${ctx.map.operations.operations}"/>
+        <pmfn:operations entity="${entity}" operations="${ctx.map.operations}" pmsession="${pmsession}" labels="true" />
         <div id="navigation_bar">
-            <pm:navigation container="${e_container.owner}"  />
+            <pm:navigation container="${ctx.entityContainer.owner}"  />
         </div>
         <div class="content">
             <table id="box-table-a">
                 <tbody id="list_body" >
-                    <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
+                    <c:forEach var="field" items="${entity.orderedFields}">
                         <c:if test="${fn:contains(field.display,'show') or fn:contains(field.display,'all')}">
                             <tr>
                                 <th scope="row" width="175px"><pm:field-name entity="${entity}" field="${field}" /></th>
@@ -20,7 +19,7 @@
                                 </td>
                             </tr>
                         </c:if>
-                    </logic:iterate>
+                    </c:forEach>
                 </tbody>
                 <tfoot>
                     <tr><td colspan="2"><div class="entity_message_container_${entity.id}">&nbsp;</div></td></tr>
@@ -30,9 +29,9 @@
     </div>
     <c:if test="${not empty entity.highlights}">
         <style type="text/css" >
-            <logic:iterate id="highlight" name="entity" property="highlights.highlights">
+            <c:forEach var="highlight" items="${entity.highlights.highlights}">
                 .${highlight.field}_${highlight.value} { background-color: ${highlight.color}; }
-            </logic:iterate>
+            </c:forEach>
         </style>
     </c:if>
 </pm:page>

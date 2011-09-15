@@ -1,35 +1,33 @@
 <%@include file="../inc/inc-full.jsp" %>
-<bean:define id="e_container"   name="ctx" property="entityContainer" toScope="request"/>
-<bean:define id="operation"     name="ctx" property="operation" toScope="request"/>
-<bean:define id="PMLIST"        name="e_container" property="list" toScope="request"/>
-<bean:define id="operations"    name="PMLIST" property="operations" type="org.jpos.ee.pm.core.Operations" toScope="request"/>
-<bean:define id="contents" 	name="PMLIST" property="contents" type="java.util.List<Object>" toScope="request"/>
+<bean:define id="operation" name="ctx" property="operation" toScope="request"/>
+<bean:define id="PMLIST"    name="ctx" property="entityContainer.list" toScope="request"/>
+<bean:define id="contents"  name="ctx" property="entityContainer.list.contents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="list">
     <div class="boxed">
         <pm:pmtitle entity="${entity}" operation="${operation}" />
-        <pm:operations labels="true" operations="${operations.operations}"/>
+        <pmfn:operations entity="${entity}" operations="${ctx.entityContainer.list.operations}" pmsession="${pmsession}" labels="true" />
         <div id="navigation_bar">
-            <pm:navigation container="${e_container.owner}"  />
+            <pm:navigation container="${ctx.entityContainer.owner}"  />
         </div>
         <form action="${es.context_path}/list.do" method="GET" class="listform" id="listform">
             <input type="hidden" name="pmid" value="${entity.id}" />
             <script type="text/javascript" charset="utf-8">
                 var pmid = "${entity.id}";
-                var searchable = "${PMLIST.searchable}" == "true";
+                var searchable = "${entityContainer.list.searchable}" == "true";
                 var sortable = false;
                 var paginable = false;
                 var texts = new Array(
-                "<bean:message key='list.search.all' />" ,
-                "<bean:message key='list.first' />" ,
-                "<bean:message key='list.last' />" ,
-                "<bean:message key='list.next' />" ,
-                "<bean:message key='list.previous' />" ,
-                "<bean:message key='list.info' />" ,
-                "<bean:message key='list.info.empty' />" ,
-                "<bean:message key='list.info.filtered' />" ,
-                "<bean:message key='pm.struts.list.rpp' />" ,
-                "<bean:message key='list.processing' />" ,
-                "<bean:message key='list.zero.records' />"
+                "<pmfn:message key='list.search.all' />" ,
+                "<pmfn:message key='list.first' />" ,
+                "<pmfn:message key='list.last' />" ,
+                "<pmfn:message key='list.next' />" ,
+                "<pmfn:message key='list.previous' />" ,
+                "<pmfn:message key='list.info' />" ,
+                "<pmfn:message key='list.info.empty' />" ,
+                "<pmfn:message key='list.info.filtered' />" ,
+                "<pmfn:message key='pm.struts.list.rpp' />" ,
+                "<pmfn:message key='list.processing' />" ,
+                "<pmfn:message key='list.zero.records' />"
             );
             </script>
             <script type="text/javascript" charset="utf-8" src="${es.context_path}/js/list.js"></script>

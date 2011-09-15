@@ -1,15 +1,15 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <div id="sort_page" class="jqmWindow">
     <pmfn:message key='list.sort.field' /> <br/>
-    <html:select property="order" onchange="this.form.submit();" value="${PMLIST.sort.fieldId}">
-        <logic:iterate id="field" name="entity" property="orderedFields" type="org.jpos.ee.pm.core.Field">
+    <select name="order" onchange="this.form.submit();" >
+        <c:forEach var="field" items="${entity.orderedFields}">
             <c:if test="${fn:contains(field.display,'sort') or fn:contains(field.display,'all')}">
-                <html:option value="${field.id}"><pm:field-name entity='${entity}' field='${field}' /></html:option>
+                <option value="${field.id}"${(ctx.entityContainer.list.sort.fieldId==field.id)?'selected':''}><pm:field-name entity='${entity}' field='${field}' /></option>
             </c:if>
-        </logic:iterate>
-    </html:select>
-    <html:select property="desc" onchange="this.form.submit();" value="${PMLIST.sort.desc}">
-        <html:option value="true"><pmfn:message key="list.sort.desc" /></html:option>
-        <html:option value="false"><pmfn:message key="list.sort.asc" /></html:option>
-    </html:select><br/>
+        </c:forEach>
+    </select>
+    <select name="desc" onchange="this.form.submit();">
+        <option ${(ctx.entityContainer.list.sort.desc)?'selected':''} value="true"><pmfn:message key="list.sort.desc" /></option>
+        <option ${(not ctx.entityContainer.list.sort.desc)?'selected':''}  value="false"><pmfn:message key="list.sort.asc" /></option>
+    </select><br/>
 </div>
