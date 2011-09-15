@@ -21,21 +21,16 @@ import java.util.HashMap;
 import java.util.Map;
 import org.jpos.ee.pm.core.EntityContainer;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.util.MessageResources;
 
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.EntityFilter;
 import org.jpos.ee.pm.core.EntitySupport;
 import org.jpos.ee.pm.core.Field;
-import org.jpos.ee.pm.core.Highlight;
-import org.jpos.ee.pm.core.Operation;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMCoreConstants;
-import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PaginatedList;
 import org.jpos.ee.pm.core.PresentationManager;
-import org.jpos.ee.pm.core.operations.OperationScope;
 
 /**
  * Helper class for internal use.
@@ -223,43 +218,6 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
         return sb.toString();
     }
 
-    public String getListItemOperations(final PMStrutsContext ctx, MessageResources messages, Object item, int i) throws PMException {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("<span style='white-space: nowrap;' class='operationspopup'>");
-        for (Operation itemOperation : ctx.getOperations(item, ctx.getOperation()).getOperations()) {
-            //If we have permission
-            if (ctx.getPMSession().getUser().hasPermission(itemOperation.getPerm())) {
-                //if operation is at item scope
-                if (OperationScope.ITEM.is(itemOperation.getScope())) {
-                    String furl = "";
-                    if (itemOperation.getUrl() != null) {
-                        furl = itemOperation.getUrl();
-                    } else {
-                        furl = getContext_path() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + i;
-                    }
-                    sb.append("<a class='confirmable_");
-                    sb.append(itemOperation.getConfirm());
-                    sb.append("' href='");
-                    sb.append(furl);
-                    sb.append("' id='operation");
-                    sb.append(itemOperation.getId());
-                    sb.append("' title='");
-                    sb.append(messages.getMessage("operation." + itemOperation.getId()));
-                    sb.append("'><img src='");
-                    sb.append(getContext_path());
-                    sb.append("/templates/");
-                    sb.append(ctx.getPresentationManager().getTemplate());
-                    sb.append("/img/").append(itemOperation.getId());
-                    sb.append(".gif' alt='");
-                    sb.append(itemOperation.getId());
-                    sb.append("' /></a>");
-                }
-            }
-        }
-        sb.append("&nbsp;</span>");
-        return sb.toString();
-    }
-
     public PMContext prepareForConversion(Field field, Object item, Object field_value) {
         final PMContext ctx = (PMContext) request.getAttribute(PM_CONTEXT);
         ctx.setField(field);
@@ -271,15 +229,6 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
         ctx.setEntityInstance(item);
         request.setAttribute("ctx", ctx);
         return ctx;
-    }
-
-    public String getHighlight(Entity entity, Field field, Object item, Object field_value) {
-        final Highlight highlight = entity.getHighlight(field, item);
-        if (highlight != null) {
-            return highlight.getStyle();
-        } else {
-            return "";
-        }
     }
 
     public static String toHtml(final String s) {

@@ -504,3 +504,8 @@ img {
     border-bottom: blue solid thin;
     color: blue;
 }
+
+.operation_cell{
+    color:gray;
+    white-space: nowrap;
+}
