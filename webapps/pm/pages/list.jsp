@@ -4,7 +4,7 @@
 <bean:define id="contents"  name="ctx" property="entityContainer.list.contents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="list">
     <div class="boxed">
-        <pm:std-header ctx="${ctx}" />
+        <pm:std-header ctx="${ctx}" operations="${ctx.entityContainer.list.operations}" />
         <form action="${es.context_path}/list.do" method="GET" class="listform" id="listform">
             <input type="hidden" name="pmid" value="${entity.id}" />
             <script type="text/javascript" charset="utf-8">

@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <%@attribute name = "ctx" required="true" type="org.jpos.ee.pm.core.PMContext" %>
+<%@attribute name = "operations" required="false" type="org.jpos.ee.pm.core.Operations" %>
 <pm:pmtitle entity="${ctx.entity}" operation="${ctx.operation}" />
-<pmfn:operations entity="${ctx.entity}" operations="${ctx.map.operations}" pmsession="${ctx.pmsession}" labels="true" />
+<pmfn:operations ctx="${ctx}" operations="${operations}" labels="true" />
 <div id="navigation_bar"><pmfn:navigation container="${ctx.entityContainer.owner}" /></div>

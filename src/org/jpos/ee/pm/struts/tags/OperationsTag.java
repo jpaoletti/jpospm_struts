@@ -24,8 +24,11 @@ import javax.servlet.jsp.JspWriter;
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.Operation;
 import org.jpos.ee.pm.core.Operations;
+import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMSession;
 import org.jpos.ee.pm.core.PresentationManager;
+import org.jpos.ee.pm.core.operations.OperationCommandSupport;
+import org.jpos.ee.pm.struts.PMStrutsConstants;
 
 /**
  * Display an html div bar with the operations
@@ -38,8 +41,7 @@ import org.jpos.ee.pm.core.PresentationManager;
 public class OperationsTag extends PMTags {
 
     private boolean labels = true;
-    private PMSession pmsession;
-    private Entity entity;
+    private PMContext ctx;
     private Operations operations;
 
     @Override
@@ -68,35 +70,34 @@ public class OperationsTag extends PMTags {
     }
 
     public Operations getOperations() {
-        return operations;
-    }
-
-    public void setOperations(Operations operations) {
-        this.operations = operations;
+        if (operations != null) {
+            return operations;
+        } else {
+            return (Operations) ctx.get(PMStrutsConstants.OPERATIONS);
+        }
     }
 
     public PMSession getPmsession() {
-        return pmsession;
-    }
-
-    public void setPmsession(PMSession pmsession) {
-        this.pmsession = pmsession;
+        return ctx.getPmsession();
     }
 
     private void processOperation(JspWriter out, Operation operation) throws IOException {
         final String opid = operation.getId();
 
         final String onclick = (operation.getConfirm())
-                ? "onclick=\"return confirm('" + PresentationManager.getMessage("pm.operation.confirm.question", "operation." + opid, "pm.entity.${entity.id}") + "');\""
+                ? "onclick=\"return confirm('" + PresentationManager.getMessage("pm.operation.confirm.question", "operation." + opid, "pm.entity." + getEntity().getId()) + "');\""
                 : "";
         final String style = "background-image:url(" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif);";
+        final String item = getCtx().getString(OperationCommandSupport.PM_ITEM);
         final String hreff = (operation.getUrl() != null)
                 ? operation.getUrl()
-                : getContextPath() + "/" + opid + ".do";
+                : getContextPath() + "/" + opid + ".do"
+                + "?pmid=" + getEntity().getId()
+                + ((item != null) ? "&item=" + item : "");
 
         out.print("<a href='" + hreff + "' class='button' style=" + style + " id='operation" + opid + "' " + onclick + ">&nbsp;");
         if (isLabels()) {
-            out.print(PresentationManager.getMessage("operation." + opid, "pm.entity.${entity.id}"));
+            out.print(PresentationManager.getMessage("operation." + opid, "pm.entity." + getEntity().getId()));
         }
         out.println("</a>");
     }
@@ -110,10 +111,18 @@ public class OperationsTag extends PMTags {
     }
 
     public Entity getEntity() {
-        return entity;
+        return ctx.getEntity();
     }
 
-    public void setEntity(Entity entity) {
-        this.entity = entity;
+    public PMContext getCtx() {
+        return ctx;
+    }
+
+    public void setCtx(PMContext ctx) {
+        this.ctx = ctx;
+    }
+
+    public void setOperations(Operations operations) {
+        this.operations = operations;
     }
 }

@@ -115,28 +115,22 @@
         <tag-class>org.jpos.ee.pm.struts.tags.OperationsTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>pmsession</name>
+            <name>ctx</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <description>The pm session</description>
+            <description>The context</description>
         </attribute>
         <attribute>
-            <name>entity</name>
-            <required>true</required>
+            <name>operations</name>
+            <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-            <description>The entity</description>
+            <description>Optional operations object. If not defined, one from context is used</description>
         </attribute>
         <attribute>
             <name>labels</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
             <description>If true, labels are shown</description>
-        </attribute>
-        <attribute>
-            <name>operations</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <description>The operations object</description>
         </attribute>
     </tag>
     <tag>
