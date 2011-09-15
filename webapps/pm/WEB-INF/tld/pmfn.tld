@@ -139,4 +139,16 @@
             <description>The operations object</description>
         </attribute>
     </tag>
+    <tag>
+        <description>Display a navigation list of links</description>
+        <name>navigation</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.NavigationTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>container</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The entity container</description>
+        </attribute>
+    </tag>
 </taglib>
