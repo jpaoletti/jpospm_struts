@@ -1,6 +1,4 @@
 <%@tag description="This tag encapsulates a title" pageEncoding="UTF-8"%>
-<%@taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
-<%@taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@attribute name = "key" required="true" type="java.lang.String" %>
 <%@attribute name = "key_operation" required="false" type="java.lang.String" %>
