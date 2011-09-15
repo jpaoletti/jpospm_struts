@@ -84,6 +84,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      * @param request The request
      * @return The container
      */
+    @Deprecated
     public EntityContainer getContainer() throws PMStrutsException {
         if (request == null) {
             throw new PMStrutsException("request.not.found");
@@ -106,6 +107,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      * @return The entity
      * @throws PMStrutsException when the request was not setted
      */
+    @Deprecated
     public Entity getEntity() throws PMStrutsException {
         EntityContainer container = getContainer();
         if (container != null) {
@@ -120,6 +122,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      * @return The list
      * @throws PMStrutsException when request has no container
      */
+    @Deprecated
     public PaginatedList getList() throws PMStrutsException {
         EntityContainer container = getContainer();
         if (container == null) {
@@ -135,6 +138,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      * @return The list
      * @throws PMStrutsException when request has no container
      */
+    @Deprecated
     public Object getSelected() throws PMStrutsException {
         EntityContainer container = getContainer();
         if (container == null) {
@@ -150,6 +154,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      * @return The filter
      * @throws PMStrutsException when request has no container
      */
+    @Deprecated
     public EntityFilter getFilter() throws PMStrutsException {
         EntityContainer container = getContainer();
         if (container == null) {
