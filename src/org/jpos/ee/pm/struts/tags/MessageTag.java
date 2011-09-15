@@ -42,7 +42,13 @@ public class MessageTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            pageContext.getOut().print(PresentationManager.getMessage(getKey(), getArg0(), getArg1(), getArg2(), getArg3(), getArg4()));
+            pageContext.getOut().print(PresentationManager.getMessage(
+                    getKey(),
+                    PresentationManager.getMessage(getArg0()),
+                    PresentationManager.getMessage(getArg1()),
+                    PresentationManager.getMessage(getArg2()),
+                    PresentationManager.getMessage(getArg3()),
+                    PresentationManager.getMessage(getArg4())));
         } catch (Exception ex) {
             throw new JspTagException("MessageTag: " + ex.getMessage());
         }
