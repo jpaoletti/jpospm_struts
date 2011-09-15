@@ -29,7 +29,7 @@ public class LoginAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final LoginOperation op = new LoginOperation("login");
         if (op.execute(ctx)) {
-            ctx.getSession().setAttribute(PMEntitySupport.PMSESSION, ctx.getPMSession());
+            ctx.getSession().setAttribute(PMEntitySupport.PMSESSION, ctx.getPmsession());
             if (ctx.getUser().isChangePassword()) {
                 throw new PMForwardException("changepassword");
             }

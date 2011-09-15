@@ -46,7 +46,7 @@ public class PMTags extends TagSupport {
             sb.append("<span style='white-space: nowrap;' class='operationspopup'>");
             for (Operation itemOperation : ctx.getOperations(item, ctx.getOperation()).getOperations()) {
                 //If we have permission
-                if (ctx.getPMSession().getUser().hasPermission(itemOperation.getPerm())) {
+                if (ctx.getPmsession().getUser().hasPermission(itemOperation.getPerm())) {
                     //if operation is at item scope
                     if (OperationScope.ITEM.is(itemOperation.getScope())) {
                         String furl = "";

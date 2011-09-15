@@ -50,7 +50,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
     }
 
     protected boolean prepare(PMStrutsContext ctx) throws PMException {
-        if (checkUser() && ctx.getPMSession() == null) {
+        if (checkUser() && ctx.getPmsession() == null) {
             //Force logout
             final PMEntitySupport es = PMEntitySupport.getInstance();
             ctx.getSession().invalidate();
