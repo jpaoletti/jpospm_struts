@@ -1,14 +1,10 @@
 <%@include file="../inc/inc-full.jsp" %>
 <pm:page title="titles.filter">
     <div id="add" class="boxed">
-        <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
+        <pm:std-header ctx="${ctx}" />
         <form action="${es.context_path}/${ctx.operation.id}.do?pmid=${pmid}"  accept-charset="UTF-8" >
             <input type="hidden" name="finish" value="yes" />
             <fieldset>
-                <pmfn:operations entity="${entity}" operations="${ctx.map.operations}" pmsession="${pmsession}" labels="true" />
-                <div id="navigation_bar">
-                    <pm:navigation container="${ctx.entityContainer.owner}"  />
-                </div>
                 <div class="content">
                     <table id="box-table-a">
                         <tbody id="list_body" >

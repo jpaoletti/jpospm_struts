@@ -1,11 +1,7 @@
 <%@include file="../inc/inc-full.jsp" %>
 <pm:page title="titles.add">
     <div id="add" class="boxed">
-        <pm:pmtitle entity="${entity}" operation="${ctx.operation}"/>
-        <pmfn:operations entity="${entity}" operations="${ctx.map.operations}" pmsession="${pmsession}" labels="true" />
-        <div id="navigation_bar">
-            <pm:navigation container="${ctx.entityContainer.owner}"  />
-        </div>
+        <pm:std-header ctx="${ctx}" />
         <div class="content">
             <table id="box-table-a">
                 <tbody id="list_body" >

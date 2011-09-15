@@ -4,11 +4,7 @@
 <bean:define id="contents"  name="ctx" property="entityContainer.list.contents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="list">
     <div class="boxed">
-        <pm:pmtitle entity="${entity}" operation="${operation}" />
-        <pmfn:operations entity="${entity}" operations="${ctx.entityContainer.list.operations}" pmsession="${pmsession}" labels="true" />
-        <div id="navigation_bar">
-            <pm:navigation container="${ctx.entityContainer.owner}"  />
-        </div>
+        <pm:std-header ctx="${ctx}" />
         <form action="${es.context_path}/list.do" method="GET" class="listform" id="listform">
             <input type="hidden" name="pmid" value="${entity.id}" />
             <script type="text/javascript" charset="utf-8">
