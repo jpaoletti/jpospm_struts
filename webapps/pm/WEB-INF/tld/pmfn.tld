@@ -51,4 +51,47 @@
             class="${pmfn:highlight(entity,field,item,fieldValue)}"
         </example>
     </function>
+
+    <tag>
+        <description>Display an internationalized message</description>
+        <name>message</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.MessageTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>key</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The message key of the requested message</description>
+        </attribute>
+        <attribute>
+            <name>arg0</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>First parametric replacement value, if any</description>
+        </attribute>
+        <attribute>
+            <name>arg1</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Second parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg2</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Third parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg3</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Fourth parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg4</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Fifth parametric replacement value, if any.</description>
+        </attribute>
+    </tag>
 </taglib>
