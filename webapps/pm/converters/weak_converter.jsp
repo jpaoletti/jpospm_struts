@@ -15,9 +15,9 @@
             <thead>
                 <tr>
                     <c:forEach var="field" items="${weak.orderedFields}">
-                        <c:if test="${fn:contains(field.display,'list') or fn:contains(field.display,'all')}">
+                        <pmfn:displays operationId="list" field="${field}">
                             <th scope="col" style="width:${field.width}px;" ><pm:field-name entity="${weak}" field="${field}" /></th>
-                        </c:if>
+                        </pmfn:displays>
                     </c:forEach>
                 </tr>
             </thead>
@@ -25,11 +25,11 @@
                 <c:forEach var="item" items="${contents}" >
                     <tr>
                         <c:forEach var="field" items="${weak.orderedFields}">
-                            <c:if test="${fn:contains(field.display,'list') or fn:contains(field.display,'all')}">
+                            <pmfn:displays operationId="list" field="${field}">
                                 <td align="text-align:${field.align};">
                                     <pm:converted-item es="${es}" operation="${woperation}" entity="${weak}" item="${item}" field="${field}" />
                                 </td>
-                            </c:if>
+                            </pmfn:displays>
                         </c:forEach>
                     </tr>
                 </c:forEach>

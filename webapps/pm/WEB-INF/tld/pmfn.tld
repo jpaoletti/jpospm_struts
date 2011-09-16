@@ -199,4 +199,28 @@
             <description>The field value. If not defined, its calculated by reflection using item and field</description>
         </attribute>
     </tag>
+    <tag>
+        <description>Evaluates the body content only if field is displayed for the operation</description>
+        <name>displays</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.DisplaysTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>operation</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation where the field wants to be displayed. May be not defined but operationId must be defined then</description>
+        </attribute>
+        <attribute>
+            <name>operationId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation id where the field wants to be displayed. May be not defined but operation must be defined then</description>
+        </attribute>
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field to check if must be displayed</description>
+        </attribute>
+    </tag>
 </taglib>

@@ -9,13 +9,13 @@
                     <table id="box-table-a">
                         <tbody id="list_body" >
                             <c:forEach var="field" items="${entity.orderedFields}">
-                                <c:if test="${fn:contains(field.display,ctx.operation.id) or fn:contains(field.display,'all')}">
+                                <pmfn:displays operation="${ctx.operation}" field="${field}">
                                     <tr>
                                         <th scope="row" width="175px"><div><label for="object.${field.id}"><pm:field-name entity="${entity}" field="${field}" /></label></div></th>
                                         <td><pm:filter-operations field_id="${field.id}" filter="${ctx.entityContainer.filter}" /></td>
                                         <td><pmfn:converted-item ctx="${ctx}" field="${field}" fieldValue="${ctx.entityContainer.filter.filterValues[field.id][0]}"/></td>
                                     </tr>
-                                </c:if>
+                                </pmfn:displays>
                             </c:forEach>
                         </tbody>
                         <tfoot>

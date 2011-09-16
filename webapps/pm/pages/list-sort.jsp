@@ -3,9 +3,11 @@
     <pmfn:message key='list.sort.field' /> <br/>
     <select name="order" onchange="this.form.submit();" >
         <c:forEach var="field" items="${entity.orderedFields}">
-            <c:if test="${fn:contains(field.display,'sort') or fn:contains(field.display,'all')}">
-                <option value="${field.id}"${(ctx.entityContainer.list.sort.fieldId==field.id)?'selected':''}><pm:field-name entity='${entity}' field='${field}' /></option>
-            </c:if>
+            <pmfn:displays operationId="sort" field="${field}">
+                <option value="${field.id}" ${(ctx.entityContainer.list.sort.fieldId==field.id)?'selected':''}>
+                    <pm:field-name entity='${entity}' field='${field}' />
+                </option>
+            </pmfn:displays>
         </c:forEach>
     </select>
     <select name="desc" onchange="this.form.submit();">

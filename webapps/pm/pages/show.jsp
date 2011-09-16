@@ -6,16 +6,24 @@
             <table id="box-table-a">
                 <tbody id="list_body" >
                     <c:forEach var="field" items="${entity.orderedFields}">
-                        <c:if test="${fn:contains(field.display,'show') or fn:contains(field.display,'all')}">
+                        <pmfn:displays operation="${ctx.operation}" field="${field}">
                             <tr>
-                                <th scope="row" width="175px"><pm:field-name entity="${entity}" field="${field}" /></th>
-                                <td><pmfn:converted-item ctx="${ctx}" field="${field}" /></td>
+                                <th scope="row" width="175px">
+                                    <pm:field-name entity="${entity}" field="${field}" />
+                                </th>
+                                <td>
+                                    <pmfn:converted-item ctx="${ctx}" field="${field}" />
+                                </td>
                             </tr>
-                        </c:if>
+                        </pmfn:displays>
                     </c:forEach>
                 </tbody>
                 <tfoot>
-                    <tr><td colspan="2"><div class="entity_message_container_${entity.id}">&nbsp;</div></td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="entity_message_container_${entity.id}"/>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
