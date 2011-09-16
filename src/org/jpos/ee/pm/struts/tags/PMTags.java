@@ -17,6 +17,7 @@
  */
 package org.jpos.ee.pm.struts.tags;
 
+import java.io.IOException;
 import javax.servlet.jsp.tagext.TagSupport;
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.Field;
@@ -115,11 +116,35 @@ public class PMTags extends TagSupport {
         return "<img class='tooltip' title='" + message + "' alt='?' src='" + getContextPath() + "/templates/" + getTemplate() + "/img/tooltip.gif' />";
     }
 
+    /**
+     * Getter for template name
+     */
     protected static String getTemplate() {
         return PresentationManager.getPm().getTemplate();
     }
 
+    /**
+     * Getter for context path
+     */
     protected static String getContextPath() {
         return PMEntitySupport.getInstance().getContext_path();
+    }
+
+    /**
+     * Prints the objects in the jsp writer of the page context
+     */
+    protected void print(Object... objects) throws IOException {
+        for (Object object : objects) {
+            pageContext.getOut().print(object);
+        }
+    }
+
+    /**
+     * Prints the objects in the jsp writer of the page context with a new line
+     */
+    protected void println(Object... objects) throws IOException {
+        for (Object object : objects) {
+            pageContext.getOut().println(object);
+        }
     }
 }
