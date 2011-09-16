@@ -1,8 +1,9 @@
 <%@include file="../inc/inc-full.jsp" %>
-<pm:page title="titles.add">
+<%-- Standard display page for an entity instance item --%>
+<pm:page title="titles.${ctx.operation.id}">
     <div id="add" class="boxed">
         <pm:std-header ctx="${ctx}" />
-        <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}">
+        <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="${ctx.map.editable}">
             <table id="box-table-a">
                 <tbody id="list_body" >
                     <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">

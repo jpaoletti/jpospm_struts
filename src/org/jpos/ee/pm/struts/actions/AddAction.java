@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -24,14 +24,16 @@ import org.jpos.ee.pm.struts.PMStrutsContext;
 
 public class AddAction extends ActionSupport {
 
+    @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
+        ctx.put("editable", true);
         final boolean finish = ctx.getParameter("finish") == null;
         if (finish) {
             ctx.put("clean_selected", true);
             ctx.put("validate", false);
         }
 
-        AddOperation op = new AddOperation("add");
+        final AddOperation op = new AddOperation("add");
         op.execute(ctx);
 
         if (finish) {

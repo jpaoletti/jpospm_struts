@@ -1,6 +1,6 @@
 /*
  * jPOS Project [http://jpos.org]
- * Copyright (C) 2000-2010 Alejandro P. Revilla
+ * Copyright (C) 2000-2011 Alejandro P. Revilla
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,15 +17,21 @@
  */
 package org.jpos.ee.pm.struts.actions;
 
-/**Action for show operation. */
 import org.jpos.ee.pm.core.PMException;
 import org.jpos.ee.pm.core.operations.ShowOperation;
 import org.jpos.ee.pm.struts.PMStrutsContext;
 
+/**
+ * Action for show operation.
+ *
+ * @author jpaoletti
+ */
 public class ShowAction extends ActionSupport {
 
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        (new ShowOperation("show")).execute(ctx);
+        ctx.put("editable", false);
+        final ShowOperation op = new ShowOperation("show");
+        op.execute(ctx);
     }
 }
