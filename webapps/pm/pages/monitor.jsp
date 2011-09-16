@@ -1,5 +1,4 @@
 <%@include file="../inc/tag-libs.jsp" %>
-<bean:define id="es"                name="es" type="org.jpos.ee.pm.struts.PMEntitySupport" />
 <pm:page title="titles.monitor">
     <div class="boxed">
         <pm:title key="pm.monitor.${monitor.id}" key_operation="operation.monitor"/>
