@@ -14,22 +14,18 @@
         <table id="list" class="display" >
             <thead>
                 <tr>
-                    <c:forEach var="field" items="${weak.orderedFields}">
-                        <pmfn:displays operationId="list" field="${field}">
-                            <th scope="col" style="width:${field.width}px;" ><pm:field-name entity="${weak}" field="${field}" /></th>
-                        </pmfn:displays>
+                    <c:forEach var="field" items="${pmfn:displayedFields(weak, 'list')}">
+                        <th scope="col" style="width:${field.width}px;" ><pm:field-name entity="${weak}" field="${field}" /></th>
                     </c:forEach>
                 </tr>
             </thead>
             <tbody id="list_body" >
                 <c:forEach var="item" items="${contents}" >
                     <tr>
-                        <c:forEach var="field" items="${weak.orderedFields}">
-                            <pmfn:displays operationId="list" field="${field}">
-                                <td align="text-align:${field.align};">
-                                    <pm:converted-item es="${es}" operation="${woperation}" entity="${weak}" item="${item}" field="${field}" />
-                                </td>
-                            </pmfn:displays>
+                        <c:forEach var="field" items="${pmfn:displayedFields(weak, 'list')}">
+                            <td align="text-align:${field.align};">
+                                <pm:converted-item es="${es}" operation="${woperation}" entity="${weak}" item="${item}" field="${field}" />
+                            </td>
                         </c:forEach>
                     </tr>
                 </c:forEach>

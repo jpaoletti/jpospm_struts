@@ -8,17 +8,15 @@
                 <div class="content">
                     <table id="box-table-a">
                         <tbody id="list_body" >
-                            <c:forEach var="field" items="${entity.orderedFields}">
-                                <pmfn:displays operation="${ctx.operation}" field="${field}">
-                                    <tr>
-                                        <th scope="row" width="175px">
-                                            <pm:field-name entity="${entity}" field="${field}" />
-                                        </th>
-                                        <td>
-                                            <pmfn:converted-item ctx="${ctx}" field="${field}" />
-                                        </td>
-                                    </tr>
-                                </pmfn:displays>
+                            <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
+                                <tr>
+                                    <th scope="row" width="175px">
+                                        <pm:field-name entity="${entity}" field="${field}" />
+                                    </th>
+                                    <td>
+                                        <pmfn:converted-item ctx="${ctx}" field="${field}" />
+                                    </td>
+                                </tr>
                             </c:forEach>
                         </tbody>
                         <tfoot>

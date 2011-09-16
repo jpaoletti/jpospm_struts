@@ -18,6 +18,8 @@
 package org.jpos.ee.pm.struts.tags;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.jsp.tagext.TagSupport;
 import org.jpos.ee.pm.core.Entity;
 import org.jpos.ee.pm.core.Field;
@@ -114,6 +116,17 @@ public class PMTags extends TagSupport {
             return "";
         }
         return "<img class='tooltip' title='" + message + "' alt='?' src='" + getContextPath() + "/templates/" + getTemplate() + "/img/tooltip.gif' />";
+    }
+
+    public static List<Field> displayedFields(Entity entity, String operationId) {
+        final List<Field> displayedFields = new ArrayList<Field>();
+        for (Field field : entity.getOrderedFields()) {
+            final String display = field.getDisplay();
+            if (display.contains(operationId) || "all".equalsIgnoreCase(display)) {
+                displayedFields.add(field);
+            }
+        }
+        return displayedFields;
     }
 
     /**

@@ -66,6 +66,15 @@
         </example>
     </function>
 
+    <function>
+        <description>Return the list of fields for the entity that must be shown on the operation id</description>
+        <name>displayedFields</name>
+        <function-class>org.jpos.ee.pm.struts.tags.PMTags</function-class>
+        <function-signature>
+            java.util.List displayedFields(org.jpos.ee.pm.core.Entity, java.lang.String)
+        </function-signature>
+    </function>
+
     <tag>
         <description>Display an internationalized message</description>
         <name>message</name>
