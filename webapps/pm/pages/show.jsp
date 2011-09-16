@@ -20,11 +20,4 @@
             </table>
         </div>
     </div>
-    <c:if test="${not empty entity.highlights}">
-        <style type="text/css" >
-            <c:forEach var="highlight" items="${entity.highlights.highlights}">
-                .${highlight.field}_${highlight.value} { background-color: ${highlight.color}; }
-            </c:forEach>
-        </style>
-    </c:if>
 </pm:page>
