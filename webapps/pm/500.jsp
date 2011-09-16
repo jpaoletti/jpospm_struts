@@ -3,10 +3,10 @@
 <%@page import="java.io.PrintWriter" import="org.jpos.ee.pm.core.*" import="java.io.StringWriter" %>
 <div class="leftpane" align="center">
     <p align="left">
-        <i><bean:message key="errors.500" /></i>
+        <i><pmfn:message key="errors.500" /></i>
     </p>
     <p align="right">
-        <b><bean:message key="webmaster" /></b>
+        <b><pmfn:message key="webmaster" /></b>
     </p><br/>
     <%-- Exception Handler --%>
     <font color="red">

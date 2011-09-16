@@ -101,6 +101,7 @@
     </style>
     <div id="pm_error_div">
         <img alt="error" src="error.png" id="error_img">
-        <bean:message key="pm.not.present"/>
+        Presentation Manager detected some errors on initialization and was not
+        able to start. Please check the logs .
     </div>
 </c:if>
