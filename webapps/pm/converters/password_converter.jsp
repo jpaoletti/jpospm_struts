@@ -1,6 +1,4 @@
 <%@include file="../inc/tag-libs.jsp" %>
-<%@page import="org.jpos.ee.pm.core.*" %>
-<bean:define id="entity"   	name="entity" 	type="org.jpos.ee.pm.core.Entity" />
 <input type="password" value="" id="f_${param.f}" name="f_${param.f}" onkeyup="check_equal(this.form);" /><br/>
 <input type="password" value="" id="r_${param.f}" name="r_${param.f}" onkeyup="check_equal(this.form);" />
 <div id="d_${param.f}" class=""><pmfn:message key="pm.converter.password_converter.repeat"/></div>

@@ -1,5 +1,4 @@
 <%@include file="../inc/tag-libs.jsp" %>
-<bean:define id="ctx" name="ctx" type="org.jpos.ee.pm.core.PMContext" />
 <script type="text/javascript">
     if(typeof sacupds == "undefined") var sacupds = new Array();
     sacupds["${param.f}"] = function(){

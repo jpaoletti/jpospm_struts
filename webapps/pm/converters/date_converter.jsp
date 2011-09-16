@@ -1,6 +1,5 @@
 <%@include file="../inc/tag-libs.jsp" %>
-<bean:define id="value" value="${param.value}"/>
-<input type="text" value="${value}" id="f_${param.f}" name="f_${param.f}" />
+<input type="text" value="${param.value}" id="f_${param.f}" name="f_${param.f}" />
 <script type="text/javascript" src="${es.context_path}/js/jquery-ui.js"></script>
 <script type='text/javascript'>
     PM_register(function(){
