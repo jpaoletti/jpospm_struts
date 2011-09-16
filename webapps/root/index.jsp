@@ -1,11 +1,21 @@
-<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
- <html>
- <head>
-  <meta http-equiv="Refresh" content=0;URL=/pm>
- </head>
- <title>jPOS Extended Edition</title>
- <body bgcolor="#FFFFFF">
-  <h4><bean:message key="index.loading"/></h4>
- </body>
+<html>
+    <head>
+        <meta http-equiv="Refresh" content="0;URL=/pm">
+        <title>...</title>
+        <style type="text/css">
+            .centered {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: -110px;
+                margin-left: -110px;
+            }
+        </style>
+    </head>
+    <body style="background-color: #3a3a3a;">
+        <div class="centered">
+            <img src="loading.gif"  alt="..." />
+        </div>
+    </body>
 </html>
 
