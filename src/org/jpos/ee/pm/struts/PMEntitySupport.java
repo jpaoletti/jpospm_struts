@@ -19,17 +19,13 @@ package org.jpos.ee.pm.struts;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.jpos.ee.pm.core.EntityContainer;
 import javax.servlet.http.HttpServletRequest;
 
-import org.jpos.ee.pm.core.Entity;
-import org.jpos.ee.pm.core.EntityFilter;
 import org.jpos.ee.pm.core.EntitySupport;
 import org.jpos.ee.pm.core.Field;
 import org.jpos.ee.pm.core.PMContext;
 import org.jpos.ee.pm.core.PMCoreConstants;
 import org.jpos.ee.pm.core.PMSession;
-import org.jpos.ee.pm.core.PaginatedList;
 import org.jpos.ee.pm.core.PresentationManager;
 
 /**
@@ -78,89 +74,11 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
         return instance;
     }
 
-    /**
-     * Return the container that is in the given request
-     *
-     * @param request The request
-     * @return The container
-     */
-    @Deprecated
-    public EntityContainer getContainer() throws PMStrutsException {
-        if (request == null) {
-            throw new PMStrutsException("request.not.found");
-        }
-        String pmid = (String) request.getAttribute(PM_ID);
-        return getPMSession().getContainer(pmid);
-    }
-
     public PMSession getPMSession() throws PMStrutsException {
         if (request == null) {
             throw new PMStrutsException("request.not.found");
         }
         return (PMSession) request.getSession().getAttribute(PMSESSION);
-    }
-
-    /**
-     * Inserts the container entity into the request
-     *
-     * @param request The request
-     * @return The entity
-     * @throws PMStrutsException when the request was not setted
-     */
-    @Deprecated
-    public Entity getEntity() throws PMStrutsException {
-        EntityContainer container = getContainer();
-        if (container != null) {
-            return container.getEntity();
-        }
-        return null;
-    }
-
-    /**
-     * Inserts the container list into the request
-     * @param request The request
-     * @return The list
-     * @throws PMStrutsException when request has no container
-     */
-    @Deprecated
-    public PaginatedList getList() throws PMStrutsException {
-        EntityContainer container = getContainer();
-        if (container == null) {
-            throw new PMStrutsException("container.not.found");
-        }
-        PaginatedList list = container.getList();
-        return list;
-    }
-
-    /**
-     * Insert the container selected instance into the request
-     * @param request The request
-     * @return The list
-     * @throws PMStrutsException when request has no container
-     */
-    @Deprecated
-    public Object getSelected() throws PMStrutsException {
-        EntityContainer container = getContainer();
-        if (container == null) {
-            throw new PMStrutsException("container.not.found");
-        }
-        Object r = container.getSelected().getInstance();
-        return r;
-    }
-
-    /**
-     * Returns the filter applied
-     * 
-     * @return The filter
-     * @throws PMStrutsException when request has no container
-     */
-    @Deprecated
-    public EntityFilter getFilter() throws PMStrutsException {
-        EntityContainer container = getContainer();
-        if (container == null) {
-            throw new PMStrutsException("container.not.found");
-        }
-        return container.getFilter();
     }
 
     /**
@@ -181,48 +99,21 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
         return context_path;
     }
 
+    @Deprecated
     public HttpServletRequest getRequest() {
         return request;
     }
 
+    @Deprecated
     public void setRequest(HttpServletRequest request) {
         this.request = request;
-    }
-
-    public Integer getListTotalDigits() {
-        try {
-            return (getList().getTotal() == null || getList().getTotal() == 0) ? 1 : (int) Math.log10(getList().getTotal()) + 1;
-        } catch (PMStrutsException ex) {
-            return 0;
-        }
     }
 
     public String getWelcomePage() {
         return PresentationManager.getPm().getCfg().get("welcome-page", "pages/welcome.jsp");
     }
 
-    public String getNavigationList(final EntityContainer container) {
-        final StringBuilder sb = new StringBuilder();
-        if (container != null && container.getSelected() != null) {
-            sb.append(getNavigationList(container.getOwner()));
-            sb.append("&nbsp; &gt; &nbsp;");
-            sb.append("<a href='");
-            sb.append(getContext_path());
-            sb.append("/");
-            sb.append(container.getOperation().getId());
-            sb.append(".do?pmid=");
-            sb.append(container.getEntity().getId()).append("' >");
-            final Object inst = container.getSelected().getInstance();
-            if (inst == null) {
-                sb.append("");
-            } else {
-                sb.append(toHtml(inst.toString()));
-            }
-            sb.append("</a>");
-        }
-        return sb.toString();
-    }
-
+    @Deprecated
     public PMContext prepareForConversion(Field field, Object item, Object field_value) {
         final PMContext ctx = (PMContext) request.getAttribute(PM_CONTEXT);
         ctx.setField(field);
