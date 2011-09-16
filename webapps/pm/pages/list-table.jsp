@@ -15,7 +15,7 @@
                     </c:if>
                     ${pmfn:rowNumber(ctx.entityContainer.list,item)}&nbsp;${pmfn:listItemOperations(ctx, contents, item)}
                 </td>
-                <c:forEach var="field" items="${entity.orderedFields}" ><c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}"><td align="${field.align}"><pm:converted-item es="${es}" operation="${operation}" entity="${entity}" item="${item}" field="${field}" /></td></c:if>
+                <c:forEach var="field" items="${entity.orderedFields}" ><c:if test="${fn:contains(field.display,operation.id) or fn:contains(field.display,'all')}"><td align="${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td></c:if>
                 </c:forEach>
             </tr>
         </c:forEach>

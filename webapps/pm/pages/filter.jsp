@@ -13,10 +13,7 @@
                                     <tr>
                                         <th scope="row" width="175px"><div><label for="object.${field.id}"><pm:field-name entity="${entity}" field="${field}" /></label></div></th>
                                         <td><pm:filter-operations field_id="${field.id}" filter="${ctx.entityContainer.filter}" /></td>
-                                        <td>
-                                            <pm:converted-item es="${es}" operation="${ctx.operation}" entity="${entity}" field="${field}" field_value="${ctx.entityContainer.filter.filterValues[field.id][0]}" />
-                                            <div class="field_message_container_${entity.id}_${field.id}"></div>
-                                        </td>
+                                        <td><pmfn:converted-item ctx="${ctx}" field="${field}" fieldValue="${ctx.entityContainer.filter.filterValues[field.id][0]}"/></td>
                                     </tr>
                                 </c:if>
                             </c:forEach>

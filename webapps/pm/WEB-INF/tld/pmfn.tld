@@ -157,4 +157,46 @@
             <description>The session</description>
         </attribute>
     </tag>
+    <tag>
+        <description>Display a converted item</description>
+        <name>converted-item</name>
+        <tag-class>org.jpos.ee.pm.struts.tags.ConvertedItemTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>ctx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The context</description>
+        </attribute>
+        <attribute>
+            <name>entityContainer</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The container of the entity. Context one is used if none is provided</description>
+        </attribute>
+        <attribute>
+            <name>operation</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation where the item is being converted. Context one is used if none is provided</description>
+        </attribute>
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field of the item</description>
+        </attribute>
+        <attribute>
+            <name>item</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The entity instance. If not defined, selected instance is used</description>
+        </attribute>
+        <attribute>
+            <name>fieldValue</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field value. If not defined, its calculated by reflection using item and field</description>
+        </attribute>
+    </tag>
 </taglib>
