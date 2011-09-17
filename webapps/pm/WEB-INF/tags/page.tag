@@ -3,7 +3,9 @@
         pageEncoding="UTF-8" import="org.jpos.ee.pm.struts.PMStrutsService" %>
 <%@ tag import="org.jpos.ee.pm.struts.PMEntitySupport"%>
 <%@ tag import="org.jpos.ee.pm.core.*"%>
-<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %><%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
+<%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ attribute name="title" required="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,28 +39,30 @@
                 <c:if test="${message.entityScoped}"> msg_entity.push(<pm:pm-message message="${message}"/>);</c:if>
                 <c:if test="${message.fieldScoped}">  msg_field.push (<pm:pm-message message="${message}"/>);</c:if>
             </c:forEach>
-            jQuery(document).ready(function() {
-                jQuery.each(PM_onLoadFunctions, function(){
-                    this();
-                });
+                jQuery(document).ready(function() {
+                    jQuery.each(PM_onLoadFunctions, function(){
+                        this();
+                    });
 
-                //System scoped messages
-                jQuery.each(msg_system, function(){
-                    alert(this.text);
-                });
+                    jQuery.each(msg_system, function(){
+                        var cl = ".message_container";
+                        jQuery(cl).addClass("pm_message_"+this.type);
+                        jQuery(cl).html(this.text);
+                    });
 
-                jQuery.each(msg_entity, function(){
-                    var cl = ".entity_message_container_"+this.entity;
-                    jQuery(cl).addClass("pm_message_"+this.type);
-                    jQuery(cl).html(this.text);
-                });
+                    jQuery.each(msg_entity, function(){
+                        var cl = ".entity_message_container_"+this.entity;
+                        jQuery(cl).addClass("pm_message_"+this.type);
+                        jQuery(cl).html(this.text);
+                    });
 
-                jQuery.each(msg_field, function(){
-                    var cl = ".field_message_container_"+this.entity+"_"+this.field;
-                    jQuery(cl).addClass("pm_message_"+this.type);
-                    jQuery(cl).html(this.text);
+                    jQuery.each(msg_field, function(){
+                        var cl = ".field_message_container_"+this.entity+"_"+this.field;
+                        jQuery(cl).addClass("pm_message_"+this.type);
+                        jQuery(cl).parent().addClass("pm_message_"+this.type);
+                        jQuery(cl).html(this.text);
+                    });
                 });
-            });
         </script>
     </body>
 </html>

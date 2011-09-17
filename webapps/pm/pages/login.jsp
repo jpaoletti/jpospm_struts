@@ -27,7 +27,7 @@
                     </fieldset>
                 </form>
             </div>
-            <div class="entity_message_container_${entity.id}">&nbsp;</div>
+            <div class="message_container">&nbsp;</div>
         </div>
     </c:if>
 </pm:page>
