@@ -4,5 +4,5 @@
 <%@attribute name = "ctx" required="true" type="org.jpos.ee.pm.core.PMContext" %>
 <%@attribute name = "operations" required="false" type="org.jpos.ee.pm.core.Operations" %>
 <pm:pmtitle entity="${ctx.entity}" operation="${ctx.operation}" />
-<pmfn:operations ctx="${ctx}" operations="${operations}" labels="true" />
+<pmfn:operations ctx="${ctx}" operations="${ctx.map.operations}" labels="true" />
 <div id="navigation_bar"><pmfn:navigation container="${ctx.entityContainer.owner}" /></div>
