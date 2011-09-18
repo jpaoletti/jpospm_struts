@@ -9,7 +9,7 @@
             <input type="hidden" name="pmid" value="${entity.id}" />
             <script type="text/javascript" charset="utf-8">
                 var pmid = "${entity.id}";
-                var searchable = "${entityContainer.list.searchable}" == "true";
+                var searchable = "${ctx.entityContainer.list.searchable}" == "true";
                 var sortable = false;
                 var paginable = false;
                 var texts = new Array(
